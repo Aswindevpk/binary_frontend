@@ -1,0 +1,103 @@
+.commentBox--visible{
+    position: fixed;
+    top: 0;
+    right: 0; /* Start off-screen */
+    width: 400px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .commentBox{
+    position: fixed;
+    top: 0;
+    right: -400px;
+  }
+  
+  .commentBox_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+  .commentBox_header-head{
+    font-family: var(--font-family);
+  }
+  .commentBox_header-closeButton{
+    width: 30px;
+    height: 30px;
+  }
+  
+  .commentBox__form {
+    margin-top: 10px;
+    border-radius: 4px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .commentBox__form-user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0px 14px
+  }
+  .commentBox__form-user__avatar{
+    width: 30px;
+    height: 30px;
+  }
+  .commentBox__form-user__name{
+    font-family: var(--font-family);
+  }
+  .commentBox__input input{
+    margin-top: 1rem;
+    padding: 0px 14px;
+    border: none;
+    outline-style: none;
+    font-family: var(--font-family);
+    color: #858585;
+    font-weight: 400;
+  }
+  .commentBox__cta{
+    display: flex;
+    justify-content:flex-end ;
+    padding: 0px 14px;
+    gap: 8px;
+    margin-top: 2rem;
+    font-family: var(--font-family);
+    font-size: 12px;
+    }
+  .commentBox__cta-cancel{
+    padding: 5px 4px;
+    border-radius: 4px;
+  }
+  .commentBox__cta-submit{
+    padding: 5px 4px;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(108, 205, 108);
+  }
+  
+  .commentBox__comments {
+    margin-top: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .commentBox__comment {
+    padding: 10px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  .commentBox__comment:last-child {
+    border-bottom: none;
+  }
+  

@@ -1,0 +1,38 @@
+.profile{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.profile__main{
+    display: flex;
+    width: 60%;
+}
+.profile__main-header{
+    font-family: var(--font-family);
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.profile__sub{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 5rem;
+}
+
+.profile__sub-avatar{
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 2rem;
+}
+
+.profile__sub-username{
+    font-family: var(--font-family);
+    font-size: 1rem;
+
+}
+.profile__sub-bio{
+    font-family: var(--font-family);
+    font-size: 0.75rem;
+}

@@ -1,0 +1,91 @@
+.verifyOtp {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items */
+  width: 100%;
+  max-width: 500px;
+  margin: 10% auto; /* Center and add some top margin */
+  padding: 2rem 2.5rem; /* More padding for a spacious feel */
+}
+
+.verifyOtp__header {
+  font-family: var(--font-family);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: 800; /* Bolder font */
+  color: var(--primary-color); /* Primary color for header */
+}
+
+.verifyOtp__desc {
+  font-family: var(--font-family);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: var(--color-secondary);
+}
+
+.verifyOtp__timer {
+  font-family: var(--font-family);
+  margin-top: 0.5rem;
+  text-align: right;
+  font-size: 1rem;
+  color: var(--color-secondary); /* Secondary color for timer */
+}
+
+.verifyOtp__timer a {
+  font-family: var(--font-family);
+  color: var(--color-primary); /* Interactive blue color */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.verifyOtp__timer a:hover {
+  color: var(--color-secondary); /* Darker blue on hover */
+}
+
+.verifyOtp__btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-family);
+  background-color: var(--color-primary); /* Dribbble-like blue */
+  color: var(--color-bg);
+  border: none;
+  border-radius: 3rem; /* Rounded corners */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 800; /* Semi-bold font */
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.verifyOtp__btn:hover {
+  background-color: var(--color-secondary);
+}
+
+.verifyOtp__error {
+  color: #ee5e4e; /* Dribbble-like red for errors */
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  font-family: var(--font-family);
+}
+
+
+.verifyOtp__Verified{
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-family: var(--font-family);
+  color:rgb(6, 193, 6); /* Dark grey text */
+}
+
+.verifyOtp__Verified a{
+  color: var(--color-primary); /* Interactive blue color */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+.verifyOtp__Verified a:hover {
+  color: var(--color-secondary); /* Darker blue on hover */
+}

@@ -1,0 +1,128 @@
+.home{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 1.5rem;
+    font-family: var(--font-family);
+}
+.home__main{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.home__main-menu{
+  margin: 1rem 1rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  border-bottom:1px solid rgb(242, 242, 242);
+}
+
+.home__main-menu-item{
+  padding: 0.8rem 0rem;
+  border-bottom:1px solid var(--color-primary);
+}
+
+/* Container for the recent blogs section */
+.home__side-section{
+    width: 30%;
+    height: 100%;
+    position:sticky;
+    top: 0px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid rgb(242, 242, 242);
+  }
+  
+  /* Header for the recent blogs section */
+  .home__recent-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Container for each blog entry */
+  .home__recent-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    background-color: #fff;
+    border-radius: 8px;
+
+  }
+  
+  
+  /* Container for the author information */
+  .home__recent-content__author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  /* Author image styling */
+  .home__recent-content__author-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  /* Author name styling */
+  .home__recent-content__author-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-secondary);
+  }
+  
+  /* Blog title styling */
+  .home__recent-content__header {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    transition: color 0.2s;
+  }
+  
+  
+
+  /* Container for the recommended topics section */
+.home__topics {
+  display: flex;
+  flex-direction: column;
+  }
+  
+  /* Heading for the recommended topics section */
+  .home__topics-heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Container for the list of topics */
+  .home__topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 300px;
+  }
+  
+  /* Individual topic styling */
+  .home__topics-topic {
+    padding: 10px 15px;
+    background-color: rgb(242, 242, 242);
+    color: var(--color-primary);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .home__followList-heading{
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }

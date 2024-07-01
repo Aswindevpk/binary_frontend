@@ -1,0 +1,86 @@
+.forgotPass {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items */
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 10% auto; /* Center and add some top margin */
+  padding: 2rem 2.5rem; /* More padding for a spacious feel */
+}
+
+.forgotPass__header {
+  font-family: var(--font-family);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.7rem;
+  font-weight: 800; /* Bolder font */
+  color: var(--primary-color); /* Primary color for header */
+}
+
+.forgotPass__desc {
+  font-family: var(--font-family);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color:var(--color-secondary); /* Darker text color */
+}
+
+.forgotPass__error {
+  color: #ee5e4e; /* Dribbble-like red for errors */
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  font-family: var(--font-family);
+}
+
+.forgotPass__btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-family);
+  background-color: var(--color-primary); /* Dribbble-like blue */
+  color: var(--color-bg);
+  border: none;
+  border-radius: 3rem; /* Rounded corners */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 800; /* Semi-bold font */
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.forgotPass__btn:hover {
+  background-color: var(--color-secondary);
+}
+
+.formInput__label {
+  margin-bottom: 0.5rem; /* Space between label and input */
+  font-size: 14px;
+  color: #333333; /* Darker text color for labels */
+  font-weight: 600; /* Slightly bolder font for labels */
+}
+
+.formInput__input {
+  padding: 0.75rem 1rem; /* Padding inside the input */
+  font-size: 14px;
+  border: 1px solid #cccccc; /* Light grey border */
+  border-radius: 6px; /* Rounded corners */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: var(--font-family); /* Custom font for input values */
+}
+
+.formInput__input:focus {
+  border-color: #3498db; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); /* Light blue shadow on focus */
+  outline: none; /* Remove default outline */
+}
+
+.formInput__input[focused="true"] {
+  border-color: #3498db; /* Blue border when focused */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); /* Light blue shadow when focused */
+}
+
+.formInput_error {
+  margin-top: 0.5rem; /* Space between input and error message */
+  font-size: 12px; /* Smaller font size for error message */
+  color: #e74c3c; /* Red color for errors */
+}

@@ -1,0 +1,45 @@
+.followUser {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 70%;
+  }
+  
+  .followUser__img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .followUser__main {
+    flex-grow: 1;
+  }
+  
+  .followUser__main-name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .followUser__main-about {
+    font-size: 0.75rem;
+    color:var(--color-secondary);
+  }
+  
+  .followUser__main-btn {
+    color: var(--color-primary);
+    background-color: white;
+    border: 1px solid var(--color-primary);
+    text-decoration: none;
+    border-radius: 3rem;
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    font-family: var(--font-family);
+    cursor: pointer;
+  }
+  
+  .followUser__main-btn:hover {
+    background-color: #0056b3;
+  }
+  
