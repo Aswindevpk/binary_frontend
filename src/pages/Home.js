@@ -1,87 +1,103 @@
-import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import FeaturedArticle from '../components/FeaturedArticle/FeaturedArticle';
 import profile_pic from '../components/assets/profile_pic.png'
 import ArticleFilterMenu from '../components/ArticleFilterMenu/ArticlefilterMenu';
 import FollowUser from '../components/followUser/followUser'
-
-
-const filters = ['All', 'Tech', 'Life', 'Business'];
-
-const allArticles = [
-    { id: 1, title: 'Tech Article 1', content: 'Content of Tech Article 1', category: 'Tech' },
-    { id: 2, title: 'Life Article 1', content: 'Content of Life Article 1', category: 'Life' },
-    { id: 3, title: 'Business Article 1', content: 'Content of Business Article 1', category: 'Business' },
-    { id: 4, title: 'Tech Article 2', content: 'Content of Tech Article 2', category: 'Tech' },
-    // Add more articles here
-];
+import axios from 'axios';
 
 
 const Home = () => {
-    let { user, logoutUser, authTokens } = useContext(AuthContext);
+    let [categories, setCategories] = useState([]);
+    const [activeFilter, setActiveFilter] = useState(null);
+    const [users, setUsers] = useState([]);
+    let [topics,setTopics] = useState([]);
     let [blogs, setBlogs] = useState([]);
+    let [recentblog,setRecentBlog] = useState([])
     let [error, setError] = useState(null);
-    let navigate = useNavigate()
-    const [filteredArticles, setFilteredArticles] = useState(allArticles);
-
-    const handleFilterChange = (filter) => {
-        if (filter === 'All') {
-            setFilteredArticles(allArticles);
-        } else {
-            setFilteredArticles(allArticles.filter(article => article.category === filter));
-        }
-    };
+    // let navigate = useNavigate()
 
     useEffect(() => {
-        getTest();
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/home/categories/');
+                const fetchedCategories = response.data.data;
+                setCategories(fetchedCategories);
+                if (fetchedCategories.length > 0) {
+                    setActiveFilter(fetchedCategories[0]);
+                }
+            } catch (error) {
+                console.error('There was an error fetching the categories!', error);
+            }
+        };
+        const fetchTopics = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/home/tags/');
+                const fetchedTags = response.data.data;
+                setTopics(fetchedTags);
+            } catch (error) {
+                console.error('There was an error fetching the tags!', error);
+            }
+        };
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/home/users/');
+                const fetchedUsers =response.data;
+                setUsers(fetchedUsers);
+            } catch (error) {
+                console.error('There was an error fetching the users!', error);
+            }
+        };
+        const recentBlogs = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/home/recent-blogs/');
+                const fetchedBlogs =response.data;
+                setRecentBlog(fetchedBlogs);
+            } catch (error) {
+                console.error('There was an error fetching the users!', error);
+            }
+        };
+
+        recentBlogs();
+        fetchCategories();
+        fetchTopics();
+        fetchUsers();
+
     }, []);
 
-    const getTest = async () => {
-        let response = await fetch("http://localhost:8000/api/home/blogs/", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + String(authTokens.access)
+    // Fetch blogs for the active category whenever activeFilter changes
+    useEffect(() => {
+        const fetchBlogs = async (categoryId) => {
+            try {
+                const response = await axios.get(`http://localhost:8000/api/home/blogs/category/${categoryId}/`);
+                const fetchedBlogs = response.data;
+                setBlogs(fetchedBlogs);
+            } catch (error) {
+                console.error('There was an error fetching the blogs!', error);
             }
-        });
-        let data = await response.json();
+        };
 
-        if (data.status) {
-            setBlogs(data.data);
-        } else {
-            console.log(data)
+        if (activeFilter) {
+            fetchBlogs(activeFilter.uid);  // Assuming activeFilter has uid or id
         }
-    };
-
-    const handleLogout = async () => {
-        setError(null);
-        let response = await logoutUser();
-        if (response) {
-            setError(response.message);
-        }
-    };
-
-
-
+    }, [activeFilter]);
 
     return (
         <div className="home">
             <div className='home__main'>
-                <ArticleFilterMenu filters={filters} onFilterChange={handleFilterChange} />
+                <ArticleFilterMenu filters={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
                 {blogs.map((blog) => (
-                    <FeaturedArticle article={blog} />
+                    <FeaturedArticle key={blog.slug} blog={blog} />
                 ))}
             </div>
             <div className='home__side-section'>
                 <div className='home__recent'>
                     <h2 className='home__recent-header'>Recent</h2>
-                    {blogs.map((blog) => (
-                        <div className='home__recent-content'>
+                    {recentblog.map((blog) => (
+                        <div  className='home__recent-content'>
                             <div className='home__recent-content__author'>
                                 <img className='home__recent-content__author-img' alt='src' src={profile_pic}></img>
-                                <span className='home__recent-content__author-name'>{blog.creator}</span>
+                                <span className='home__recent-content__author-name'>{blog.author}</span>
                             </div>
                             <h3 className='home__recent-content__header'>{blog.title}</h3>
                         </div>
@@ -90,17 +106,16 @@ const Home = () => {
                 <div className='home__topics'>
                     <h3 className='home__topics-heading'>Recommended Topics</h3>
                     <div className='home__topics-list'>
-                        <span className='home__topics-topic'>new</span>
-                        <span className='home__topics-topic'>flutter</span>
-                        <span className='home__topics-topic'>programming</span>
-                        <span className='home__topics-topic'>python</span>
+                        {topics.map((topic)=>(
+                            <span key={topic.uid} className='home__topics-topic'>{topic.name}</span>
+                        ))}
                     </div>
                 </div>
                 <div className='home__followList'>
                     <h3 className='home__followList-heading'>Who to Follow</h3>
-                    <FollowUser />
-                    <FollowUser />
-                    <FollowUser />
+                    {users.map((user)=>(
+                        <FollowUser key={user.id} user={user}/>
+                    ))}
                 </div>
             </div>
         </div>

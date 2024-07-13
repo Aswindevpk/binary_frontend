@@ -36,7 +36,7 @@ const Navbar = () => {
         <div className="navbar-links">
           {isAuthenticated ? (
             <>
-              <div className="navbar-item" onClick={() => handleNavigation("/profile")}>
+              <div className="navbar-item" onClick={() => handleNavigation("/write")}>
                 <img className="navbar-item-write" src={write}></img>
                 <span className="navbar-item-name">Write</span>
                

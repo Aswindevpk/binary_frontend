@@ -37,8 +37,17 @@ const CommentBox = ({ toggleVisibility, isCommentBoxVisible }) => {
       <div className="commentBox__comments">
           <div className="commentBox__comment">
             <div className="commentBox__comment-header">
-              <img src={avatar}/>
+              <img className="commentBox__comment-header__avatar" src={avatar}/>
+              <div className="commentBox__comment-header__details">
+                <p className="commentBox__comment-header__details-name">Aswin dev</p>
+                <p className="commentBox__comment-header__details-time">1 hour ago</p>
+              </div>
             </div>
+              <div className="commentBox__comment-content">
+                <p className="commentBox__comment-content__p">
+                There’s something almost poetic about the notion of data being 'processed and then forgotten.' It’s reminiscent of ancient philosophies about living in the moment, applied to the digital realm. This stateless, isolated processing paints a picture 
+                </p>
+              </div>
           </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ import Plans from './pages/Plans';
 import Payment from './pages/Payment';
 import Profile from './pages/Profile';
 import Author from './pages/Author';
-
+import BlogEditor from './pages/BlogEditor';
 
 
 
@@ -45,6 +45,7 @@ const App = () => {
               <Route path="/plans" element={<Plans />} />
               <Route path="/payment" element={<Payment />} />
               <Route exact path='/' element={<Home />} />
+              <Route exact path='/write' element={<BlogEditor />} />
               <Route path="/blog/:slug" element={<BlogDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/author" element={<Author />} />
