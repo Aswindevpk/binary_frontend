@@ -5,7 +5,7 @@ const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
     <div className="filter-menu">
       {filters.map((filter) => (
         <div
-          key={filter.id}
+          key={filter.uid}
           className={filter === activeFilter ? 'active' : ''}
           onClick={() => setActiveFilter(filter)}
         >

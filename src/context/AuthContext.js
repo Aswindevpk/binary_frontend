@@ -1,51 +1,48 @@
 import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
-
+import api from "../services/api";
 
 const AuthContext = createContext();
 
 export default AuthContext;
 
-export const AuthProvider = ({children}) => {
-    let [user, setUser] = useState(()=>localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')):null)
-    let [isAuthenticated, setisAuthenticated] = useState(()=>localStorage.getItem('authTokens') ? true:false)
-    let [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')):null)
+export const AuthProvider = ({ children }) => {
+    let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null)
+    let [isAuthenticated, setisAuthenticated] = useState(() => localStorage.getItem('authTokens') ? true : false)
+    let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const navigate = useNavigate();
-    let [loading, setLoading]= useState(true)
+    let [loading, setLoading] = useState(true)
 
 
-
-    let registerUser = async (username,email,password)=>{
-        let response = await fetch("http://localhost:8000/api/accounts/register/",{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
+    let registerUser = async (username, email, password) => {
+        let response = await fetch("http://localhost:8000/api/accounts/register/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body:JSON.stringify({'username':username,'password':password,'email':email})
+            body: JSON.stringify({ 'username': username, 'password': password, 'email': email })
         });
         let data = await response.json()
 
-        if (response.ok){
+        if (response.ok) {
             navigate(`/verify-otp?email=${encodeURIComponent(email)}`)
-        }else{
+        } else {
             return data;
         };
     };
 
-    let genarateOtp = async (email)=>{
-        let response = await fetch("http://localhost:8000/api/accounts/genarate_otp/",{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
+    let genarateOtp = async (email) => {
+        let response = await fetch("http://localhost:8000/api/accounts/genarate_otp/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body:JSON.stringify({'email':email})
+            body: JSON.stringify({ 'email': email })
         });
         let data = await response.json()
         return data;
     }
-
 
     let forgotPass = async (email) => {
         try {
@@ -54,7 +51,7 @@ export const AuthProvider = ({children}) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({'email':email})
+                body: JSON.stringify({ 'email': email })
             });
             let data;
             try {
@@ -73,7 +70,6 @@ export const AuthProvider = ({children}) => {
             console.error("Error during link creation:", error);
         }
     };
-    
 
     let forgotPassConfirm = async (token) => {
         try {
@@ -82,7 +78,7 @@ export const AuthProvider = ({children}) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify({'token':token})
+                body: JSON.stringify({ 'token': token })
             });
             let data;
             try {
@@ -93,7 +89,7 @@ export const AuthProvider = ({children}) => {
                 data = null;
             }
             if (response.ok) {
-                localStorage.setItem('resetToken',token)
+                localStorage.setItem('resetToken', token)
                 navigate('/reset-password')
                 return data
             }
@@ -102,7 +98,6 @@ export const AuthProvider = ({children}) => {
             console.error("Error during link creation:", error);
         }
     };
-
 
     let ResetPass = async (password) => {
         try {
@@ -114,7 +109,7 @@ export const AuthProvider = ({children}) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify({'password':password,'token':ResetToken})
+                body: JSON.stringify({ 'password': password, 'token': ResetToken })
             });
             let data;
             try {
@@ -134,131 +129,103 @@ export const AuthProvider = ({children}) => {
         }
     };
 
-
-
-    
-    let verifyOtp = async (email,otp)=>{
-        let response = await fetch("http://localhost:8000/api/accounts/verify_otp/",{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'email':email,'otp':otp})
-        });
-        let data = await response.json()
-        return data
+    let verifyOtp = async (email, otp) => {
+        try {
+            const values = { 'email': email, 'otp': otp }
+            let response = await api.post("/accounts/verify_otp/", values);
+            if (response.status !== 202) {
+                console.log(response.message)
+            }
+            return response.data
+        } catch (error) {
+            console.log("Error during verify otp:", error)
+        }
     }
 
 
-    let loginUser = async (username,password)=>{
+    let loginUser = async (username, password) => {
         try{
-            let response = await fetch("http://localhost:8000/api/accounts/login/",{
-                method:"POST",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({'username':username,'password':password})
-            });
-            let data = await response.json()
-
-            if (data.status){
+            const values = { 'username': username, 'password': password };
+            let response = await api.post("/accounts/login/", values);
+            const data = response.data
+            if (response.data.status) {
                 setAuthTokens(data)
                 setUser(jwtDecode(data.access))
                 setisAuthenticated(true)
-                localStorage.setItem('authTokens',JSON.stringify({'access':data.access, 'refresh':data.refresh}));
+                localStorage.setItem('authTokens', JSON.stringify({ 'access': data.access, 'refresh': data.refresh }));
                 navigate('/')
-            }else{
-                return data;
             }
+            return data
         }catch (error){
-            console.log("Error during login :", error)
+            if (error.response){
+                return error.response.data
+            }
         }
     }
 
     let logoutUser = async () => {
-        setisAuthenticated(false)
         const refresh = authTokens?.refresh;
-        setAuthTokens(null);
-        setUser(null);
-        localStorage.removeItem('authTokens');
-    
         try {
-            let response = await fetch("http://localhost:8000/api/accounts/logout/", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'refresh': refresh })
-            });
-    
-            if (response.ok) {
+            const values = { 'refresh': refresh }
+            let response = await api.post("/accounts/logout/", values);
+            if (response.data.status) {
+                setisAuthenticated(false)
+                setAuthTokens(null);
+                setUser(null);
+                localStorage.removeItem('authTokens');
                 navigate('/login');
             } else {
-                // Try to parse the response body if available
-                let data;
-                try {
-                    data = await response.json();
-                } catch (e) {
-                    // If parsing fails, log the error and set data to null
-                    console.error("Error parsing JSON response:", e);
-                    data = null;
-                }
-                console.log('logout error')
+                console.log(response.data.message)
                 navigate('/login');
-                return data;
             }
         } catch (error) {
             console.error("Error during logout:", error);
-            alert('An error occurred while logging out');
         }
     };
-    
 
-    let updateToken = async () =>{
-        let response = await fetch("http://localhost:8000/api/accounts/login/refresh/",{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'refresh':authTokens.refresh})
-        });
-        let data = await response.json()
-
-        if (response.ok){
-            setAuthTokens(data)
-            setUser(jwtDecode(data.access))
-            localStorage.setItem('authTokens',JSON.stringify({'access':data.access, 'refresh':data.refresh}));
-        }else{
-            logoutUser()
+    let updateToken = async () => {
+        try {
+            const values = { 'refresh': authTokens.refresh }
+            let response = await api.post("/accounts/login/refresh/", values);
+            let data = response.data
+            console.log(response)
+            if (response.status === 200) {
+                setAuthTokens(data)
+                setUser(jwtDecode(data.access))
+                localStorage.setItem('authTokens', JSON.stringify({ 'access': data.access, 'refresh': data.refresh }));
+            } else {
+                logoutUser()
+            }
+        } catch (error) {
+            console.log("Error during refreshing token :", error)
         }
     }
 
-    useEffect(()=>{
-        const fourMinutes = 1000 * 60 * 4
-        let interval = setInterval(()=>{
-            if(authTokens){
+    useEffect(() => {
+        const fourMinutes = 1000 * 60 * 29
+        let interval = setInterval(() => {
+            if (authTokens) {
                 updateToken();
             }
-        },fourMinutes)
-        return ()=> clearInterval(interval)
-    },[authTokens,loading])
+        }, fourMinutes)
+        return () => clearInterval(interval)
+    }, [authTokens, loading])
 
-
-
-    const contextData= {
-        user:user,
-        authTokens:authTokens,
-        isAuthenticated:isAuthenticated,
-        loginUser:loginUser,
-        logoutUser:logoutUser,
-        registerUser:registerUser,
-        verifyOtp:verifyOtp,
-        genarateOtp:genarateOtp,
-        forgotPass:forgotPass,
-        forgotPassConfirm:forgotPassConfirm,
-        ResetPass:ResetPass,
+    const contextData = {
+        user: user,
+        authTokens: authTokens,
+        isAuthenticated: isAuthenticated,
+        loginUser: loginUser,
+        logoutUser: logoutUser,
+        registerUser: registerUser,
+        verifyOtp: verifyOtp,
+        genarateOtp: genarateOtp,
+        forgotPass: forgotPass,
+        forgotPassConfirm: forgotPassConfirm,
+        ResetPass: ResetPass,
     }
-    return(
+
+    return (
         <AuthContext.Provider value={contextData}>
             {children}
         </AuthContext.Provider>

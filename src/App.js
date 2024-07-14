@@ -46,7 +46,7 @@ const App = () => {
               <Route path="/payment" element={<Payment />} />
               <Route exact path='/' element={<Home />} />
               <Route exact path='/write' element={<BlogEditor />} />
-              <Route path="/blog/:slug" element={<BlogDetails />} />
+              <Route path="/blog/:id" element={<BlogDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/author" element={<Author />} />
             </Route>

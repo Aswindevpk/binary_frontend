@@ -12,8 +12,8 @@ const FeaturedArticle = ({ blog }) => {
   const formattedDate = format(new Date(blog.created_at), 'MMM d'); // Format date as 'Feb 9'
   const navigate = useNavigate();
 
-  const handleBlogClick = (slug) => {
-    navigate(`/blog/${slug}`);
+  const handleBlogClick = (uid) => {
+    navigate(`/blog/${uid}/`);
   };
 
   return (
@@ -31,7 +31,7 @@ const FeaturedArticle = ({ blog }) => {
         </div>
         <div
           onClick={() => {
-            handleBlogClick(blog.slug);
+            handleBlogClick(blog.uid);
           }}
         >
           <h2 className="FeaturedArticle__content-title">{blog.title}</h2>

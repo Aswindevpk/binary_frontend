@@ -10,10 +10,11 @@ const Login = () => {
   let [values, setValues] = useState({
     username: "",
     password: "",
-    error: ""
+    error: "",
+    info: ""
   });
   let [isEmailVerified, setEmailVerified] = useState(true);
-  let [email,setEmail] = useState(null)
+  let [email, setEmail] = useState(null)
 
   const inputs = [
     {
@@ -41,18 +42,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setValues({ ...values, error: "" })
-    try {
-      let response = await loginUser(values.username, values.password);
-      if (response) {
-        if (!response.verified) {
-          setEmailVerified(false)
-          setEmail(response.email)
-        } else {
-          setValues({ ...values, error: response.message })
-        }
+    let response = await loginUser(values.username, values.password);
+    if (response) {
+      if (!response.verified) {
+        setEmailVerified(false)
+        setEmail(response.email)
+      } else {
+        setValues({ ...values, error: response.message })
       }
-    } catch (error) {
-      console.log(`network error:${error}`)
     }
   };
 
