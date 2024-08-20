@@ -1,0 +1,122 @@
+import React, { useContext } from "react";
+// Importing helper modules
+import { useCallback, useMemo, useRef } from "react";
+import "./BlogEditor.css";
+import axios from "axios";
+// Importing core components
+import QuillEditor from "react-quill";
+//quill editor styles
+import "react-quill/dist/quill.snow.css";
+import AuthContext from "../../context/AuthContext";
+
+
+const BlogEditor = ({ setValues, values }) => {
+  let {authTokens}=useContext(AuthContext)
+  // Editor ref
+  const quill = useRef(null);
+
+  //if any image is selected it is uploaded to the server and shown in the content area
+  const imageHandler = useCallback(() => {
+    // Create an input element of type 'file'
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    // When a file is selected
+    input.onchange = async () => {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/home/upload/",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "Authorization":`Bearer ${authTokens.access}`
+            },
+          }
+        );
+        const imageUrl = response.data.imageUrl;
+
+        const quillEditor = quill.current.getEditor();
+        const range = quillEditor.getSelection(true);
+        quillEditor.insertEmbed(range.index, "image", imageUrl, "user");
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    };
+  }, []);
+
+  //configuration of quills rich editor
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [2, 3, 4, false] }],
+          ["bold", "italic", "underline", "blockquote"],
+          [{ color: [] }],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+          ],
+          ["link", "image"],
+          ["clean"],
+        ],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+      clipboard: {
+        matchVisual: true,
+      },
+    }),
+    [imageHandler]
+  );
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "color",
+    "clean",
+  ];
+
+  const handleChange = () => {
+    if (quill.current) {
+      const editor = quill.current.getEditor();
+      const html = editor.root.innerHTML;
+      setValues({ ...values, content: html });
+    }
+  };
+
+  return (
+    <div>
+      <QuillEditor
+        className="Editor_content-body"
+        ref={quill}
+        theme="snow"
+        value={values.content}
+        formats={formats}
+        modules={modules}
+        onChange={handleChange}
+        placeholder="Tell your Story..."
+      />
+    </div>
+  );
+};
+
+export default BlogEditor;

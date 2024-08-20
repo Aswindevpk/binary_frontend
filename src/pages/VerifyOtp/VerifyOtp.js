@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import FormInput from '../components/FormInput';
+import AuthContext from '../../context/AuthContext';
+import { FormInput } from '../../components';
 import './VerifyOtp.css'
 
 function VerifyOtp() {

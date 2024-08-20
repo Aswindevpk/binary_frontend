@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import AuthContext from '../context/AuthContext';
-import FormInput from '../components/FormInput';
+import AuthContext from '../../context/AuthContext';
+import {FormInput } from '../../components'
 import './ForgotPass.css'; 
 
 

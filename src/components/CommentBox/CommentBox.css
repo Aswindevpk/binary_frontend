@@ -78,10 +78,12 @@
   .commentBox__cta-cancel{
     padding: 5px 4px;
     border-radius: 4px;
+    cursor: pointer;
   }
   .commentBox__cta-submit{
     padding: 5px 4px;
     border-radius: 4px;
+    cursor: pointer;
     color: white;
     background-color: rgb(108, 205, 108);
   }

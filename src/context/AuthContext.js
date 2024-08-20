@@ -2,99 +2,72 @@ import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { checkTokenValidity, isTokenValid } from "./tokenUtils";
 
 const AuthContext = createContext();
 
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-    let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null)
-    let [isAuthenticated, setisAuthenticated] = useState(() => localStorage.getItem('authTokens') ? true : false)
-    let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+    let [user, setUser] = useState(() => checkTokenValidity() ? jwtDecode(localStorage.getItem('authTokens')) : null)
+    let [isAuthenticated, setisAuthenticated] = useState(() => checkTokenValidity() ? true : false)
+    let [authTokens, setAuthTokens] = useState(() => checkTokenValidity() ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const navigate = useNavigate();
-    let [loading, setLoading] = useState(true)
+    
 
 
     let registerUser = async (username, email, password) => {
-        let response = await fetch("http://localhost:8000/api/accounts/register/", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 'username': username, 'password': password, 'email': email })
-        });
-        let data = await response.json()
-
-        if (response.ok) {
+        try{
+            const values = { 'username': username, 'password': password, 'email': email }
+            await api.post("/accounts/register/", values);
             navigate(`/verify-otp?email=${encodeURIComponent(email)}`)
-        } else {
-            return data;
-        };
+        } catch(error){
+            if (error.response){
+                return error.response.data
+            }
+            console.error("Error during registration creation:", error);
+        }
+
+
     };
 
     let genarateOtp = async (email) => {
-        let response = await fetch("http://localhost:8000/api/accounts/genarate_otp/", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 'email': email })
-        });
-        let data = await response.json()
-        return data;
+        try{
+            const values = { 'email': email }
+            let response = await fetch("/accounts/genarate_otp/", values);
+            return response.data;
+        } catch (error){
+            if (error.response){
+                return error.response.data
+            }
+            console.error("Error during otp generation creation:", error);
+        }
     }
 
     let forgotPass = async (email) => {
         try {
-            let response = await fetch("http://localhost:8000/api/accounts/forgot_password/", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'email': email })
-            });
-            let data;
-            try {
-                data = await response.json();
-            } catch (e) {
-                // If parsing fails, log the error and set data to null
-                console.error("Error parsing JSON response:", e);
-                data = null;
-            }
-            if (response.ok) {
-                console.log('sucess')
-                return data
-            }
-            return data
+            const values = { 'email': email }
+            let response = await api.post("/accounts/forgot_password/", values);
+            return response.data
         } catch (error) {
+            if (error.response){
+                return error.response.data
+            }
             console.error("Error during link creation:", error);
         }
     };
 
     let forgotPassConfirm = async (token) => {
         try {
-            let response = await fetch("http://localhost:8000/api/accounts/forgot_password_confirm/", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'token': token })
-            });
-            let data;
-            try {
-                data = await response.json();
-            } catch (e) {
-                // If parsing fails, log the error and set data to null
-                console.error("Error parsing JSON response:", e);
-                data = null;
-            }
-            if (response.ok) {
-                localStorage.setItem('resetToken', token)
-                navigate('/reset-password')
-                return data
-            }
-            return data
+            const values =  { 'token': token }
+            let response = await api.post("/accounts/forgot_password_confirm/", values);
+            localStorage.setItem('resetToken', token)
+            navigate('/reset-password')
+            return response.data
         } catch (error) {
+            if (error.response){
+                return error.response.data
+            }
             console.error("Error during link creation:", error);
         }
     };
@@ -103,29 +76,15 @@ export const AuthProvider = ({ children }) => {
         try {
             let ResetToken = "";
             ResetToken = localStorage.getItem('resetToken');
-            console.log(ResetToken)
-            let response = await fetch("http://localhost:8000/api/accounts/reset_password/", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'password': password, 'token': ResetToken })
-            });
-            let data;
-            try {
-                data = await response.json();
-            } catch (e) {
-                // If parsing fails, log the error and set data to null
-                console.error("Error parsing JSON response:", e);
-                data = null;
-            }
-            if (response.ok) {
-                localStorage.removeItem('resetToken')
-                return data
-            }
-            return data
+            const values =  { 'password': password, 'token': ResetToken }
+            let response = await api.post("/accounts/reset_password/", values);
+
+            localStorage.removeItem('resetToken')
+            return response.data;
         } catch (error) {
-            console.error("Error during link creation:", error);
+            if (error.response){
+                return error.response.data
+            }
         }
     };
 
@@ -133,12 +92,11 @@ export const AuthProvider = ({ children }) => {
         try {
             const values = { 'email': email, 'otp': otp }
             let response = await api.post("/accounts/verify_otp/", values);
-            if (response.status !== 202) {
-                console.log(response.message)
-            }
             return response.data
         } catch (error) {
-            console.log("Error during verify otp:", error)
+            if (error.response){
+                return error.response.data
+            }
         }
     }
 
@@ -188,7 +146,6 @@ export const AuthProvider = ({ children }) => {
             const values = { 'refresh': authTokens.refresh }
             let response = await api.post("/accounts/login/refresh/", values);
             let data = response.data
-            console.log(response)
             if (response.status === 200) {
                 setAuthTokens(data)
                 setUser(jwtDecode(data.access))
@@ -197,6 +154,7 @@ export const AuthProvider = ({ children }) => {
                 logoutUser()
             }
         } catch (error) {
+            logoutUser()
             console.log("Error during refreshing token :", error)
         }
     }
@@ -209,7 +167,7 @@ export const AuthProvider = ({ children }) => {
             }
         }, fourMinutes)
         return () => clearInterval(interval)
-    }, [authTokens, loading])
+    }, [authTokens])
 
     const contextData = {
         user: user,

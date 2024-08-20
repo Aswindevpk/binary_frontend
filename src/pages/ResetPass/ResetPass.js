@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from '../context/AuthContext';
-import FormInput from '../components/FormInput';
-// import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import AuthContext from '../../context/AuthContext';
+import { FormInput } from '../../components';
 import './ResetPass.css'
 
 

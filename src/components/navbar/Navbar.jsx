@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { write,Search } from "../../assets";
 import AuthContext from "../../context/AuthContext";
-import searchIcon from "../assets/search-icon.svg";
-import write from '../assets/write.svg';
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
 
@@ -25,7 +24,7 @@ const Navbar = () => {
             Binary
           </div>
           <div className="search-bar-container">
-            <img src={searchIcon} alt="Search Icon" className="search-icon" />
+            <img src={Search} alt="Search Icon" className="search-icon" />
             <input
               type="text"
               className="search-input"

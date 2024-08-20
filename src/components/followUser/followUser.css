@@ -25,6 +25,7 @@
     font-size: 0.75rem;
     color:var(--color-secondary);
     padding-right: 5px;
+    word-break: break-word;
   }
   
   .followUser__main-btn {
@@ -33,13 +34,20 @@
     border: 1px solid var(--color-primary);
     text-decoration: none;
     border-radius: 3rem;
-    padding: 4px 8px;
+    padding: 5px 12px ;
     font-size: 0.875rem;
     font-family: var(--font-family);
     cursor: pointer;
   }
   
-  .followUser__main-btn:hover {
-    background-color: #0056b3;
-  }
+  .followUser__main-btn.not-following {
+    color: var(--color-primary);
+}
+
+
+.followUser__main-btn.following {
+    background-color: rgb(25, 25, 25);
+    color: #fff;
+}
+
   

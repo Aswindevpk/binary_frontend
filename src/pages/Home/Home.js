@@ -1,52 +1,38 @@
 import React, { useEffect, useState ,useContext} from 'react';
 import './Home.css';
-import FeaturedArticle from '../components/FeaturedArticle/FeaturedArticle';
-import profile_pic from '../components/assets/profile_pic.png'
-import ArticleFilterMenu from '../components/ArticleFilterMenu/ArticlefilterMenu';
-import FollowUser from '../components/followUser/followUser'
-import axios from 'axios';
-import AuthContext from '../context/AuthContext';
-import api from '../services/api';
+import api from '../../services/api';
+import { FeaturedArticle,ArticleFilterMenu,FollowUser, } from '../../components';
+import { Avatar } from '../../assets';
+import AuthContext from '../../context/AuthContext';
+import SkeletonLoader from './SkeletonLoader';
+
+
 
 
 const Home = () => {
     let { user, authTokens } = useContext(AuthContext);
-    let [categories, setCategories] = useState([]);
     const [activeFilter, setActiveFilter] = useState(null);
     const [authors, setAuthors] = useState([]);
     let [topics,setTopics] = useState([]);
     let [blogs, setBlogs] = useState([]);
     let [recentblog,setRecentBlog] = useState([])
-    let [error, setError] = useState(null);
-    // let navigate = useNavigate()
-
+    const [loading,setloading] = useState(true)
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await api.get('/home/categories/');
-                const fetchedCategories = response.data.data;
-                setCategories(fetchedCategories);
-                if (fetchedCategories.length > 0) {
-                    setActiveFilter(fetchedCategories[0]);
-                }
-            } catch (error) {
-                console.error('There was an error fetching the categories!', error);
-            }
-        };
         const fetchTopics = async () => {
             try {
-                const response = await api.get('/home/tags/');
+                const response = await api.get('/home/topics/');
                 const fetchedTags = response.data.data;
                 setTopics(fetchedTags);
+                setActiveFilter(fetchedTags[0])
             } catch (error) {
                 console.error('There was an error fetching the tags!', error);
             }
         };
         const fetchAuthors = async () => {
             try {
-                const response = await api.get('/home/users/');
-                const fetchedUsers =response.data;
+                const response = await api.get('/home/authors/?limit=5');
+                const fetchedUsers =response.data.data;
                 setAuthors(fetchedUsers);
             } catch (error) {
                 console.error('There was an error fetching the users!', error);
@@ -54,8 +40,8 @@ const Home = () => {
         };
         const recentBlogs = async () => {
             try {
-                const response = await api.get('/home/recent-blogs/');
-                const fetchedBlogs =response.data;
+                const response = await api.get('/home/articles/');
+                const fetchedBlogs =response.data.data;
                 setRecentBlog(fetchedBlogs);
             } catch (error) {
                 console.error('There was an error fetching the recentblogs!', error);
@@ -63,7 +49,6 @@ const Home = () => {
         };
 
         recentBlogs();
-        fetchCategories();
         fetchTopics();
         fetchAuthors();
 
@@ -71,24 +56,30 @@ const Home = () => {
 
     // Fetch blogs for the active category whenever activeFilter changes
     useEffect(() => {
-        const fetchBlogs = async (categoryId) => {
+        const fetchBlogs = async (Topic) => {
             try {
-                const response = await api.get(`/home/blogs/category/${categoryId}/`);
-                const fetchedBlogs = response.data;
+                const response = await api.get(`/home/articles/?topic=${Topic}`);
+                const fetchedBlogs = response.data.data;
                 setBlogs(fetchedBlogs);
+                setloading(false)
             } catch (error) {
                 console.error('There was an error fetching the blogs!', error);
             }
         };
 
         if (activeFilter) {
-            fetchBlogs(activeFilter.uid);  // Assuming activeFilter has uid or id
+            fetchBlogs(activeFilter.name);  
         }
     }, [activeFilter]);
+
+    if (loading) {
+        return <SkeletonLoader />;
+    }
+
     return (
         <div className="home">
             <div className='home__main'>
-                <ArticleFilterMenu filters={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+                <ArticleFilterMenu filters={topics} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
                 {blogs.map((blog) => (
                     <FeaturedArticle key={blog.uid} blog={blog} />
                 ))}
@@ -99,8 +90,8 @@ const Home = () => {
                     {recentblog.map((blog) => (
                         <div key={blog.uid}  className='home__recent-content'>
                             <div className='home__recent-content__author'>
-                                <img className='home__recent-content__author-img' alt='src' src={profile_pic}></img>
-                                <span className='home__recent-content__author-name'>{blog.author}</span>
+                                <img className='home__recent-content__author-img' alt='src' src={Avatar}></img>
+                                <span className='home__recent-content__author-name'>{blog.author.username}</span>
                             </div>
                             <h3 className='home__recent-content__header'>{blog.title}</h3>
                         </div>
@@ -117,7 +108,7 @@ const Home = () => {
                 <div className='home__followList'>
                     <h3 className='home__followList-heading'>Who to Follow</h3>
                     {authors.map((author)=>(
-                        <FollowUser key={author.id} author={author} user={user}/>
+                        <FollowUser key={author.id} author={author} />
                     ))}
                 </div>
             </div>

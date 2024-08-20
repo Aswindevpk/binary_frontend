@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
-import FormInput from '../components/FormInput';
+import { FormInput } from '../../components';
 import './Register.css'
 
 const Register = () => {
@@ -67,6 +67,7 @@ const Register = () => {
         setValues({...values,error: [] })
         let response = await registerUser(values.username, values.email, values.password);
         if (response) {
+            console.log(response)
             let errorMessages = [];
 
             for (let field in response.message) {

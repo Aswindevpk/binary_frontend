@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import avatar from '../components/assets/profile_pic.png'
+import React, { useState } from 'react';
+import { Avatar } from '../../assets';
 import './Author.css'
-import ArticleFilterMenu from '../components/ArticleFilterMenu/ArticlefilterMenu';
-
+import { ArticleFilterMenu } from '../../components';
 
 const filters = ['Home', 'About'];
 const allArticles = [
@@ -30,7 +29,7 @@ const Author = () => {
                 <ArticleFilterMenu filters={filters} onFilterChange={handleFilterChange} />
             </div>
             <div className='home__side-section'>
-                <img src={avatar}></img>
+                <img src={Avatar}></img>
                 <h3>Creative Byte</h3>
                 <p>Followers</p>
                 <div>
@@ -39,7 +38,7 @@ const Author = () => {
                 </div>
                 <h5>Following</h5>
                 <div>
-                    <img src={avatar}>Aswin</img>
+                    <img src={Avatar}>Aswin</img>
                     <p>Name</p>
                     
                 </div>

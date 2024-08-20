@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import './ProfileDropdown.css'; // Import the CSS file
-import avatar from '../assets/profile_pic.png'
+import { Avatar } from '../../assets';
 import AuthContext from '../../context/AuthContext';
 
 const ProfileDropdown = () => {
@@ -31,14 +31,15 @@ const ProfileDropdown = () => {
 
   return (
     <div className="profile-dropdown" ref={dropdownRef}>
-      <img src={avatar} alt="Profile" className="avatar" onClick={toggleDropdown} />
+      <img src={Avatar} alt="Profile" className="avatar" onClick={toggleDropdown} />
       {isOpen && (
         <div className="dropdown-menu">
           <ul>
             <li><a href="/profile">Profile</a></li>
-            <li><a href="/settings">Settings</a></li>
-            <li><a href="/notifications">Notifications</a></li>
-            <li><a onClick={handleLogout}>Logout</a></li>
+            <li><a href="/settings">Library</a></li>
+            <li><a href="/notifications">Stories</a></li>
+            <li><a href="/plans">Premium Membership</a></li>
+            <li><a onClick={handleLogout}>Sign out</a></li>
           </ul>
         </div>
       )}

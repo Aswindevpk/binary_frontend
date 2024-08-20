@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './Home.css';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Plans.css'
+import api from '../../services/api';
+
 
 
 const Plans = () => {
@@ -15,28 +16,11 @@ const Plans = () => {
     useEffect(() => {
         const getPlans = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/home/plans/', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + String(authTokens.access)
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                console.log(data.data)
-                if (data.status) {
-                    setPlans(data.data);
-                } else {
-                    setError('Failed to fetch blog data');
-                }
+                const response = await api.get('/home/plans/');
+                const fetchedBlogs = response.data.data;
+                setPlans(fetchedBlogs);
             } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
+                console.error('There was an error fetching the blogs!', error);
             }
         };
 

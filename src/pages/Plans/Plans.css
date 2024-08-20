@@ -17,14 +17,13 @@
     color:var(--color-secondary);
 }
 .plans__types{
+    justify-content: center;
     text-align: center;
     display: flex;
     flex-direction: row;
     font-family: var(--font-family);
     color:var(--color-primary);
-    align-items: center;
     margin: 2rem 2rem;
-    justify-content: center;
 }
 
 .plan__type{
@@ -34,9 +33,7 @@
     flex-direction: column;
     padding: 2rem 1rem;
     border-radius: 1.5rem;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
+    width: 350px;
 }
 
 .plan__type-heading{
@@ -44,6 +41,7 @@
 }
 
 .plan__type-price{
+    justify-content: left;
     padding-top: 1rem;
     font-size: 1.3rem;
 }

@@ -4,11 +4,12 @@
     position: -webkit-sticky; /* For Safari */
     position: sticky;
     top: 0px; /* Adjust based on the height of the navbar */
-    z-index: 1000;
+    z-index: 100;
     background-color: var(--color-bg);
   }
   
   .filter-menu div {
+    font-family: var(--font-family);
     padding: 15px 15px;
     font-size: 0.9rem;
     font-weight: 600;

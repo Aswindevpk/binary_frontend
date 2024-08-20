@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useParams } from 'react-router-dom';
 // import './ForgotPass.css'; 
 

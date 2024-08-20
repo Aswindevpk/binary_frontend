@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import axios from 'axios';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useLocation } from 'react-router-dom';
 import './Payment.css'
+import api from '../../services/api';
 
 
 const Payment = () => {
@@ -24,11 +24,9 @@ const Payment = () => {
   }, []);
 
   const handlePayment = async () => {
-    const config = {
-        headers: { Authorization: `Bearer ${authTokens.access}` }
-      };
+    console.log(amount)
 
-    const { data: orderData } = await axios.post('http://localhost:8000/api/accounts/create_order/', { amount },config);
+    const { data: orderData } = await api.post('/accounts/create_order/', {'amount':amount});
 
     const options = {
       key: orderData.key,
@@ -44,7 +42,7 @@ const Payment = () => {
           razorpay_signature: response.razorpay_signature,
         };
 
-        const result = await axios.post('http://localhost:8000/api/accounts/verify_payment/', paymentData,config);
+        const result = await api.post('/accounts/verify_payment/', paymentData);
         alert(result.data.status);
       },
       prefill: {
