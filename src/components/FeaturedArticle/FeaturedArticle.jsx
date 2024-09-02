@@ -42,7 +42,7 @@ const FeaturedArticle = ({ blog }) => {
           }}
         >
           <h2 className="FeaturedArticle__content-title">{blog.title}</h2>
-          <p className="FeaturedArticle__content-short">{blog.content}</p>
+          <p className="FeaturedArticle__content-short" dangerouslySetInnerHTML={{ __html: blog.content }}></p>
         </div>
 
         <div className="FeaturedArticle__content-footer">

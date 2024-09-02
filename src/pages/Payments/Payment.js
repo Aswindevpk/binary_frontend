@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Payment.css'
 import api from '../../services/api';
 
 
+
 const Payment = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { price } = location.state || { amount: 0 };
 
   let {authTokens } = useContext(AuthContext);
@@ -24,8 +26,6 @@ const Payment = () => {
   }, []);
 
   const handlePayment = async () => {
-    console.log(amount)
-
     const { data: orderData } = await api.post('/accounts/create_order/', {'amount':amount});
 
     const options = {
@@ -42,8 +42,15 @@ const Payment = () => {
           razorpay_signature: response.razorpay_signature,
         };
 
-        const result = await api.post('/accounts/verify_payment/', paymentData);
-        alert(result.data.status);
+        try{
+          const result = await api.post('/accounts/verify_payment/', paymentData);
+          if (result.status===200){
+            navigate('/payment-success')
+          }
+        }
+        catch (error){
+          navigate('/payment-failed')
+        }
       },
       prefill: {
         name: "Your Name",

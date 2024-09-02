@@ -20,11 +20,16 @@ const BlogDetails = () => {
   const handleClap = async () => {
     try {
       const response = await api.post(`/home/article/${blog.uid}/clap/`)
+      if (response.status === 201){
+        setBlog(prevBlog => ({
+          ...prevBlog,
+          clap_count: prevBlog.clap_count + 1
+      }));
+      }
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message)
       }
-      console.error('error while clapping!', error);
     }
   }
 

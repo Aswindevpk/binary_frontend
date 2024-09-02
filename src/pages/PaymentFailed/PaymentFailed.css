@@ -1,0 +1,57 @@
+.payment-failed-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: var(--font-family);
+}
+
+.payment-failed-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.failed-icon {
+    font-size: 50px;
+    color: #E53935;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.transaction-details p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.try-again-button {
+    background-color: #E53935;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.try-again-button:hover {
+    background-color: #d32f2f;
+}

@@ -51,7 +51,7 @@ const Home = () => {
         recentBlogs();
         fetchTopics();
         fetchAuthors();
-
+        
     }, []);
 
     // Fetch blogs for the active category whenever activeFilter changes
@@ -75,6 +75,7 @@ const Home = () => {
     if (loading) {
         return <SkeletonLoader />;
     }
+    console.log(blogs)
 
     return (
         <div className="home">

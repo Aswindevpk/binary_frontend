@@ -11,4 +11,6 @@ export {default as Register} from './Register/Register';
 export {default as ResetPass} from './ResetPass/ResetPass';
 export {default as VerifyOtp} from './VerifyOtp/VerifyOtp';
 export {default as WriteBlog} from './WriteBlog/WriteBlog';
+export {default as PaymentSuccess} from './PaymentSuccess/PaymentSuccess';
+export {default as PaymentFailed} from './PaymentFailed/PaymentFailed';
 
