@@ -46,7 +46,7 @@ const Plans = () => {
                         ))}
                         <button className='plan__type-btn' key={index} onClick={() => handleBuy(plan.price)}>select</button>
                     </div>
-                ))};
+                ))}
             </div>
         </div >
     );

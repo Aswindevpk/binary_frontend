@@ -11,7 +11,6 @@ const filters=[
 ]
 
 const Profile = () => {
-    let { authTokens } = useContext(AuthContext);
     let navigate = useNavigate();
     const [activeFilter, setActiveFilter] = useState(null);
 

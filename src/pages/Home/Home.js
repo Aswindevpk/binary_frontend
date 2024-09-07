@@ -75,7 +75,6 @@ const Home = () => {
     if (loading) {
         return <SkeletonLoader />;
     }
-    console.log(blogs)
 
     return (
         <div className="home">

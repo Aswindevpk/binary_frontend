@@ -36,9 +36,12 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <div className="navbar-item" onClick={() => handleNavigation("/write")}>
-                <img className="navbar-item-write" src={write}></img>
+                <ion-icon name="create-outline"></ion-icon>
                 <span className="navbar-item-name">Write</span>
                
+              </div>
+              <div className="navbar-item">
+              <ion-icon name="notifications-outline"></ion-icon>
               </div>
               <div className="navbar-item">
                 <ProfileDropdown/>
