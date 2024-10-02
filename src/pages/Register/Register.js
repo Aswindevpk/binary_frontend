@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import { FormInput } from '../../components';
 import './Register.css'
+import { Toaster, toast } from "sonner";
 
 const Register = () => {
     let { registerUser } = useContext(AuthContext);
@@ -67,7 +68,6 @@ const Register = () => {
         setValues({...values,error: [] })
         let response = await registerUser(values.username, values.email, values.password);
         if (response) {
-            console.log(response)
             let errorMessages = [];
 
             for (let field in response.message) {
@@ -77,7 +77,6 @@ const Register = () => {
                 });
               }
             }
-        
             setValues({...values,error:errorMessages})
         }
     }
@@ -89,6 +88,7 @@ const Register = () => {
 
     return (
         <div className='register'>
+            <Toaster richColors position="top-center" />
             <h2 className='register__header'>Register to Binary</h2>
             {values.error && <p className='forgotPass__error'>{values.error}</p>}
             <form onSubmit={handleSubmit} >

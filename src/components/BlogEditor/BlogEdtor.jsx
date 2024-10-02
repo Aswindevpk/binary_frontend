@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 // Importing helper modules
 import { useCallback, useMemo, useRef } from "react";
 import "./BlogEditor.css";
-import axios from "axios";
+import { formApi } from "../../services/api";
 // Importing core components
 import QuillEditor from "react-quill";
 //quill editor styles
@@ -30,16 +30,7 @@ const BlogEditor = ({ setValues, values }) => {
       formData.append("image", file);
 
       try {
-        const response = await axios.post(
-          "http://localhost:8000/api/home/upload/",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Authorization":`Bearer ${authTokens.access}`
-            },
-          }
-        );
+        const response = await formApi.post("home/upload/",formData);
         const imageUrl = response.data.imageUrl;
 
         const quillEditor = quill.current.getEditor();

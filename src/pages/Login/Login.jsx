@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import { FormInput } from '../../components';
 import "./Login.css";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
   let { loginUser } = useContext(AuthContext);
@@ -45,6 +46,7 @@ const Login = () => {
     let response = await loginUser(values.username, values.password);
     if (response) {
       if (!response.verified) {
+        toast.success('Login success')
         setEmailVerified(false)
         setEmail(response.email)
       } else {
@@ -73,6 +75,7 @@ const Login = () => {
 
   return (
     <div className='login'>
+      <Toaster richColors position="top-center" />
       <h2 className='login__header'>Login to Binary</h2>
       <form onSubmit={handleSubmit}>
         {values.error && (

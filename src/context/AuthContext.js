@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import { api } from "../services/api";
 import { checkTokenValidity, isTokenValid } from "./tokenUtils";
 
 const AuthContext = createContext();

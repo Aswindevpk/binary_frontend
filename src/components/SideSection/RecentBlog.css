@@ -1,0 +1,56 @@
+/* Container for each blog entry */
+.home__recent-content {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+/* Container for the author information */
+.home__recent-content__author {
+  align-items: end;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+/* parent of  dropdown  */
+.home__recent-content__author-dropdown{
+  display: inline-flex;
+}
+
+/* activate dropdown on hover  */
+.home__recent-content__author-dropdown:hover .profile_overlay{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* Author image styling */
+.home__recent-content__author-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+/* Author name styling */
+.home__recent-content__author-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
+.home__recent-content__author-name:hover {
+  text-decoration: underline;
+}
+
+/* Blog title styling */
+.home__recent-content__header {
+  font-size: 16px;
+  font-weight: 800;
+  color: #333;
+  margin: 0;
+  transition: color 0.2s;
+}

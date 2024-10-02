@@ -1,0 +1,15 @@
+.Footer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  font-family: var(--font-family);
+}
+
+.Footer span {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: lighter;
+  color: rgb(107, 107, 107);
+  font-weight: 400;
+}

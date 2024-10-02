@@ -4,6 +4,8 @@ import "./Navbar.css";
 import { write,Search } from "../../assets";
 import AuthContext from "../../context/AuthContext";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell,faPenToSquare } from '@fortawesome/free-regular-svg-icons';  // 
 
 
 const Navbar = () => {
@@ -36,12 +38,11 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <div className="navbar-item" onClick={() => handleNavigation("/write")}>
-                <ion-icon name="create-outline"></ion-icon>
+                <FontAwesomeIcon icon={faPenToSquare} className="icons"/>
                 <span className="navbar-item-name">Write</span>
-               
               </div>
               <div className="navbar-item">
-              <ion-icon name="notifications-outline"></ion-icon>
+                <FontAwesomeIcon icon={faBell} className="icons"/>
               </div>
               <div className="navbar-item">
                 <ProfileDropdown/>

@@ -3,42 +3,55 @@ import { Close } from "../../assets";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
-
+import { formApi, api } from "../../services/api";
+import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const BlogPreview = ({ onClose, values, setValues }) => {
   //for select
   const animatedComponents = makeAnimated();
   const [topics, setTopics] = useState([]);
-  let [selectedOptions,setSelectedOptions] = useState([])
+  let [selectedOptions, setSelectedOptions] = useState([]);
+  const [imageSrc, setImageSrc] = useState(null); // State to store the image src
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopics = async () => {
       try {
         const response = await api.get("/home/topics/");
         const fetchedTags = response.data.data;
-        setTopics(fetchedTags.map((topic=>({
-          value:topic.uid,
-          label:topic.name
-        }))));
+        setTopics(
+          fetchedTags.map((topic) => ({
+            value: topic.uid,
+            label: topic.name,
+          }))
+        );
       } catch (error) {
         console.error("There was an error fetching the tags!", error);
       }
     };
-    fetchTopics()
+    fetchTopics();
   }, []);
 
   const handleChange = (selected) => {
     if (selected.length <= 5) {
-      setSelectedOptions(selected)
-      setValues({...values, topic:selected})
+      setSelectedOptions(selected);
     } else {
-      // Optionally, display an error message or notification
       alert("You can only select up to 5 options");
     }
   };
 
   const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result); 
+      };
+
+      reader.readAsDataURL(file); 
+    }
     setValues({ ...values, image: e.target.files[0] });
   };
 
@@ -50,12 +63,33 @@ const BlogPreview = ({ onClose, values, setValues }) => {
     setValues({ ...values, subtitle: event.target.value });
   };
 
-  const onSubmit =()=>{
-    console.log(values)
-  }
+  const onSubmit = async () => {
+    const formData = new FormData();
+    formData.append("image", values.image);
+    formData.append("title", values.title);
+    formData.append("subtitle", values.subtitle);
+    formData.append("is_published", true);
+    // take each id in an array
+    const topicValues = selectedOptions.map((topic) => topic.value);
+    formData.append("topics", topicValues);
+
+    try {
+      const response = await formApi.patch(
+        `/home/article/${values.BlogId}/`,
+        formData
+      );
+      if (response.status === 200) {
+        toast.success("Blog published.");
+        navigate(`/blog/${response.data.id}/`);
+      }
+    } catch (error) {
+      console.error("Error sumitting:", error);
+    }
+  };
 
   return (
     <div className="popup-overlay">
+      <Toaster richColors position="top-center" />
       <div className="popup-close">
         <img
           className="popus-close__img"
@@ -69,9 +103,9 @@ const BlogPreview = ({ onClose, values, setValues }) => {
           <h2 className="BlogPreview-content__header">Story Preview</h2>
           <div className="BlogPreview-content__img">
             <img
-              src=""
+              src={imageSrc}
               alt="Include a high-quality image in your story to make it more inviting to readers."
-            />
+            /> 
           </div>
           <input
             className="BlogPreview-content__imginput"

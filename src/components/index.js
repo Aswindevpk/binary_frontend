@@ -7,3 +7,6 @@ export {default as FollowUser} from './followUser/followUser';
 export {default as ProfileDropdown} from './ProfileDropdown/ProfileDropdown';
 export {default as FormInput} from './FormInput/FormInput';
 export {default as BlogPreview} from './BlogPreview/BlogPreview';
+export {default as FilterMenu} from './FilterMenu/FilterMenu';
+export {default as Footer} from './Footer/Footer';
+export {default as SideSection} from './SideSection/SideSection';

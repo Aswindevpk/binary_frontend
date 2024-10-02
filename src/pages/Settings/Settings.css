@@ -1,15 +1,78 @@
 .settings{
     display: flex;
     flex-direction: row;
-    width: 100%;
-    margin-left: 2rem;
+    font-family: var(--font-family);
+    margin: 0px 80px;
+    justify-content: space-evenly;
 }
+
 .settings__main{
     display: flex;
     flex-direction: column;
-    width: 60%;
-    height: 100vh;
+    width: 680px;
 }
+
+.settings_menu{
+    
+}
+
+.settings_account_item{
+    display:  flex;
+    justify-content: space-between;
+    padding:20px 0px;
+    align-items: center;
+}
+
+.settings_main_heading_lg{
+    padding: 10px 0px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.settings_main_heading{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: green;
+}
+
+.settings_heading{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.settings_heading_danger{
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(201, 74, 74);
+}
+
+.settings_section_border_bottom{
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+.settings_account_item_imgdiv{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.settings_desc{
+    font-size: 13px;
+    color: rgb(107, 107, 107);
+}
+
+.settings_para{
+    font-size: 14px;
+    color: rgb(107, 107, 107);
+}
+.settings_heading_group{
+    display: flex;
+    flex-direction: column;
+}
+
+
 .settings__main-header{
     font-family: var(--font-family);
     font-size: 2rem;
@@ -18,12 +81,16 @@
 }
 
 .settings__sub{
+    font-family: var(--font-family);
     display: flex;
     flex-direction: column;
-    width: 40%;
-    padding-top: 3rem;
-    padding-left: 2rem;
-    border-left: 1px solid rgb(234, 232, 232);
+    top: 0px;
+    height: 100%;
+    max-width: 368px;
+    height: 100%;
+    position: sticky;
+    padding: 40px 24px 0px 40px;
+    border-left: 1px solid rgb(242, 242, 242);
 }
 
 .settings__sub-avatar{
@@ -48,4 +115,12 @@
 .settings__sub-list li{
     list-style-type: none;
     padding: 8px 0px;
+}
+
+
+
+
+.settings_account_section2{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
 }

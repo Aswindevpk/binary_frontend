@@ -1,14 +1,12 @@
 .followUser {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    width: 70%;
+    align-items: start;
   }
   
   .followUser__img {
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     margin-right: 10px;
   }
   
@@ -17,15 +15,19 @@
   }
   
   .followUser__main-name {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
   }
   
   .followUser__main-about {
-    font-size: 0.75rem;
     color:var(--color-secondary);
     padding-right: 5px;
-    word-break: break-word;
+    display: -webkit-box; /* Necessary for line clamping */
+    -webkit-box-orient: vertical; /* Sets the orientation of the box */
+    -webkit-line-clamp: 2; /* Limit the text to a certain number of lines */
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
   }
   
   .followUser__main-btn {

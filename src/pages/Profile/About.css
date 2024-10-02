@@ -1,0 +1,119 @@
+.profile_about {
+  padding: 10px;
+  font-family: var(--font-family);
+}
+
+.profile_about-bottom{
+    display: flex;
+    padding: 40px 0px;
+    gap: 10px;
+}
+.profile_about-bottom a{
+    color: green;
+    font-size: 14px;
+}
+
+
+/*profile about edit*/
+.profile_about_edit {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  border-bottom: 1px solid gray;
+}
+.profile_about_edit-textarea {
+  border: none;
+  resize: none; /* Disables the resizer */
+  overflow: auto; /* Keeps the scrollbars if the content overflows */
+  /* Additional optional styles */
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: var(--font-family);
+}
+
+.profile_about_edit-textarea:focus {
+  outline: none;
+}
+
+.profile_about_edit-cta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.profile_about_edit-cta__cancel {
+  padding: 8px 16px; /* Adjust padding for size */
+  border: 1px solid #000; /* Outline border */
+  background: transparent; /* No background */
+  color: #000; /* Text color */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.profile_about_edit-cta__save {
+  padding: 8px 16px; /* Adjust padding for size */
+  border: none; /* No border */
+  background-color: #000; /* Dark background */
+  color: #fff; /* White text */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+
+
+
+.profile_about_view{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+
+.profile_about_view-cta{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.profile_about_view-cta button{
+    padding: 8px 16px; /* Adjust padding for size */
+    border: 1px solid #000; /* Outline border */
+    background: transparent; /* No background */
+    color: #000; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+
+
+
+.profile_about_blank{
+    display: flex;
+    padding: 50px;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    text-align: center;
+    align-items: center;
+}
+
+.profile_about_blank-header{
+    font-size: 16px;
+    padding-bottom: 8px;
+}
+
+.profile_about_blank p{
+    font-size: 14px;
+    max-width: 350px;
+}
+.profile_about_blank button{
+    padding: 8px 16px; /* Adjust padding for size */
+    border: 1px solid #000; /* Outline border */
+    background: transparent; /* No background */
+    color: #000; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+

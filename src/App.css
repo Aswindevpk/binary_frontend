@@ -5,6 +5,29 @@
     scroll-behavior: smooth;
 }
 
+.green_button{
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 16px; /* Adjust padding for size */
+    background: rgb(3, 132, 3); /* No background */
+    color: #ffffff; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.outline_button{
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 16px; /* Adjust padding for size */
+    background: transparent; /* No background */
+    border: 1px solid black;
+    color: black; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
 body{
     background-color: var(--color-bg);
 }

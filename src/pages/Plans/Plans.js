@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Plans.css'
-import api from '../../services/api';
+import { api } from "../../services/api";
 
 
 

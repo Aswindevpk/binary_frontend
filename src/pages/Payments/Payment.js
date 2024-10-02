@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Payment.css'
-import api from '../../services/api';
+import { api } from "../../services/api";
 
 
 

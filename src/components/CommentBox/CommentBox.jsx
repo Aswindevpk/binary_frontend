@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CommentBox.css";
 import { Close, Avatar } from "../../assets";
-import api from "../../services/api";
+import { api } from "../../services/api";
 import AuthContext from "../../context/AuthContext";
 
 const CommentBox = ({ toggleVisibility, isCommentBoxVisible, article_id }) => {

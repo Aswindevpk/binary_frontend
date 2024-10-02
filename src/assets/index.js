@@ -6,4 +6,5 @@ export {default as Post} from './post.jpg';
 export {default as Search} from './search-icon.svg';
 export {default as write} from './write.svg';
 export {default as Avatar} from './profile_pic.png';
+export {default as Cover} from './cover.jpg';
 

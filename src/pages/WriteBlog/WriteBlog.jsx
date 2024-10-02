@@ -5,7 +5,7 @@ import AuthContext from '../../context/AuthContext';
 import "react-quill/dist/quill.snow.css";
 import "./WriteBlog.css"
 import { BlogEditor,BlogPreview } from "../../components";
-import api from "../../services/api";
+import { api } from "../../services/api";
 
 
 const WriteBlog = () => {

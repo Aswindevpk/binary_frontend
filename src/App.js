@@ -12,7 +12,9 @@ import { AuthProvider } from './context/AuthContext';
 //importing pages
 import {
   Home, Register, Login, VerifyOtp, ForgotPass, ForgotPassConfirm,
-  ResetPass, BlogDetails, Settings, Plans, Payment, Profile, Author, WriteBlog,PaymentSuccess,PaymentFailed
+  ResetPass, BlogDetails, Settings, Plans, Payment, Profile, AuthorDetails, WriteBlog,PaymentSuccess,PaymentFailed,
+  Library,
+  Stories
 } from './pages';
 import { Navbar } from './components';
 
@@ -41,7 +43,9 @@ const App = () => {
               <Route path="/blog/:id" element={<BlogDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/author" element={<Author />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/stories" element={<Stories />} />
+              <Route path="/author" element={<AuthorDetails />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/payment-failed" element={<PaymentFailed />} />
             </Route>

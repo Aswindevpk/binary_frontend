@@ -1,28 +1,85 @@
 .filter-menu {
-    display: flex;
-    border-bottom:1px solid rgb(242, 242, 242);
-    position: -webkit-sticky; /* For Safari */
-    position: sticky;
-    top: 0px; /* Adjust based on the height of the navbar */
-    z-index: 100;
-    background-color: var(--color-bg);
-  }
-  
-  .filter-menu div {
-    font-family: var(--font-family);
-    padding: 15px 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-secondary);
-    border: none;
-    cursor: pointer;
-  }
+  display: flex;
+  border-bottom: 1px solid rgb(242, 242, 242);
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0px; /* Adjust based on the height of the navbar */
+  z-index: 5;
+  margin: 0px 25px;
+  gap: 35px;
+  background-color: var(--color-bg);
+  align-items: center;
+  overflow-x: auto;
+  /* Hide scrollbars in most modern browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
 
-  .filter-menu div:hover {
-    color: var(--color-primary);
-  }
+/* make scrollbar invisible in the chrome */
+.filter-menu::-webkit-scrollbar {
+  display: none;
+}
 
-  
-  .filter-menu div.active {
-    border-bottom: 1px solid var(--color-primary);
-  }
+#filter-menu-add {
+  padding: 2px;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+
+#filter-menu-add:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+.filter-menu div {
+  display: flex;
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  padding: 15px 0px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  border: none;
+  cursor: pointer;
+}
+
+.filter-menu div:hover {
+  color: var(--color-primary);
+}
+
+.filter-menu div.active {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.filter__scroll-container{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.arrow{
+  font-size: 24px;
+}
+.arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 1); /* White color with opacity */
+  filter: blur(5px);  /* Blur effect */
+  transform: translate(-50%, -50%);
+  z-index: -1; /* Behind the arrow */
+}
+
+.left-arrow{
+  position: absolute;
+  z-index: 20;
+}
+
+.right-arrow{
+  position: absolute;
+  right: 0px;
+  z-index: 20;
+}

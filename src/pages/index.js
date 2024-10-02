@@ -1,4 +1,3 @@
-export {default as Author} from './Author/Author';
 export {default as BlogDetails} from './BlogDetails/BlogDetails';
 export {default as ForgotPass} from './ForgotPass/ForgotPass';
 export {default as ForgotPassConfirm} from './ForgotPassConfirm/ForgotPassConfirm';
@@ -8,10 +7,13 @@ export {default as Payment} from './Payments/Payment';
 export {default as Plans} from './Plans/Plans';
 export {default as Profile} from './Profile/Profile';
 export {default as Settings} from './Settings/Settings';
+export {default as Library} from './Library/Library';
+export {default as Stories} from './Stories/Stories';
 export {default as Register} from './Register/Register';
 export {default as ResetPass} from './ResetPass/ResetPass';
 export {default as VerifyOtp} from './VerifyOtp/VerifyOtp';
 export {default as WriteBlog} from './WriteBlog/WriteBlog';
 export {default as PaymentSuccess} from './PaymentSuccess/PaymentSuccess';
 export {default as PaymentFailed} from './PaymentFailed/PaymentFailed';
+export {default as AuthorDetails} from './AuthorDetails/AuthorDetails';
 
