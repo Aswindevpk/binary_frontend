@@ -4,9 +4,11 @@
   --font-family: 'Manrope', sans-serif;
 
   
-  --color-bg: #fcfcfd;
-  --color-primary : #1c1e21;
-  --color-secondary: #616162;
-
-  --color-border:rgb(242, 242, 242);
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f9f9f9;
+  --color-primary : rgb(36, 36, 36);
+  --color-secondary: rgb(107, 107, 107);
+  --color-border:#f3f3f3;
+  --color-icon:#6b6b6b;
+  --color-premium-icon:#ffc017;
 }

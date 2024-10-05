@@ -1,0 +1,50 @@
+.MainLayout {
+  display: flex;
+  flex-direction: row;
+  font-family: var(--font-family);
+  margin: 0px 80px;
+  justify-content: space-evenly;
+}
+
+.MainLayout__main {
+  display: flex;
+  flex-direction: column;
+  max-width: 728px;
+  flex: 1;
+}
+
+.MainLayout__sub {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 90vh;
+  top: 0px;
+  max-width: 368px;
+  position: sticky;
+  padding: 40px 24px 0px 40px;
+  border-left: 1px solid rgb(242, 242, 242);
+}
+
+/* making it responsive */
+
+@media only screen and (max-width: 905px) {
+    .MainLayout__sub{
+        display: none;
+    }
+    .MainLayout__main {
+        max-width: 680px;
+      }
+
+}
+
+ @media screen and (max-width: 725px) {
+    .MainLayout {
+        margin: 0px 30px;
+      }
+}
+
+@media screen and (max-width: 550px) {
+    .MainLayout {
+        margin: 0px 20px;
+      }
+} 

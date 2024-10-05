@@ -1,9 +1,9 @@
-.filter-menu {
+.Articlefilter-menu {
   display: flex;
   border-bottom: 1px solid rgb(242, 242, 242);
   position: -webkit-sticky; /* For Safari */
-  position: sticky;
   top: 0px; /* Adjust based on the height of the navbar */
+  position: sticky;
   z-index: 5;
   margin: 0px 25px;
   gap: 35px;
@@ -11,12 +11,13 @@
   align-items: center;
   overflow-x: auto;
   /* Hide scrollbars in most modern browsers */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
+  margin: 24px 0px;
 }
 
 /* make scrollbar invisible in the chrome */
-.filter-menu::-webkit-scrollbar {
+.Articlefilter-menu::-webkit-scrollbar {
   display: none;
 }
 
@@ -31,7 +32,7 @@
   background-color: rgb(235, 235, 235);
 }
 
-.filter-menu div {
+.Articlefilter-menu div {
   display: flex;
   flex-shrink: 0;
   font-family: var(--font-family);
@@ -43,11 +44,11 @@
   cursor: pointer;
 }
 
-.filter-menu div:hover {
+.Articlefilter-menu div:hover {
   color: var(--color-primary);
 }
 
-.filter-menu div.active {
+.Articlefilter-menu div.active {
   border-bottom: 1px solid var(--color-primary);
 }
 
@@ -75,7 +76,7 @@
 
 .left-arrow{
   position: absolute;
-  z-index: 20;
+  z-index: 1;
 }
 
 .right-arrow{

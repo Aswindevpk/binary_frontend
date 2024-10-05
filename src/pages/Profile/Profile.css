@@ -1,36 +1,8 @@
-.profile{
-    display: flex;
-    flex-direction: row;
-    font-family: var(--font-family);
-    margin: 0px 80px;
-    justify-content: space-evenly;
-}
-.profile__main{
-    display: flex;
-    flex-direction: column;
-    width: 680px;
-}
-.profile__main-filterMenu{
-    padding-top: 24px;
-}
 
 .profile__main-header{
     font-family: var(--font-family);
     font-size: 2rem;
     margin-top: 40px;
-}
-
-.profile__sub{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    top: 0px;
-    min-height: 100vh;
-    max-width: 368px;
-    height: 100%;
-    position: sticky;
-    padding: 40px 24px 0px 40px;
-    border-left: 1px solid rgb(242, 242, 242);
 }
 
 .profile__sub-avatar{
@@ -45,11 +17,13 @@
     padding-bottom: 1rem;
 
 }
+
 .profile__sub-cta{
     font-family: var(--font-family);
     color: rgb(3, 132, 3);
     font-size: 0.75rem;
 }
+
 .profile__sub-cta:hover{
     color: black;
     cursor: pointer;

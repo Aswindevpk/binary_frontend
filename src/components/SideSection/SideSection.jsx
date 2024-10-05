@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FollowUser, Footer } from "../../components";
 import { Avatar } from "../../assets";
 import { api } from "../../services/api";
-import './RecentBlog.css'
-import './SideSection.css'
-
+import "./RecentBlog.css";
+import "./SideSection.css";
 
 function SideSection() {
   let [recentblog, setRecentBlog] = useState([]);
@@ -15,7 +14,7 @@ function SideSection() {
     const fetchTopics = async () => {
       try {
         const response = await api.get("/home/topics/");
-        const fetchedTags = response.data.data;
+        const fetchedTags = response.data;
         setTopics(fetchedTags);
       } catch (error) {
         console.error("There was an error fetching the tags!", error);
@@ -32,7 +31,7 @@ function SideSection() {
     };
     const recentBlogs = async () => {
       try {
-        const response = await api.get("/home/articles/");
+        const response = await api.get("/home/articles/?limit=3");
         const fetchedBlogs = response.data.data;
         setRecentBlog(fetchedBlogs);
       } catch (error) {
@@ -54,7 +53,7 @@ function SideSection() {
             <RecentBlog blog={blog} />
           ))}
         </div>
-        <a className="home__side-section-cta" href="">
+        <a className="home__side-section-cta" href="/author">
           See the full list
         </a>
       </div>
@@ -62,12 +61,12 @@ function SideSection() {
         <h3 className="home__side-section-header">Recommended Topics</h3>
         <div className="home__topics-list">
           {topics.map((topic) => (
-            <span key={topic.uid} className="home__topics-topic">
-              {topic.name}
-            </span>
+            <a className="home__topics-topic" href="/tag">
+              <span key={topic.uid}>{topic.name}</span>
+            </a>
           ))}
         </div>
-        <a className="home__side-section-cta" href="">
+        <a className="home__side-section-cta" href="/explore-topics">
           See more topics
         </a>
       </div>

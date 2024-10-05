@@ -5,6 +5,7 @@
   gap: 25px;
   background-color: var(--color-bg);
   align-items: center;
+  margin: 24px 0px;
 }
 
 .binary__filter-menu div {

@@ -36,12 +36,19 @@ const FollowUser = ({ author }) => {
 
   return (
     <div className="followUser">
-      <img className="followUser__img" src={Avatar} alt="img"></img>
-      <div className="followUser__main">
+      <a href="/author">
+        <img className="followUser__img" src={Avatar} alt="img"></img>
+      </a>
+      <a className="followUser__main" href="/author">
         <h6 className="followUser__main-name">{author.username}</h6>
         {/* <p className="followUser__main-about">{author.about}</p> */}
-        <p className="followUser__main-about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam aliquam magnam incidunt recusandae blanditiis qui ipsum nobis quas. Labore adipisci architecto facilis, laborum cumque iusto non laboriosam illo atque nisi.</p>
-      </div>
+        <p className="followUser__main-about">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+          aliquam magnam incidunt recusandae blanditiis qui ipsum nobis quas.
+          Labore adipisci architecto facilis, laborum cumque iusto non
+          laboriosam illo atque nisi.
+        </p>
+      </a>
       <button
         onClick={isFollowing ? handleUnFollow : handleFollow}
         className={`followUser__main-btn ${

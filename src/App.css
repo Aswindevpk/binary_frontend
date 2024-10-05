@@ -5,6 +5,14 @@
     scroll-behavior: smooth;
 }
 
+
+.filter_menu{
+    padding-bottom: 40px;
+}
+
+
+
+/* button  */
 .green_button{
     font-family: var(--font-family);
     font-size: 0.8rem;
@@ -14,6 +22,11 @@
     color: #ffffff; /* Text color */
     border-radius: 20px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
+    border: 1px solid rgb(3, 132, 3);
+}
+
+.green_button:hover{
+    background: rgb(2, 104, 2); 
 }
 
 .outline_button{
@@ -26,6 +39,39 @@
     color: black; /* Text color */
     border-radius: 20px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
+}
+
+.outline_green_button{
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 16px; /* Adjust padding for size */
+    background: transparent; /* No background */
+    border: 1px solid rgb(3, 132, 3);
+    color: rgb(3, 132, 3); /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.outline_green_button:hover{
+    border:1px solid rgb(2, 104, 2);
+    color: rgb(3, 132, 3); /* Text color */
+}
+
+
+.black_button{
+    padding: 8px 16px; /* Adjust padding for size */
+    border: none; /* No border */
+    background-color: #000; /* Dark background */
+    color: #fff; /* White text */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-family: var(--font-family);
+    font-size: 14px;
+}
+
+.green_button:hover{
+    background: rgb(2, 104, 2); 
 }
 
 body{

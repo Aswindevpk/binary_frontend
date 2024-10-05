@@ -48,7 +48,7 @@ const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
 
   return (
     <div className="filter__scroll-container">
-      <div className="filter-menu" ref={containerRef}>
+      <div className="Articlefilter-menu" ref={containerRef}>
         <FontAwesomeIcon
           icon={faPlus}
           className="icons"

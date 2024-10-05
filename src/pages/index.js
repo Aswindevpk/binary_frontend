@@ -16,4 +16,7 @@ export {default as WriteBlog} from './WriteBlog/WriteBlog';
 export {default as PaymentSuccess} from './PaymentSuccess/PaymentSuccess';
 export {default as PaymentFailed} from './PaymentFailed/PaymentFailed';
 export {default as AuthorDetails} from './AuthorDetails/AuthorDetails';
+export {default as Tags} from './Tags/Tags';
+export {default as ExploreTopics} from './ExploreTopics/ExploreTopics';
+export {default as Notifications} from './Notifications/Notifications';
 
