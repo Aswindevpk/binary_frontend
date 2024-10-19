@@ -1,7 +1,6 @@
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./FeaturedArticle.css";
-import { useNavigate } from "react-router-dom";
-import { Avatar } from "../../assets";
+import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,20 +11,33 @@ import {
   faEllipsis,
   faCircleMinus,
   faCirclePlus,
-  faCaretUp
+  faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-tooltip";
+import ProfileOverlay from "./ProfileOverlay";
+import { api } from "../../services/api";
+import { toast } from "sonner";
+
 
 const FeaturedArticle = ({ blog }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const formattedDate = format(new Date(blog.created_at), "MMM d"); // Format date as 'Feb 9'
-  const navigate = useNavigate();
-  let blog_img = blog ? `http://localhost:8000${blog.image}` : "";
 
-
-  const handleBookmark = () => {
-    alert("bookmarked");
+  const handleBookmark = async(article_id) => {
+    try {
+      const response = await api.post(`/home/article/${article_id}/bookmark/`);
+      if (response.status == 201) {
+        toast.success('Article Bookmarked !')
+      }else if (response.status == 200) {
+        toast.success('Article Already Bookmarked !')
+      }
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.error);
+      }
+      console.error("error while following!", error);
+    }
   };
 
   const toggleDropdown = () => {
@@ -38,20 +50,10 @@ const FeaturedArticle = ({ blog }) => {
     }
   };
 
-  const handleBlogClick = (uid) => {
-    navigate(`/blog/${uid}/`);
-  };
-
-  const handleProfileClick = (uid) => {
-    navigate(`/author/`);
-  };
-
-
-
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -59,47 +61,19 @@ const FeaturedArticle = ({ blog }) => {
     <div className="FeaturedArticle">
       <div className="FeaturedArticle__content">
         <div className="FeaturedArticle__content-author">
-          <div className="dropdown" onClick={handleProfileClick}>
-            <img
-              className="FeaturedArticle__content-author__pic"
-              src={Avatar}
-              alt="alt"
-            />
-            <span className="FeaturedArticle__content-author__name">
-              {blog.author.username}
-            </span>
-            <div className="profile_overlay">
-              <div className="profile_overlay-main">
-                <img src={Avatar} alt="" />
-                <a href="">Follow</a>
-              </div>
-              <div className="profile_overlay-sub">
-                <h2>{blog.author.username}</h2>
-                <span>161K Followers</span>
-              </div>
-              <span className="profile_overlay-summery">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum,
-                laboriosam voluptatum. Eos reiciendis deleniti sed
-                exercitationem? Sunt deserunt, est magni, impedit voluptate
-                officia totam porro accusantium, ipsum laudantium repellat
-                consectetur.
-              </span>
-            </div>
-          </div>
+          <ProfileOverlay author={blog.author} />
         </div>
-        <div
-          onClick={() => {
-            handleBlogClick(blog.uid);
-          }}
+        <Link to={`/blog/${blog.uid}/`}
+          className="FeaturedArticle_content-main"
         >
           <h2 className="FeaturedArticle__content-title">{blog.title}</h2>
           <p
             className="FeaturedArticle__content-short"
             dangerouslySetInnerHTML={{
-              __html: blog.content,
+              __html: blog.summary,
             }}
           ></p>
-        </div>
+        </Link>
 
         <div className="FeaturedArticle__content-footer">
           <div className="blog__actions-left">
@@ -111,36 +85,40 @@ const FeaturedArticle = ({ blog }) => {
               />
             )}
             <span>{formattedDate}</span>
-            <div className="blog__actions-clap">
-              <FontAwesomeIcon
-                icon={faHandsClapping}
-                className="icons"
-                id="tooltip-clap"
-                style={{ fontSize: "14px" }}
-                color="gray"
-              />
-              <Tooltip
-                anchorSelect="#tooltip-clap"
-                content={`${blog.clap_count} claps`}
-              />
-              <span>{blog.clap_count}</span>
-            </div>
-            <div className="blog__actions-comment">
-              <div className="commentIcon">
+            {blog.clap_count > 0 && (
+              <div className="blog__actions-clap">
                 <FontAwesomeIcon
-                  icon={faComment}
+                  icon={faHandsClapping}
                   className="icons"
-                  id="tooltip-comment"
+                  id="tooltip-clap"
                   style={{ fontSize: "14px" }}
                   color="gray"
                 />
                 <Tooltip
-                  anchorSelect="#tooltip-comment"
-                  content={`${blog.comment_count} responses`}
+                  anchorSelect="#tooltip-clap"
+                  content={`${blog.clap_count} claps`}
                 />
+                <span>{blog.clap_count}</span>
               </div>
-              <span>{blog.comment_count}</span>
-            </div>
+            )}
+            {blog.comment_count > 0 && (
+              <div className="blog__actions-comment">
+                <div className="commentIcon">
+                  <FontAwesomeIcon
+                    icon={faComment}
+                    className="icons"
+                    id="tooltip-comment"
+                    style={{ fontSize: "14px" }}
+                    color="gray"
+                  />
+                  <Tooltip
+                    anchorSelect="#tooltip-comment"
+                    content={`${blog.comment_count} responses`}
+                  />
+                </div>
+                <span>{blog.comment_count}</span>
+              </div>
+            )}
           </div>
           <div className="blog__actions-right">
             <div>
@@ -161,7 +139,7 @@ const FeaturedArticle = ({ blog }) => {
                 icon={faBookmark}
                 className="icons"
                 id="tooltip-bookmark"
-                onClick={handleBookmark}
+                onClick={()=>handleBookmark(blog.uid)}
                 style={{ fontSize: "18px" }}
                 color="gray"
               />
@@ -179,12 +157,12 @@ const FeaturedArticle = ({ blog }) => {
               <Tooltip anchorSelect="#tooltip-ellipsis" content="More" />
               {isOpen && (
                 <div className="blog_dropdown-more drop-shadow">
-                      <FontAwesomeIcon
-                        icon={faCaretUp}
-                        id="blog_dropdown_pointer"
-                        className="icons"
-                        color="white"
-                      />
+                  <FontAwesomeIcon
+                    icon={faCaretUp}
+                    id="blog_dropdown_pointer"
+                    className="icons"
+                    color="white"
+                  />
                   <ul className="blog_dropdown-more__section1">
                     <li>
                       <FontAwesomeIcon
@@ -227,7 +205,7 @@ const FeaturedArticle = ({ blog }) => {
                       <span>Mute Publication</span>
                     </li>
                     <li>
-                      <span style={{color:'red'}}>Report Stroy..</span>
+                      <span style={{ color: "red" }}>Report Stroy..</span>
                     </li>
                   </ul>
                 </div>
@@ -237,7 +215,7 @@ const FeaturedArticle = ({ blog }) => {
         </div>
       </div>
       <div className="FeaturedArticle__image">
-        <img src={blog_img} alt="article image" />
+        <img src={blog.image} alt="article" />
       </div>
     </div>
   );

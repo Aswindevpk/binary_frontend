@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./followUser.css";
-import { Avatar } from "../../assets";
-import { api } from "../../services/api";
+import { api } from "services/api";
+import { Link } from "react-router-dom";
+import { Avatar } from "components";
 
-const FollowUser = ({ author }) => {
+
+function FollowUser({ author }){
   const [isFollowing, setIsFollowing] = useState(author.is_following);
 
   const handleFollow = async () => {
     try {
-      const response = await api.post(`/home/follow/${author.id}/`);
+      const response = await api.post(`/home/users/${author.id}/follow/`);
       if (response.status == 201) {
         setIsFollowing(true);
       }
@@ -22,7 +24,7 @@ const FollowUser = ({ author }) => {
 
   const handleUnFollow = async () => {
     try {
-      const response = await api.post(`/home/unfollow/${author.id}/`);
+      const response = await api.post(`/home/users/${author.id}/unfollow/`);
       if (response.status == 202) {
         setIsFollowing(false);
       }
@@ -36,19 +38,19 @@ const FollowUser = ({ author }) => {
 
   return (
     <div className="followUser">
-      <a href="/author">
-        <img className="followUser__img" src={Avatar} alt="img"></img>
-      </a>
-      <a className="followUser__main" href="/author">
-        <h6 className="followUser__main-name">{author.username}</h6>
-        {/* <p className="followUser__main-about">{author.about}</p> */}
-        <p className="followUser__main-about">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-          aliquam magnam incidunt recusandae blanditiis qui ipsum nobis quas.
-          Labore adipisci architecto facilis, laborum cumque iusto non
-          laboriosam illo atque nisi.
-        </p>
-      </a>
+      <Link to={`author/${author.id}`}>
+        <Avatar username={author.username} image_url={author.img} size={'medium'}/>
+        <div className="followUser__main" href="/author">
+          <h6 className="followUser__main-name">{author.username}</h6>
+          {/* <p className="followUser__main-about">{author.about}</p> */}
+          <p className="followUser__main-about">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+            aliquam magnam incidunt recusandae blanditiis qui ipsum nobis quas.
+            Labore adipisci architecto facilis, laborum cumque iusto non
+            laboriosam illo atque nisi.
+          </p>
+        </div>
+      </Link>
       <button
         onClick={isFollowing ? handleUnFollow : handleFollow}
         className={`followUser__main-btn ${

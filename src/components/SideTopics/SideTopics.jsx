@@ -23,8 +23,8 @@ const SideTopics = () => {
       <h3 className="home__side-section-header">Recommended Topics</h3>
       <div className="home__topics-list">
         {topics.map((topic) => (
-          <a className="home__topics-topic" href="/tag">
-            <span key={topic.uid}>{topic.name}</span>
+          <a key={topic.uid} className="home__topics-topic" href="/tag">
+            <span >{topic.name}</span>
           </a>
         ))}
       </div>

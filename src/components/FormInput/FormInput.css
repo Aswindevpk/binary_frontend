@@ -5,28 +5,29 @@ input:invalid[focused="true"] {
 input:invalid[focused="true"] ~ span {
   display: block;
 }
-/* design  */
+
 
 .formInput {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem; /* Space between form inputs */
+  margin-bottom: 1.5rem; /* Space between form inputs */
 }
 
 .formInput__label {
   font-family: var(--font-family);
   margin-bottom: 0.2rem; /* Space between label and input */
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--color-primary); /* Darker text color for labels */
   font-weight: 600; /* Slightly bolder font for labels */
 }
 
 .formInput__input {
-  padding: 1rem 1rem; /* Padding inside the input */
-  font-size: 1rem;
+  padding: 0.75rem 1rem; /* Padding inside the input */
+  font-size: 14px;
+  border-radius: 6px; /* Rounded corners */
   font-family: var(--font-family);
-  border: 1px solid var(--color-primary); /* Light grey border */
-  border-radius: 0.8rem; /* Rounded corners */
+  border: 1px solid #cccccc; /* Light grey border */
+  font-family: var(--font-family); /* Custom font for input values */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -43,8 +44,15 @@ input:invalid[focused="true"] ~ span {
 
 .formInput_error {
   font-family: var(--font-family);
-  margin-top: 0.2rem; /* Space between input and error message */
-  font-size: 0.8rem; /* Smaller font size for error message */
-  color: #e74c3c; /* Red color for errors */
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: #e74c3c; 
   display: none;
+}
+
+.formInput_apiError {
+  font-family: var(--font-family);
+  margin-top: 0.5rem; /* Space between input and error message */
+  font-size: 12px; /* Smaller font size for error message */
+  color: #e74c3c; /* Red color for errors */
 }

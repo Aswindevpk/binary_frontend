@@ -1,11 +1,9 @@
 .Articlefilter-menu {
   display: flex;
   border-bottom: 1px solid rgb(242, 242, 242);
-  position: -webkit-sticky; /* For Safari */
   top: 0px; /* Adjust based on the height of the navbar */
   position: sticky;
-  z-index: 5;
-  margin: 0px 25px;
+  z-index: 1;
   gap: 35px;
   background-color: var(--color-bg);
   align-items: center;
@@ -14,6 +12,7 @@
   scrollbar-width: none; 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   margin: 24px 0px;
+  width: 100%;
 }
 
 /* make scrollbar invisible in the chrome */
@@ -56,7 +55,7 @@
   position: relative;
   display: flex;
   align-items: center;
-}
+} 
 
 .arrow{
   font-size: 24px;

@@ -2,14 +2,16 @@ export {default as ArticleFilterMenu} from './ArticleFilterMenu/ArticlefilterMen
 export {default as BlogEditor} from './BlogEditor/BlogEdtor';
 export {default as CommentBox} from './CommentBox/CommentBox';
 export {default as FeaturedArticle} from './FeaturedArticle/FeaturedArticle';
+export {default as ProfileOverlay} from './FeaturedArticle/ProfileOverlay';
 export {default as FollowUser} from './followUser/followUser';
 export {default as ProfileDropdown} from './ProfileDropdown/ProfileDropdown';
 export {default as FormInput} from './FormInput/FormInput';
 export {default as BlogPreview} from './BlogPreview/BlogPreview';
 export {default as FilterMenu} from './FilterMenu/FilterMenu';
-export {default as Footer} from '../layouts/Footer/Footer';
 export {default as SideSection} from './SideSection/SideSection';
 export {default as ProfileList} from './ProfileList/ProfileList';
 export {default as SideTopics} from './SideTopics/SideTopics';
 export {default as SideStaffPicks} from './SideStaffPicks/SideStaffPicks';
 export {default as SideFollow} from './SideFollow/SideFollow';
+export {default as Modal} from './Modal/Modal';
+export {default as Avatar} from './Avatar/Avatar';

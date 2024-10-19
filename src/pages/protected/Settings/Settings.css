@@ -1,0 +1,123 @@
+
+.settings_account_item{
+    display:  flex;
+    justify-content: space-between;
+    padding:20px 0px;
+    align-items: center;
+}
+
+.settings_main_heading_lg{
+    padding: 10px 0px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.settings_main_heading{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: green;
+}
+
+.settings_heading{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.settings_heading_danger{
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(201, 74, 74);
+}
+
+.settings_section_border_bottom{
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+.settings_account_item_imgdiv{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.settings_desc{
+    font-size: 13px;
+    color: rgb(107, 107, 107);
+}
+
+.settings_para{
+    font-size: 14px;
+    color: rgb(107, 107, 107);
+    cursor: pointer;
+}
+
+.settings_para:hover{
+    color: black;
+}
+
+.settings_heading_group{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.settings__main-header{
+    font-family: var(--font-family);
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.settings__sub{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 0px;
+    min-height: 100vh;
+    max-width: 368px;
+    height: 100%;
+    position: sticky;
+    padding: 40px 24px 0px 40px;
+    border-left: 1px solid rgb(242, 242, 242);
+}
+
+.settings__sub-avatar{
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 2rem;
+}
+
+.settings__sub-header{
+    font-family: var(--font-family);
+    font-size: 1rem;
+    padding-bottom: 1rem;
+
+}
+.settings__sub-list{
+    list-style-type: none;
+    padding: 10px 0px;
+    font-family: var(--font-family);
+    font-size: 14px;
+}
+
+.settings__sub-list li{
+    list-style-type: none;
+    padding: 8px 0px;
+}
+
+
+
+
+.settings_account_section2{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+
+#profile_img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid var(--color-secondary);
+}

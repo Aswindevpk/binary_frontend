@@ -1,0 +1,118 @@
+.AuthorDetails {
+  display: flex;
+  flex-direction: row;
+  font-family: var(--font-family);
+  margin: 0px 80px;
+  justify-content: space-evenly;
+}
+
+/* main section  */
+.AuthorDetails__main-cover {
+  height: 150px;
+}
+
+@media screen and (max-width: 905px) {
+  .AuthorDetails__main-cover {
+    display: none;
+  }
+}
+
+
+.AuthorDetails__main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.AuthorDetails__main-header__h1 {
+  font-size: 42px;
+}
+
+.AuthorDetails__main-filterMenu {
+  padding-bottom: 40px;
+  margin: 0px 20px;
+}
+
+.AuthorDetails__main-blogs {
+  padding-top: 50px;
+}
+
+/* Container for the recent blogs section */
+.AuthorDetails__side-section {
+  display: flex;
+  flex-direction: column;
+  top: 0px;
+  max-width: 368px;
+  height: 100%;
+  position: sticky;
+  padding: 40px 24px 0px 40px;
+  border-left: 1px solid var(--color-border);
+}
+
+.AuthorDetails__side-section__profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.AuthorDetails__side-section__profile-pic {
+  height: 88px;
+  width: 88px;
+}
+.AuthorDetails__side-section__profile-h1 {
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.AuthorDetails__side-section__profile-sub {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.AuthorDetails__side-section__profile-para {
+  font-size: 14px;
+  margin-top: 16px;
+  color: var(--color-secondary);
+}
+
+.AuthorDetails__side-section__profile-cta {
+    display: flex;
+    gap: 10px;
+}
+
+.AuthorDetails__side-section__profile-cta a {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  background: #1a8917;
+  padding: 8px 16px; /* Adjust padding for size */
+  color:white; /* Text color */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.AuthorDetails__side-section__lists span{
+    font-size: 12px;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.AuthorDetails__side-section__lists span:hover{
+    color: var(--color-secondary);
+}
+
+
+@media (max-width: 1100px) {
+  .AuthorDetails__main {
+    max-width: 650px;
+    flex-shrink: 1;
+  }
+  .AuthorDetails__side-section {
+    max-width: 352px;
+  }
+}
+
+@media (max-width: 905px) {
+  .AuthorDetails__side-section {
+    display: none;
+  }
+}

@@ -9,7 +9,7 @@ const SideStaffPicks = () => {
     const recentBlogs = async () => {
       try {
         const response = await api.get("/home/articles/?limit=3");
-        const fetchedBlogs = response.data.data;
+        const fetchedBlogs = response.data;
         setRecentBlog(fetchedBlogs);
       } catch (error) {
         console.error("There was an error fetching the recentblogs!", error);
@@ -23,7 +23,7 @@ const SideStaffPicks = () => {
       <h2 className="home__side-section-header">Staff picks</h2>
       <div className="home__recent-list">
         {recentblog.map((blog) => (
-          <RecentBlog blog={blog} />
+          <RecentBlog key={blog.uid} blog={blog} />
         ))}
       </div>
       <a className="home__side-section-cta" href="/author">

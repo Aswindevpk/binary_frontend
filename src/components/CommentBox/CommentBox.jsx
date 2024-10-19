@@ -32,7 +32,7 @@ const CommentBox = ({ toggleVisibility, isCommentBoxVisible, article_id }) => {
       try {
         let response = await api.get(`/home/article/${article_id}/comments/`);
         if (response.status == 200) {
-          setComments(response.data.data);
+          setComments(response.data);
         }
       } catch (error) {
         console.log(error);

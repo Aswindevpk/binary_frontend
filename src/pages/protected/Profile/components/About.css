@@ -1,0 +1,29 @@
+/* About  */
+.profile_about-bottom{
+    display: flex;
+    padding: 40px 0px;
+    gap: 10px;
+}
+
+.profile_about-bottom a{
+    color: green;
+    font-size: 14px;
+    font-weight: 500;
+} 
+
+.profile_about-bottom a:hover{
+    color: rgb(0, 75, 0);
+    font-size: 14px;
+} 
+
+
+
+
+
+
+
+
+
+
+
+

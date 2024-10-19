@@ -1,0 +1,43 @@
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.default__avatar {
+  cursor: pointer;
+  background-color: #005a15;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 50%; /* Make it circular */
+  cursor: pointer;
+}
+
+/* Avatar sizes */
+.avatar--small {
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+}
+
+.avatar--medium {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.avatar--large {
+  width: 64px;
+  height: 64px;
+  font-size: 26px;
+}
+
+.avatar--xlarge {
+  width: 88px;
+  height: 88px;
+  font-size: 34px;
+}

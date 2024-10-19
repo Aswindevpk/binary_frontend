@@ -1,12 +1,15 @@
-import AppRouter from './routes/AppRouter';
+import AppRouter from 'routes/AppRouter';
 import './App.css';
 import './index.css';
+import { Toaster} from "sonner";
+
 
 
 const App = () => {
   return (
     <>
       <AppRouter/>
+      <Toaster position="top-center" />
     </>
   );
 };

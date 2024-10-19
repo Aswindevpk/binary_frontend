@@ -1,15 +1,17 @@
 import React from "react";
-import { Avatar } from "../../assets";
+import ProfileOverlay from "../FeaturedArticle/ProfileOverlay";
+
 
 const RecentBlog = ({blog}) => {
   return (
     <div key={blog.uid} className="home__recent-content">
       <div className="home__recent-content__author">
-        <div className="home__recent-content__author-dropdown">
+        <ProfileOverlay author={blog.author}/>
+        {/* <div className="home__recent-content__author-dropdown">
           <img
             className="home__recent-content__author-img"
             alt="src"
-            src={Avatar}
+            src={blog.author.img}
           ></img>
           <span className="home__recent-content__author-name">
             {blog.author.username}
@@ -30,7 +32,7 @@ const RecentBlog = ({blog}) => {
               accusantium, ipsum laudantium repellat consectetur.
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       <h3 className="home__recent-content__header">{blog.title}</h3>
     </div>
