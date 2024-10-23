@@ -16,7 +16,7 @@ const StoriesMain = () => {
       <div className="stories__main-header">
         <h1 className="main__header">Your Stories</h1>
         <div className="stories__main-header__cta">
-          <Link className="green_button" to="/write">
+          <Link className="green_button" to="/create-story">
             Write a Story
           </Link>
           <Link className="outline_button" to="/">

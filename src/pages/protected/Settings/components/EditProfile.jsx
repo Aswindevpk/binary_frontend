@@ -1,21 +1,24 @@
 import React, { useState, useRef } from "react";
-import { formApi } from "services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import useEditProfile from "./useEditProfile";
+import { ModalInput } from "components";
+
 
 function EditProfile({ user, setUser, onClose }) {
-  let [value, setValue] = useState(user);
-  const fileInputRef = useRef(null); // Create a ref for the file input
-  const [imageSrc, setImageSrc] = useState(user.img); // State to hold the image source
+  let [status, setStatus] = useState("typing");
 
-  const handleSelectImg = () => {
-    fileInputRef.current.click();
-  };
+  const { formData, setFormData, handleSubmit } = useEditProfile(
+    setStatus,
+    setUser,
+    user
+  ); // Destructure the hook's return values
 
-  const handleRemoveImg = () => {
-    setImageSrc(null); // Clear the image source
-    fileInputRef.current.value = null; // Reset the file input
-  };
+  // State to hold the image source
+  const [imageSrc, setImageSrc] = useState(user.img);
+
+  // Create a ref for the file input
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]; // Get the selected file
@@ -27,32 +30,30 @@ function EditProfile({ user, setUser, onClose }) {
 
       reader.readAsDataURL(file);
     }
-    setValue({ ...value, img: event.target.files[0] });
+    setFormData({ ...formData, img: event.target.files[0] });
   };
-
-  const handleChange = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
-  };
-
-  const updateProfile = async () => {
-    try {
-      const formData = new FormData();
-
-      for (const key in value) {
-        if (key === "img") {
-          formData.append(key, value.img);
-        } else {
-          formData.append(key, value[key]);
-        }
-      }
-
-      const response = await formApi.patch("/home/profile/", formData);
-      const updatedUser = response.data;
-      setUser(updatedUser);
-    } catch (error) {
-      console.error("There was an error fetching the tags!", error);
-    }
-  };
+  const inputs = [
+    {
+      id: 1,
+      name: "name",
+      type: "text",
+      placeholder: "",
+      // errorMessage: "Enter a valid email address.",
+      label: "Name*",
+      desc: "",
+      required: true,
+    },
+    {
+      id: 1,
+      name: "pronouns",
+      type: "text",
+      placeholder: "",
+      // errorMessage: "Enter a valid email address.",
+      label: "Pronouns",
+      desc: "",
+      required: true,
+    },
+  ];
 
   return (
     <div className="modal-main__container">
@@ -62,7 +63,7 @@ function EditProfile({ user, setUser, onClose }) {
           <span className="modal-label">Photo</span>
           <div className="modal-input__desc">
             <img
-              src={imageSrc }
+              src={imageSrc}
               alt=""
               width="80px"
               height="80px"
@@ -77,13 +78,18 @@ function EditProfile({ user, setUser, onClose }) {
                     paddingRight: "5%",
                     cursor: "pointer",
                   }}
-                  onClick={handleSelectImg}
+                  onClick={() => {
+                    fileInputRef.current.click();
+                  }}
                 >
                   Update
                 </a>
                 <a
                   style={{ color: "red", fontSize: "13px", cursor: "pointer" }}
-                  onClick={handleRemoveImg}
+                  onClick={() => {
+                    setImageSrc(null); // Clear the image source
+                    fileInputRef.current.value = null; // Reset the file input
+                  }}
                 >
                   Remove
                 </a>
@@ -103,52 +109,20 @@ function EditProfile({ user, setUser, onClose }) {
           </div>
         </div>
 
-        <div className="modal-section">
-          <label className="modal-label" htmlFor="name">
-            Name*
-          </label>
-          <input
-            className="modal-input"
-            type="text"
-            name="name"
-            id="name"
-            onChange={handleChange}
-            value={value.name}
-          />
-          <div className="modal-input__desc">
-            <span className="modal-main__para"></span>
-            <span>
-              <span className="modal-input__current-count">
-                {value.name.length}
-              </span>
-              <span className="modal-input__count-limit">/50</span>
-            </span>
-          </div>
-        </div>
 
-        <div className="modal-section">
-          <label className="modal-label" htmlFor="pronouns">
-            Pronouns
-          </label>
-          <input
-            className="modal-input"
-            type="text"
-            name="pronouns"
-            id="pronouns"
-            onChange={handleChange}
-            placeholder="Add..."
-            value={value.pronouns}
+        {inputs.map((input)=>(
+          //render both name and pronouns field
+          <ModalInput
+            key={input.id}
+            {...input}
+            value={formData[input.name]}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+            }}
+            status={status}
+            max_len="10"
           />
-          <div className="modal-input__desc">
-            <span className="modal-main__para"></span>
-            <span>
-              <span className="modal-input__current-count">
-                {value.pronouns.length}
-              </span>
-              <span className="modal-input__count-limit">/4</span>
-            </span>
-          </div>
-        </div>
+        ))}
 
         <div className="modal-section">
           <label className="modal-label" htmlFor="short_bio">
@@ -161,15 +135,17 @@ function EditProfile({ user, setUser, onClose }) {
             type="text"
             id="short_bio"
             name="about"
-            onChange={handleChange}
-            value={value.about}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+            }}
+            value={formData.about}
             style={{ resize: "none" }}
           />
           <div className="modal-input__desc">
             <span className="modal-main__para"></span>
             <span>
               <span className="modal-input__current-count">
-                {value.about.length}
+                {formData.about.length}
               </span>
               <span className="modal-input__count-limit">/160</span>
             </span>
@@ -195,7 +171,7 @@ function EditProfile({ user, setUser, onClose }) {
         <button className="outline_green_button" onClick={onClose}>
           Cancel
         </button>
-        <button className="green_button" onClick={updateProfile}>
+        <button className="green_button" onClick={handleSubmit}>
           Save
         </button>
       </div>

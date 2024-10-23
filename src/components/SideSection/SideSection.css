@@ -22,8 +22,7 @@
   }
   
   .home__side-section-cta {
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     text-decoration: none;
     color: rgb(44, 171, 40);
     font-size: 14px;
@@ -66,7 +65,7 @@
     color: var(--color-primary);
     border-radius: 20px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
   }
   

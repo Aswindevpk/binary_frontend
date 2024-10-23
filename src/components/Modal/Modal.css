@@ -43,54 +43,6 @@
   }
   
   
-  /* common classes  */
-  .modal-input{
-      background-color: rgb(242, 242, 242);
-      border-width: 1px;
-      border-color: transparent;
-      border-radius: 4px;
-      width: 100%;
-      color: rgb(6, 6, 6);
-      padding: 8px 12px;
-      outline: black;
-  }
-  
-  .modal-label{
-      color: rgb(36, 36, 36);
-      font-size: 14px;
-      line-height: 14px;
-      font-weight: 400;
-      padding-bottom: 8px;
-  }
-  
-  .modal-section{
-      margin-bottom: 20px;
-  }
-  
-  .modal-input__desc{
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-  }
-  
-  .modal-input__current-count{
-      font-size: 13px;
-      margin-top: 8px;
-      color: rgb(36, 36, 36);
-      line-height: 15px;
-      font-weight: 400;
-  }
-  
-  .modal-input__count-limit{
-      display: inline-block;
-      font-size: 13px;
-      margin-top: 8px;
-      color: rgb(107, 107, 107);
-      line-height: 14px;
-      font-weight: 400;
-  }
-  
-  
   .modal-main__header{
       line-height: 24px;
       font-size: 20px;

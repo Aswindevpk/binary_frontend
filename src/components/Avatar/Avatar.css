@@ -6,10 +6,10 @@
 }
 
 .default__avatar {
+  display: flex;
   cursor: pointer;
   background-color: #005a15;
   color: white;
-  display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;

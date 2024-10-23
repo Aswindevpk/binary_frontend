@@ -6,13 +6,13 @@ function Avatar({ username, image_url=null , size }) {
   const firstletter = username ? username[0].toUpperCase() : "";
 
   return (
-    <>
+    <div>
       {image_url ? (
         <img src={image_url} alt="Profile_pic" className={`avatar avatar--${size}`} />
       ) : (
         <div className={`default__avatar avatar--${size}`} >{firstletter}</div>
       )}
-    </>
+    </div>
   );
 }
 

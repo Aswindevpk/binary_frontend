@@ -14,7 +14,7 @@ function Navbar () {
   // for changing content accoding to logged user and loggedout user
   let { isAuthenticated,user } = useContext(AuthContext);
   const [author, setAuthor] = useState(null);
-  const [loading, setLoading] = useState(isAuthenticated?true:false);
+  const [loading, setLoading] = useState(true);
 
   //fetch user
   useEffect(() => {
@@ -53,7 +53,7 @@ function Navbar () {
         <div className="navbar-links">
           {isAuthenticated ? (
             <>
-              <Link to="/write" className="navbar-item">
+              <Link to="/create-story" className="navbar-item">
                 <FontAwesomeIcon icon={faPenToSquare} className="icons navbar-icon" />
                 <span className="navbar-item-name">Write</span>
               </Link>

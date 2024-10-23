@@ -89,8 +89,8 @@ function ProfileOverlay({ author }) {
   return (
     <div
       className="dropdown"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
     >
       <Link className="dropdown__author" to={`/author/${author.id}`}>
         <Avatar username={author.username} image_url={author.img} size={'small'}/>

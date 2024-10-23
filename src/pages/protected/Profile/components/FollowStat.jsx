@@ -10,7 +10,7 @@ function FollowStat() {
   const fetchfollow = async () => {
     try {
       const response = await api.get(
-        `home/users/${user.user_id}/follow-stats/`
+        `accounts/${user.user_id}/follow-stats/`
       );
       setFollow(response.data);
     } catch (error) {

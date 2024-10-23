@@ -25,7 +25,6 @@ import {
   Payment,
   Profile,
   AuthorDetails,
-  WriteBlog,
   PaymentSuccess,
   PaymentFailed,
   Library,
@@ -33,6 +32,9 @@ import {
   ExploreTopics,
   Stories,
   ReadingList,
+  CreateStory,
+  EditStory,
+
 } from "pages/protected";
 
 
@@ -57,7 +59,6 @@ function AppRouter(){
             <Route path="/plans" element={<Plans />} />
             <Route path="/payment" element={<Payment />} />
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/write" element={<WriteBlog />} />
             <Route path="/blog/:id" element={<BlogDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
@@ -69,6 +70,8 @@ function AppRouter(){
             <Route path="/tag" element={<Tags />} />
             <Route path="/explore-topics" element={<ExploreTopics />} />
             <Route path="/reading-list" element={<ReadingList />} />
+            <Route path="/create-story" element={<CreateStory />} />
+            <Route path="/edit-story/:id" element={<EditStory />} />
           </Route>
         </Routes>
       </AuthProvider>

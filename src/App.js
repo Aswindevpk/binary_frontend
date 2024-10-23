@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       <AppRouter/>
-      <Toaster position="top-center" />
+      <Toaster richColors position="top-center" />
     </>
   );
 };

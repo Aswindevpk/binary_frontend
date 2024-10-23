@@ -4,17 +4,15 @@ import { MainLayout } from "components/layouts";
 import ProfileSide from '../Profile/ProfileSide';
 import ReadingListMain from './ReadingListMain';
 
-
-
 function ReadingList() {
     let [user, setUser] = useState(null);
 
     const fetchArticles = async () => {
       try {
-        const response = await api.get("/home/profile/");
-        const fetchedData = response.data;
-        setUser(fetchedData);
+        const response = await api.get("/accounts/profile/");
+        setUser(response.data);
       } catch (error) {
+        console.log(error)
         console.error("There was an error fetching the tags!", error);
       }
     };

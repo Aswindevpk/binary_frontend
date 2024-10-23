@@ -20,7 +20,7 @@ const SideTopics = () => {
 
   return (
     <div className="home__topics">
-      <h3 className="home__side-section-header">Recommended Topics</h3>
+      <h3 className="home__side-section-header header3">Recommended Topics</h3>
       <div className="home__topics-list">
         {topics.map((topic) => (
           <a key={topic.uid} className="home__topics-topic" href="/tag">
@@ -28,7 +28,7 @@ const SideTopics = () => {
           </a>
         ))}
       </div>
-      <a className="home__side-section-cta" href="/explore-topics">
+      <a className="home__side-section-cta para-cta para1" href="/explore-topics">
         See more topics
       </a>
     </div>

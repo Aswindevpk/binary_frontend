@@ -21,13 +21,13 @@ const SideFollow = () => {
     
   return (
     <div className="home__followList">
-      <h3 className="home__side-section-header">Who to Follow</h3>
+      <h3 className="home__side-section-header header3">Who to Follow</h3>
       <div className="home__followList-list">
         {authors.map((author) => (
           <FollowUser key={author.id} author={author} />
         ))}
       </div>
-      <a className="home__side-section-cta" href="">
+      <a className="home__side-section-cta para-cta para1" href="">
         See more suggestions
       </a>
     </div>

@@ -14,7 +14,7 @@ import Avatar from "components/Avatar/Avatar";
 const ProfileDropdown = ({ author }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  let { logoutUser,user} = useContext(AuthContext);
+  let { logoutUser, user } = useContext(AuthContext);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -26,9 +26,6 @@ const ProfileDropdown = ({ author }) => {
     }
   };
 
-  const handleLogout = () => {
-    logoutUser();
-  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -40,7 +37,11 @@ const ProfileDropdown = ({ author }) => {
   return (
     <div className="profile-dropdown" ref={dropdownRef}>
       <div onClick={toggleDropdown}>
-        <Avatar username={author.username} image_url={author.img} size={"medium"}/>
+        <Avatar
+          username={author.username}
+          image_url={author.img}
+          size={"medium"}
+        />
       </div>
       {isOpen && (
         <div className="dropdown-menu">
@@ -94,10 +95,15 @@ const ProfileDropdown = ({ author }) => {
           </div>
           <div className="dropdown-menu__section4">
             <li>
-              <span onClick={handleLogout}>
+              <Link
+                onClick={() => {
+                  logoutUser();
+                }}
+              >
+                {" "}
                 Sign out
                 <p>{author.email}</p>
-              </span>
+              </Link>
             </li>
           </div>
         </div>

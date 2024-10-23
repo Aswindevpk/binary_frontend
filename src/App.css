@@ -26,7 +26,8 @@
 
 .para1{
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .para2{

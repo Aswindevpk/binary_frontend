@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faX } from "@fortawesome/free-solid-svg-icons";
 import './Modal.css';
 
-const Modal = ({ show, onClose, children }) => {
+export default function Modal({ show, onClose, children }){
   if (!show) {
     return null;
   }
@@ -25,4 +25,3 @@ const Modal = ({ show, onClose, children }) => {
   );
 };
 
-export default Modal;

@@ -8,22 +8,16 @@ import {
   Security,
 } from "./components";
 
-const filters = [
-  { name: "Account", uid: "1" },
-  { name: "Publishing", uid: "2" },
-  { name: "Notification", uid: "3" },
-  { name: "Membership and Payment", uid: "4" },
-  { name: "Security and apps", uid: "5" },
-];
 
 const SettingsMain = () => {
   const [activeFilter, setActiveFilter] = useState({
     name: "Account",
     uid: "2",
   });
+  
   return (
     <>
-      <h2 className="main__header">Settings</h2>
+      <h2 className="header1">Settings</h2>
       <FilterMenu
         filters={filters}
         activeFilter={activeFilter}
@@ -39,5 +33,14 @@ const SettingsMain = () => {
     </>
   );
 };
+
+const filters = [
+  { name: "Account", uid: "1" },
+  { name: "Publishing", uid: "2" },
+  { name: "Notification", uid: "3" },
+  { name: "Membership and Payment", uid: "4" },
+  { name: "Security and apps", uid: "5" },
+];
+
 
 export default SettingsMain;

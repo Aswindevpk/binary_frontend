@@ -4,6 +4,7 @@ import "./Profile.css";
 import { Link } from "react-router-dom";
 import { Avatar } from "components";
 import { api } from "services/api";
+import { toast } from "sonner";
 
 
 const ProfileSide = ({ user }) => {
@@ -12,11 +13,11 @@ const ProfileSide = ({ user }) => {
   const fetchfollow = async () => {
     try {
       const response = await api.get(
-        `home/users/${user.id}/follow-stats/`
+        `accounts/${user.id}/follow-stats/`
       );
       setFollow(response.data);
     } catch (error) {
-      console.error("There was an error fetching the tags!", error);
+      toast.error('error')
     }
   };
 

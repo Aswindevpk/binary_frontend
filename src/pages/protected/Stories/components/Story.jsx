@@ -1,12 +1,15 @@
 import React from "react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
-const Story = () => {
+const Story = ({ article }) => {
   return (
     <div className="Story">
-      <h2 className="Story-heading">heading</h2>
-      <p className="Story-para">paragraph</p>
+      <Link to={`/edit-story/${article.uid}`}>
+        <h2 className="Story-heading">{article.title}</h2>
+        <p className="Story-para">{article.subtitle}</p>
+      </Link>
       <div className="Story-footer">
         <span>Last edited 5 days ago</span>
         <span>.</span>

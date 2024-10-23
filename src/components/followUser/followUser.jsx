@@ -38,16 +38,13 @@ function FollowUser({ author }){
 
   return (
     <div className="followUser">
-      <Link to={`author/${author.id}`}>
+      <Link className="followUser-user" to={`author/${author.id}`}>
         <Avatar username={author.username} image_url={author.img} size={'medium'}/>
         <div className="followUser__main" href="/author">
           <h6 className="followUser__main-name">{author.username}</h6>
           {/* <p className="followUser__main-about">{author.about}</p> */}
           <p className="followUser__main-about">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            aliquam magnam incidunt recusandae blanditiis qui ipsum nobis quas.
-            Labore adipisci architecto facilis, laborum cumque iusto non
-            laboriosam illo atque nisi.
+            {author.about}
           </p>
         </div>
       </Link>

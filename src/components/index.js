@@ -15,3 +15,5 @@ export {default as SideStaffPicks} from './SideStaffPicks/SideStaffPicks';
 export {default as SideFollow} from './SideFollow/SideFollow';
 export {default as Modal} from './Modal/Modal';
 export {default as Avatar} from './Avatar/Avatar';
+export {default as ModalInput} from './ModalInput/ModalInput';
+

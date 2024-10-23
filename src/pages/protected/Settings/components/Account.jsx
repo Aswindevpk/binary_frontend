@@ -15,7 +15,7 @@ const Account = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await api.get("/home/profile/");
+      const response = await api.get("/accounts/profile/");
       const fetchedUser = response.data;
       setUser(fetchedUser);
     } catch (error) {
@@ -31,26 +31,22 @@ const Account = () => {
     return <p>Loading...</p>;
   }
 
-  const handleOpenModal = (modelId) => {
-    setActiveModal(modelId); // Open modal when button is clicked
-  };
-
-  const handleCloseModal = () => {
-    setActiveModal(false); // Close modal when button is clicked or backdrop is clicked
-  };
-
   return (
-    <div className="settings_menu">
+    <>
       <div className="settings_section_border_bottom">
         <div className="settings_account_item">
           <span className="settings_heading">Email address</span>
           <span
             className="settings_para"
-            onClick={() => handleOpenModal("email")}
+            onClick={() => {
+              setActiveModal("email"); // Open modal when button is clicked
+            }}
           >
             {user.email}
           </span>
-          <Modal show={activeModal === "email"} onClose={handleCloseModal}>
+          <Modal show={activeModal === "email"} onClose={()=>{
+            setActiveModal(false); // Close modal when button is clicked or backdrop is clicked
+          }}>
             <EditEmail user={user} setUser={setUser} />
           </Modal>
         </div>
@@ -60,11 +56,15 @@ const Account = () => {
           </div>
           <span
             className="settings_para"
-            onClick={() => handleOpenModal("username")}
+            onClick={() => {
+              setActiveModal("username"); // Open modal when button is clicked
+            }}
           >
             {`@${user.username}`}
           </span>
-          <Modal show={activeModal === "username"} onClose={handleCloseModal}>
+          <Modal show={activeModal === "username"} onClose={()=>{
+            setActiveModal(false); // Close modal when button is clicked or backdrop is clicked
+          }}>
             <EditUsername user={user} setUser={setUser} />
           </Modal>
         </div>
@@ -77,11 +77,15 @@ const Account = () => {
           </div>
           <span
             className="settings_para"
-            onClick={() => handleOpenModal("profile")}
+            onClick={() => {
+              setActiveModal("profile"); // Open modal when button is clicked
+            }}
           >
-            {user.name}
+            {user.name ? user.name : "edit"}
           </span>
-          <Modal show={activeModal === "profile"} onClose={handleCloseModal}>
+          <Modal show={activeModal === "profile"} onClose={()=>{
+            setActiveModal(false); // Close modal when button is clicked or backdrop is clicked
+          }}>
             <EditProfile user={user} setUser={setUser}/>
           </Modal>
         </div>
@@ -157,7 +161,7 @@ const Account = () => {
           <FontAwesomeIcon icon={faUpRightFromSquare} className="icons" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

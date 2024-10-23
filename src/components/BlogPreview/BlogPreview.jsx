@@ -7,7 +7,7 @@ import { formApi, api } from "../../services/api";
 import { Toaster, toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
-const BlogPreview = ({ onClose, values, setValues }) => {
+const BlogPreview = ({ onClose, formData, setFormData,id }) => {
   //for select
   const animatedComponents = makeAnimated();
   const [topics, setTopics] = useState([]);
@@ -19,7 +19,7 @@ const BlogPreview = ({ onClose, values, setValues }) => {
     const fetchTopics = async () => {
       try {
         const response = await api.get("/home/topics/");
-        const fetchedTags = response.data.data;
+        const fetchedTags = response.data;
         setTopics(
           fetchedTags.map((topic) => ({
             value: topic.uid,
@@ -52,30 +52,30 @@ const BlogPreview = ({ onClose, values, setValues }) => {
 
       reader.readAsDataURL(file); 
     }
-    setValues({ ...values, image: e.target.files[0] });
+    setFormData({ ...formData, image: e.target.files[0] });
   };
 
   const changeTitle = (event) => {
-    setValues({ ...values, title: event.target.value });
+    setFormData({ ...formData, title: event.target.value });
   };
 
   const changeSubtitle = (event) => {
-    setValues({ ...values, subtitle: event.target.value });
+    setFormData({ ...formData, subtitle: event.target.value });
   };
 
   const onSubmit = async () => {
     const formData = new FormData();
-    formData.append("image", values.image);
-    formData.append("title", values.title);
-    formData.append("subtitle", values.subtitle);
+    formData.append("image", formData.image);
+    formData.append("title", formData.title);
+    formData.append("subtitle", formData.subtitle);
     formData.append("is_published", true);
     // take each id in an array
     const topicValues = selectedOptions.map((topic) => topic.value);
-    formData.append("topics", topicValues);
+    // formData.append("topics", topicValues);
 
     try {
       const response = await formApi.patch(
-        `/home/article/${values.BlogId}/`,
+        `/home/article-edit/${id}/`,
         formData
       );
       if (response.status === 200) {
@@ -83,6 +83,7 @@ const BlogPreview = ({ onClose, values, setValues }) => {
         navigate(`/blog/${response.data.id}/`);
       }
     } catch (error) {
+      console.log(error)
       console.error("Error sumitting:", error);
     }
   };
@@ -116,14 +117,14 @@ const BlogPreview = ({ onClose, values, setValues }) => {
           <input
             className="BlogPreview-content__heading"
             type="text"
-            value={values.title}
+            value={formData.title}
             onChange={changeTitle}
             placeholder="Your Story Heading"
           />
           <input
             className="BlogPreview-content__subtitle"
             type="text"
-            value={values.subtitle}
+            value={formData.subtitle}
             onChange={changeSubtitle}
             placeholder="write a preview subtitle.."
           />

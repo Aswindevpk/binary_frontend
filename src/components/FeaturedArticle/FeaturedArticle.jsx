@@ -126,7 +126,7 @@ const FeaturedArticle = ({ blog }) => {
                 icon={faCircleMinus}
                 className="icons"
                 id="tooltip-showless"
-                style={{ fontSize: "18px" }}
+                style={{ fontSize: "14px" }}
                 color="gray"
               />
               <Tooltip
@@ -140,7 +140,7 @@ const FeaturedArticle = ({ blog }) => {
                 className="icons"
                 id="tooltip-bookmark"
                 onClick={()=>handleBookmark(blog.uid)}
-                style={{ fontSize: "18px" }}
+                style={{ fontSize: "14px" }}
                 color="gray"
               />
               <Tooltip anchorSelect="#tooltip-bookmark" content="Save" />
@@ -150,7 +150,7 @@ const FeaturedArticle = ({ blog }) => {
                 icon={faEllipsis}
                 className="icons"
                 id="tooltip-ellipsis"
-                style={{ fontSize: "18px" }}
+                style={{ fontSize: "16px" }}
                 color="gray"
                 onClick={toggleDropdown}
               />

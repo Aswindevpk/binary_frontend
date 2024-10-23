@@ -1,56 +1,40 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FilterMenu, ProfileList } from "components";
 import ReadingHistory from "./ReadingHistory";
 import SaveLists from "./SaveLists";
 import { api } from "services/api";
+import { toast } from "sonner";
+import useFetchUser from "./useFetchUser";
 
-
-const filters = [
-  { name: "Your Lists", uid: "1" },
-  { name: "Saved Lists", uid: "2" },
-  { name: "Highlights", uid: "3" },
-  { name: "Reading History", uid: "4" },
+const filterComponents = [
+  { name: "Your Lists", uid: "1", component: ProfileList },
+  { name: "Saved Lists", uid: "2", component: SaveLists },
+  { name: "Highlights", uid: "3", component: null }, // Assuming no component for Highlights
+  { name: "Reading History", uid: "4", component: ReadingHistory },
 ];
 
-const LibraryMain = () => {
-  const [activeFilter, setActiveFilter] = useState({
-    name: "Your Lists",
-    uid: "1",
-  });
-  let [user, setUser] = useState(null);
+export default function LibraryMain() {
+  const [activeFilter, setActiveFilter] = useState(filterComponents[0]);
+  const { user, loading } = useFetchUser(); // Using the custom hook
 
-  const fetchUser = async () => {
-    try {
-      const response = await api.get("/home/profile/");
-      const fetchedUser = response.data;
-      setUser(fetchedUser);
-    } catch (error) {
-      console.error("There was an error fetching the tags!", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  if (!user) {
+  if (loading) {
     return <p>Loading...</p>;
   }
 
+  const renderActiveComponent = () => {
+    const ActiveComponent = activeFilter.component;
+    return ActiveComponent ? <ActiveComponent user={user} /> : null;
+  };
 
   return (
     <>
       <h2 className="main__header">Library</h2>
       <FilterMenu
-        filters={filters}
+        filters={filterComponents}
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
       />
-      {activeFilter && activeFilter.uid === "4" && <ReadingHistory />}
-      {activeFilter && activeFilter.uid === "2" && <SaveLists />}
-      {activeFilter && activeFilter.uid === "1" && <ProfileList user={user} />}
+      {renderActiveComponent()}
     </>
   );
-};
-
-export default LibraryMain;
+}

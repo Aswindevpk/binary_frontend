@@ -6,28 +6,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEllipsis, faComment, faHandsClapping } from "@fortawesome/free-solid-svg-icons";
 import ReadingListInput from "./ReadingListInput";
 import { Avatar } from "components";
+import { toast } from "sonner";
 
 function ReadingListMain({ user }) {
-  let [blogs, setBlogs] = useState([]);
+  let [articles, setArticles] = useState([]);
   let [loading, setLoading] = useState(true);
 
+
+  //move to utls later
   const getCurrentDate = () => {
     const today = new Date();
     const options = { year: "numeric", month: "short", day: "numeric" };
     return today.toLocaleDateString("en-US", options); // Outputs: "Oct 13, 2024"
   };
 
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await api.get("/home/bookmarks");
+      setArticles(response.data);
+      setLoading(false);
+    } catch (error) {
+      toast.error("error")
+      console.error("There was an error fetching the articles!", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchBlogs = async (Topic) => {
-      try {
-        const response = await api.get("/home/articles/?bookmarked=true");
-        const fetchedBlogs = response.data;
-        setBlogs(fetchedBlogs);
-        setLoading(false);
-      } catch (error) {
-        console.error("There was an error fetching the blogs!", error);
-      }
-    };
     fetchBlogs();
   }, []);
 
@@ -45,7 +50,7 @@ function ReadingListMain({ user }) {
             <div className="ReadingList-main__sub">
               <span>{getCurrentDate()}</span>
               <span>.</span>
-              <span>4 stories</span>
+              {articles.length > 0 && <span>{articles.length} stories</span>}
               <FontAwesomeIcon
                 icon={faLock}
                 className="icons"
@@ -79,12 +84,22 @@ function ReadingListMain({ user }) {
           />
         </div>
       </div>
-      {blogs.map((blog) => (
+
+      {articles.length > 0 ?(
         <>
-          <ReadingListInput blogNote={'noted'}/>
-          <FeaturedArticle key={blog.uid} blog={blog} />
+        {articles.map((blog) => (
+          <>
+            <ReadingListInput key={blog.bookmark_id} id={blog.bookmark_id}/>
+            <FeaturedArticle key={blog.uid} blog={blog} />
+          </>
+        ))}
         </>
-      ))}
+      ):(
+        <>
+        <p className="para1">Add your favorite stories to your list. Simply click the
+        on any Medium story to get started.</p>
+        </>
+      )}
     </div>
   );
 }

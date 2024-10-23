@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { api } from "../../services/api";
+import { api } from "services/api";
 import RecentBlog from "./RecentBlog";
 
 
@@ -20,13 +20,13 @@ const SideStaffPicks = () => {
 
   return (
     <div className="home__recent">
-      <h2 className="home__side-section-header">Staff picks</h2>
+      <h2 className="home__side-section-header header3">Staff picks</h2>
       <div className="home__recent-list">
         {recentblog.map((blog) => (
           <RecentBlog key={blog.uid} blog={blog} />
         ))}
       </div>
-      <a className="home__side-section-cta" href="/author">
+      <a className="home__side-section-cta para-cta para1" href="/author">
         See the full list
       </a>
     </div>

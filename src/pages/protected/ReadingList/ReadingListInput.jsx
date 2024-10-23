@@ -1,14 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ReadingListInput.css";
+import { api } from "services/api";
+import { toast } from "sonner";
 
-function ReadingListInput({blogNote}) {
-  const [note, setNote] = useState(blogNote);
+
+function ReadingListInput({id}) {
+  const [note, setNote] = useState(null);
   const [isActive, setIsActive] = useState(false);
+  let [loading, setLoading] = useState(true);
+
+  const fetchNote = async () => {
+    try {
+      const response = await api.get(`/home/bookmark/${id}/`);
+      setNote(response.data.note);
+      setLoading(false);
+    } catch (error) {
+      toast.error("error")
+    }
+  };
+
+  useEffect(() => {
+    fetchNote();
+  }, []);
+
+
+  if (loading) {
+    return <div>loading..</div>;
+  }
+
+  console.log(note)
+
+  
+  const handleNoteUpdate = async () => {
+    try {
+      setLoading(true)
+      const response = await api.patch(`/home/bookmark/${id}/`,{note:note});
+      //set new data
+      setNote(response.data.note);
+      setLoading(false);
+    } catch (error) {
+      toast.error("error")
+    }
+  };
+
 
   return (
     <form
       className={`reading-list-input ${
-        blogNote && "reading-list-input--active"
+        note && "reading-list-input--active"
       }`}
     >
       <input
@@ -19,7 +58,7 @@ function ReadingListInput({blogNote}) {
         name="note"
         onFocus={() => setIsActive(true)}
         onChange={(e) => {
-          setNote(e.value);
+          setNote(e.target.value);
         }}
       />
       {isActive && (
@@ -29,7 +68,6 @@ function ReadingListInput({blogNote}) {
             className="reading-list-input__cancel-button"
             onClick={()=>{
                 setIsActive(false)
-                setNote(blogNote)
             }}
             value="cancel"
           />
@@ -37,6 +75,10 @@ function ReadingListInput({blogNote}) {
             className="reading-list-input__submit-button"
             type="submit"
             value="Done"
+            onClick={()=>{
+              handleNoteUpdate();
+              setIsActive(false)
+            }}
           />
         </div>
       )}

@@ -1,65 +1,43 @@
 import React, { useState } from "react";
-import { api } from "services/api";
-import "./EditUsername.css";
+import ModalInput from "components/ModalInput/ModalInput";
+import useProfileUpdate from "./useProfileUpdate";
 
 function EditUsername({ user, setUser, onClose }) {
-  let [value, setValue] = useState(user);
   const [isChecked, setIsChecked] = useState(false);
 
-  const updateUsername = async () => {
-    try {
-      const response = await api.patch("/home/profile/", value);
-      const updatedUser = response.data;
-      setUser(updatedUser);
-    } catch (error) {
-      console.error("There was an error fetching the tags!", error);
-    }
-  };
+  let [status, setStatus] = useState("typing");
+  const { formData, setFormData, handleSubmit } = useProfileUpdate(
+    setStatus,
+    setUser,
+    user
+  ); 
 
+  const inputs = {
+    id: 1,
+    name: "username",
+    type: "text",
+    placeholder: "@",
+    errorMessage: "Enter a valid username.",
+    label: "Username",
+    desc: "medium.com/" + `@${formData.username}`,
+    required: true,
+  };
 
   return (
     <div className="modal-main__container">
       <div className="modal-section">
         <h2 className="modal-main__header">Username and subdomain</h2>
-        <label htmlFor="username" className="modal-label">
-          Username
-        </label>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <span
-            style={{
-              position: "absolute",
-              marginLeft: "6px",
-              fontSize: "12px",
-              color: "gray",
-            }}
-          >
-            @
-          </span>
-          <input
-            style={{ paddingLeft: "17px" }}
-            className="modal-input"
-            type="username"
-            name="username"
-            id="username"
-            onChange={(e) => {
-              setValue({ ...value, [e.target.name]: e.target.value });
-            }}
-            value={value.username}
-          />
-        </div>
-        <div className="modal-input__desc">
-          <span className="modal-main__para">
-            medium.com/{`@${value.username}`}
-          </span>
-          <span>
-            <span className="modal-input__current-count">
-              {value.username.length}
-            </span>
-            <span className="modal-input__count-limit">/30</span>
-          </span>
-        </div>
+        <ModalInput
+          key={inputs.id}
+          {...inputs}
+          value={formData[inputs.name]}
+          onChange={(e) => {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
+          }}
+          status={status}
+          max_len="30"
+        />
       </div>
-
       <div className="modal-section">
         <div className="modal-input__desc">
           <div className="test" style={{ width: "80%" }}>
@@ -79,7 +57,6 @@ function EditUsername({ user, setUser, onClose }) {
           />
         </div>
       </div>
-
       <div className="modal-section">
         <p className="modal-main__para2">
           <a href="">Learn more</a>
@@ -93,17 +70,20 @@ function EditUsername({ user, setUser, onClose }) {
             style={{ color: "var(--color-secondary)" }}
             className="modal-input"
             type="text"
-            value={`@${value.username}.medium.com`}
+            value={`@${formData.username}.medium.com`}
             disabled
           />
         </div>
       )}
-
       <div className="modal-cta">
         <button className="outline_green_button" onClick={onClose}>
           Cancel
         </button>
-        <button className="green_button" onClick={updateUsername}>
+        <button
+          className="green_button"
+          disabled={status === "submitting"}
+          onClick={handleSubmit}
+        >
           Save
         </button>
       </div>

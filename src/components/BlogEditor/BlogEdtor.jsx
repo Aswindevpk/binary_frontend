@@ -10,7 +10,7 @@ import "react-quill/dist/quill.snow.css";
 import AuthContext from "../../context/AuthContext";
 
 
-const BlogEditor = ({ setValues, values }) => {
+const BlogEditor = ({ setFormData, formData }) => {
   let {authTokens}=useContext(AuthContext)
   // Editor ref
   const quill = useRef(null);
@@ -90,7 +90,7 @@ const BlogEditor = ({ setValues, values }) => {
     if (quill.current) {
       const editor = quill.current.getEditor();
       const html = editor.root.innerHTML;
-      setValues({ ...values, content: html });
+      setFormData({ ...formData, content: html });
     }
   };
 
@@ -100,7 +100,7 @@ const BlogEditor = ({ setValues, values }) => {
         className="Editor_content-body"
         ref={quill}
         theme="snow"
-        value={values.content}
+        value={formData.content}
         formats={formats}
         modules={modules}
         onChange={handleChange}
