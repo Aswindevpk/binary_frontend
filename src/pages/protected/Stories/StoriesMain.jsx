@@ -3,18 +3,23 @@ import { FilterMenu } from "../../../components";
 import { Draft, Published, Responses } from "./components";
 import { Link } from 'react-router-dom';
 
-const filters = [
-  { name: "Drafts", uid: "1" },
-  { name: "Published", uid: "2" },
-  { name: "Response", uid: "3" },
+const filterComponents = [
+  { name: "Drafts", uid: "1",component:Draft },
+  { name: "Published", uid: "2",component:Published  },
+  { name: "Response", uid: "3" ,component:Responses },
 ];
 
 const StoriesMain = () => {
-  const [activeFilter, setActiveFilter] = useState(null);
+  const [activeFilter, setActiveFilter] = useState(filterComponents[0]);
+
+  const renderActiveComponent = () => {
+    const ActiveComponent = activeFilter.component;
+    return ActiveComponent ? <ActiveComponent /> : null;
+  };
   return (
     <>
       <div className="stories__main-header">
-        <h1 className="main__header">Your Stories</h1>
+        <h1 className="header1">Your Stories</h1>
         <div className="stories__main-header__cta">
           <Link className="green_button" to="/create-story">
             Write a Story
@@ -25,13 +30,11 @@ const StoriesMain = () => {
         </div>
       </div>
         <FilterMenu
-          filters={filters}
-          activeFilter={activeFilter}
-          setActiveFilter={setActiveFilter}
+         filters={filterComponents}
+         activeFilter={activeFilter}
+         setActiveFilter={setActiveFilter}
         />
-      {activeFilter && activeFilter.uid === "1" && <Draft />}
-      {activeFilter && activeFilter.uid === "2" && <Published />}
-      {activeFilter && activeFilter.uid === "3" && <Responses />}
+      {renderActiveComponent()}
     </>
   );
 };

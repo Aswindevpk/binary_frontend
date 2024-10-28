@@ -15,11 +15,12 @@
 }
 
 .MainLayout__sub {
-  height: 100vh; /* Full-height: remove this if you want "auto" height */
+  height: fit-content;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  top: 0px;
+  top: 0; 
   max-width: 368px;
   position: sticky;
   padding: 40px 24px 0px 40px;

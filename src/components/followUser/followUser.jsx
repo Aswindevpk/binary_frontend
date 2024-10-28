@@ -10,13 +10,13 @@ function FollowUser({ author }){
 
   const handleFollow = async () => {
     try {
-      const response = await api.post(`/home/users/${author.id}/follow/`);
+      const response = await api.post(`accounts/${author.id}/follow/`);
       if (response.status == 201) {
         setIsFollowing(true);
       }
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.error);
+        console.log(error.response.data);
       }
       console.error("error while following!", error);
     }
@@ -24,13 +24,13 @@ function FollowUser({ author }){
 
   const handleUnFollow = async () => {
     try {
-      const response = await api.post(`/home/users/${author.id}/unfollow/`);
-      if (response.status == 202) {
+      const response = await api.delete(`accounts/${author.id}/unfollow/`);
+      if (response.status == 204) {
         setIsFollowing(false);
       }
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.error);
+        console.log(error.response.data);
       }
       console.error("error while following!", error.response.data.error);
     }
@@ -42,7 +42,6 @@ function FollowUser({ author }){
         <Avatar username={author.username} image_url={author.img} size={'medium'}/>
         <div className="followUser__main" href="/author">
           <h6 className="followUser__main-name">{author.username}</h6>
-          {/* <p className="followUser__main-about">{author.about}</p> */}
           <p className="followUser__main-about">
             {author.about}
           </p>

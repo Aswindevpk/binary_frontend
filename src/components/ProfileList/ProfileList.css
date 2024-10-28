@@ -1,56 +1,85 @@
 .ProfileList {
-    border: 1px solid rgb(240, 240, 249);
-    font-family: var(--font-family);
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: space-between;
-    background-color: rgb(249, 249, 249);
-    max-height: 150px;
-  }
-  
-  .ProfileList-main {
-    margin: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .ProfileList-main h1 {
-    font-size: 20px;
-    font-weight: bolder;
-  }
-  
-  .ProfileList-main__sub {
-    display: inline-flex;
-    font-size: 12px;
-    color: gray;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .ProfileList-main__author {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .ProfileList-main__author img {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .ProfileList-main__author span {
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
+  border: 1px solid rgb(240, 240, 249);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(249, 249, 249);
+}
+
+.ProfileList-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  padding: 20px;
+}
+
+.ProfileList-main h1 {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.ProfileList-main__sub {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: gray;
+  gap: 10px;
+  align-items: center;
+}
+
+.ProfileList-main__author {
+  display: flex;
+  gap: 10px;
+}
+
+.ProfileList-main__author img {
+  width: 20px;
+  height: 20px;
+}
+
+.ProfileList-main__author span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ProfileList-sub {
+  display: flex;
+  position: relative;
+  width: 294px;
+}
+
+.ProfileList-sub img {
+  position: absolute;
+  width: 170px;
+  height: 100%;
+}
+
+.ProfileList-sub__img1 {
+  right: 125px;
+  border-right: 2px solid white;
+  z-index: 3;
+}
+.ProfileList-sub__img2 {
+  right: 50px;
+  border-right: 2px solid white;
+  z-index: 2;
+}
+.ProfileList-sub__img3 {
+  right: 0px;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+
+@media screen and (max-width: 550px) {
   .ProfileList-sub {
-    width: 50%;
+    width: 220px;
   }
   
   .ProfileList-sub img {
-    width: 100%;
+    width: 100px;
     height: 100%;
-    object-fit: cover;
   }
-  
+}

@@ -2,6 +2,7 @@ import AuthContext from "context/AuthContext";
 import React, { useContext, useEffect, useState } from "react";
 import "./About.css";
 import { api } from "services/api";
+import { Link } from "react-router-dom";
 
 function FollowStat() {
   const { user } = useContext(AuthContext);
@@ -25,9 +26,9 @@ function FollowStat() {
   return (
     follow && (
       <div className="profile_about-bottom">
-        <a href="#">{follow.followers_count} Follower</a>
+        <Link to="/followers/">{follow.followers_count} Followers</Link>
         <span>.</span>
-        <a href="#">{follow.following_count} Following</a>
+        <Link to="/following/">{follow.following_count} Following</Link>
       </div>
     )
   );

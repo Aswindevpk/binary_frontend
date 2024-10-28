@@ -8,46 +8,48 @@
   padding-bottom: 40px;
 }
 
+.breadcrumb {
+  margin-top: 40px;
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+}
+
 /* header  */
-.header1{
+.header1 {
   font-family: var(--font-family);
   font-size: 42px;
 }
-.header2{
+.header2 {
   font-family: var(--font-family);
   font-weight: bolder;
   font-size: 24px;
 }
-.header3{
+.header3 {
   font-family: var(--font-family);
   font-size: 16px;
 }
 
-
-.para1{
+.para1 {
   font-family: var(--font-family);
   font-size: 13px;
   font-weight: 500;
 }
 
-.para2{
+.para2 {
   font-family: var(--font-family);
   font-size: 12px;
 }
 
-.para-cta{
+.para-cta {
   font-family: var(--font-family);
   color: rgb(3, 132, 3);
 }
 
-.para-cta:hover{
+.para-cta:hover {
   color: rgb(0, 72, 0);
   cursor: pointer;
 }
-
-
-
-
 
 /* button  */
 .green_button {
@@ -64,6 +66,22 @@
 
 .green_button:hover {
   background: rgb(2, 104, 2);
+}
+
+.red_button {
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 16px; /* Adjust padding for size */
+  background: #c94a4a; /* No background */
+  color: #ffffff; /* Text color */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  border: 1px solid #c94a4a; /* No background */
+}
+
+.red_button:hover {
+  background: #f36666;
 }
 
 .outline_button {
@@ -128,13 +146,13 @@ a {
 
 .main__header {
   font-size: 42px;
-  margin-top: 40px ;
+  margin-top: 40px;
 }
 
 @media screen and (max-width: 905px) {
   .main__header {
     font-size: 26px;
-    margin-top: 20px ;
+    margin-top: 20px;
   }
 }
 

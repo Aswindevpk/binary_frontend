@@ -15,6 +15,7 @@ import {
   VerifyOtp,
   PasswordResetConfirm,
   PasswordResetRequest,
+  Test
 } from "pages/auth";
 
 import {
@@ -34,19 +35,22 @@ import {
   ReadingList,
   CreateStory,
   EditStory,
-
+  Followers,
+  Following,
+  Notifications,
 } from "pages/protected";
+import PageNotFound from "pages/PageNotFound/PageNotFound";
 
 
-
-function AppRouter(){
+function AppRouter() {
   return (
     <Router>
       <AuthProvider>
-        <Navbar/>
+        <Navbar />
         <Routes>
           <Route element={<PrivateRouteLoggedIn />}>
             <Route path="/register" element={<Register />} />
+            <Route path="/test" element={<Test />} />
             <Route path="/login" element={<Login />} />
             <Route path="/verify-otp/:username/" element={<VerifyOtp />} />
             <Route path="/password-reset" element={<PasswordResetRequest />} />
@@ -57,7 +61,7 @@ function AppRouter(){
           </Route>
           <Route exact path="/" element={<PrivateRoute />}>
             <Route path="/plans" element={<Plans />} />
-            <Route path="/payment" element={<Payment />} />
+            <Route path="/payment" element={<Payment />} /> 
             <Route exact path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogDetails />} />
             <Route path="/profile" element={<Profile />} />
@@ -72,7 +76,12 @@ function AppRouter(){
             <Route path="/reading-list" element={<ReadingList />} />
             <Route path="/create-story" element={<CreateStory />} />
             <Route path="/edit-story/:id" element={<EditStory />} />
+            <Route path="/followers/" element={<Followers />} />
+            <Route path="/following/" element={<Following />} />
+            <Route path="/notifications" element={<Notifications />} /> 
           </Route>
+          {/* Catch-all route for 404 Page */}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </AuthProvider>
     </Router>

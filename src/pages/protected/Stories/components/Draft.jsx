@@ -4,31 +4,32 @@ import { api } from "services/api";
 
 
 const Draft = () => {
-  let [status, setStatus] = useState("loading");
+  let [loading, setLoading] = useState(true);
   let [articles, setArticles] = useState(null);
 
-  useEffect(() => {
-    const fetchDraft = async () => {
-      try {
-        const response = await api.get("/home/articles?draft=true");
-        if (response.status === 200){
-          setArticles(response.data);
-          setStatus("loaded");
-        }
-      } catch (error) {
-        console.log(error)
+  const fetchDraft = async () => {
+    try {
+      const response = await api.get("/home/articles?draft=true");
+      if (response.status === 200){
+        setArticles(response.data);
+        setLoading(false)
       }
-    };
-    fetchDraft();
-  }, []);
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
-  if (status === "loading") {
+  useEffect(() => {
+    fetchDraft();
+  }, [loading]);
+
+  if (loading) {
     return <div>loading..</div>;
   }
   return (
     <>
     {articles.map((article)=>(
-      <Story article={article} />
+      <Story key={article.uid} article={article} setLoading={setLoading} />
     ))}
     </>
   );

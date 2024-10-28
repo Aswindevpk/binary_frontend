@@ -14,5 +14,7 @@ export {default as ExploreTopics} from './ExploreTopics/ExploreTopics';
 export {default as Notifications} from './Notifications/Notifications';
 export {default as ReadingList} from './ReadingList/ReadingList';
 export {default as CreateStory} from './CreateStory/CreateStory';
+export {default as Followers} from './Followers/Followers';
+export {default as Following} from './Following/Following';
 export {default as EditStory} from './EditStory/EditStory';
 

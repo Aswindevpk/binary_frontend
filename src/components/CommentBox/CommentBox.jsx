@@ -1,72 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CommentBox.css";
-import { Close, Avatar } from "../../assets";
-import { api } from "../../services/api";
-import AuthContext from "../../context/AuthContext";
+import { Close, Avatar } from "assets";
+import AuthContext from "context/AuthContext";
+import useComments from "./useComments"; // Import the custom hook
 
 const CommentBox = ({ toggleVisibility, isCommentBoxVisible, article_id }) => {
   let { user } = useContext(AuthContext);
-  const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState(null);
-  const [submitCount, setSubmitCount] = useState(0);
+  const [comment, setComment] = useState("");
+  const { comments, submitComment } = useComments(article_id); // Use the custom hook
 
-  const handleResponse = (event) => {
-    setComment(event.target.value);
+  const onSubmit = () => {
+    if (comment.trim() === "") {
+      return; // Prevent submitting empty comments
+    }
+    submitComment(comment);
+    setComment(""); // Clear the input field after submission
   };
-
-  const onSubmit = async () => {
-    try {
-      let response = await api.post(`/home/article/${article_id}/comments/`, {
-        content: comment,
-      });
-      if (response.status == 201) {
-        setSubmitCount((prevCount) => prevCount + 1);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        let response = await api.get(`/home/article/${article_id}/comments/`);
-        if (response.status == 200) {
-          setComments(response.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchComments();
-  }, [submitCount]);
-
-  function timeAgo(date) {
-    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-    let interval = Math.floor(seconds / 31536000);
-
-    if (interval >= 1) {
-      return interval === 1 ? "1 year ago" : `${interval} years ago`;
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval >= 1) {
-      return interval === 1 ? "1 month ago" : `${interval} months ago`;
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval >= 1) {
-      return interval === 1 ? "1 day ago" : `${interval} days ago`;
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval >= 1) {
-      return interval === 1 ? "1 hour ago" : `${interval} hours ago`;
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval >= 1) {
-      return interval === 1 ? "1 minute ago" : `${interval} minutes ago`;
-    }
-    return seconds < 10 ? "Just now" : `${Math.floor(seconds)} seconds ago`;
-  }
-
   return (
     <div
       className={`${
@@ -89,7 +38,9 @@ const CommentBox = ({ toggleVisibility, isCommentBoxVisible, article_id }) => {
         </div>
         <div className="commentBox__input">
           <input
-            onChange={handleResponse}
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
             type="text"
             placeholder="What are your thoughts?"
           />
@@ -114,7 +65,7 @@ const CommentBox = ({ toggleVisibility, isCommentBoxVisible, article_id }) => {
                   {comment.author.username}
                 </p>
                 <p className="commentBox__comment-header__details-time">
-                <small>{timeAgo(comment.created_at)}</small>
+                  <small>{comment.created_at}</small>
                 </p>
               </div>
             </div>

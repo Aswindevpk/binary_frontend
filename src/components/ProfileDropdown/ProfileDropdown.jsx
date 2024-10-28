@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import "./ProfileDropdown.css"; // Import the CSS file
 import AuthContext from "../../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,97 +16,129 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import Avatar from "components/Avatar/Avatar";
+import { api } from "services/api";
+import { toast } from "sonner";
 
-const ProfileDropdown = ({ author }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ProfileDropdown = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
   let { logoutUser, user } = useContext(AuthContext);
+  // for changing content accoding to logged user and loggedout user
+  const [author, setAuthor] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
-
+  //fetch user
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+    const fetchAuthor = async () => {
+      try {
+        const response = await api.get(`/home/author/${user.user_id}`);
+        setAuthor(response.data);
+      } catch (error) {
+        toast.error("Failed to fetch user");
+      } finally {
+        setLoading(false);
+      }
     };
+
+    const timer = setTimeout(() => {
+      fetchAuthor();
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
+  //usecllback for performance
+  const toggleDropdownVisibility = useCallback(() => {
+    setIsDropdownOpen((prev) => !prev);
+  });
+
+  //useCallback for performance
+  const closeDropdownOnClickOutside = useCallback((event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", closeDropdownOnClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", closeDropdownOnClickOutside);
+    };
+  }, [closeDropdownOnClickOutside]);
+
+  const primaryMenuItems = [
+    { icon: faUser, label: "Profile", link: "/profile" },
+    { icon: faBookmark, label: "Library", link: "/library" },
+    { icon: faFileText, label: "Stories", link: "/stories" },
+    { icon: faChartBar, label: "Stats", link: "/stats" },
+  ];
+
+  const settingsMenuItems = [
+    { label: "Settings", link: "/settings" },
+    { label: "Refine recommendations", link: "/settings" },
+    { label: "Manage publications", link: "/settings" },
+    { label: "Help", link: "/settings" },
+  ];
+
+  const membershipMenuItems = [
+    { label: "Become a Binary member", link: "/plans" },
+    { label: "Create a Mastodon account", link: "/settings" },
+    { label: "Apply for author verification", link: "/settings" },
+    { label: "Gift a membership", link: "/settings" },
+  ];
+
+
   return (
-    <div className="profile-dropdown" ref={dropdownRef}>
-      <div onClick={toggleDropdown}>
-        <Avatar
-          username={author.username}
-          image_url={author.img}
-          size={"medium"}
-        />
+    <div className="user-profile-dropdown" ref={dropdownRef}>
+      <div onClick={toggleDropdownVisibility}>
+        {loading ? (
+          <div className="navbar-avatar__skelton-loader">
+          </div>
+        ) : (
+          <>
+            <Avatar
+              username={author.username}
+              image_url={author.img}
+              size={"medium"}
+            />
+          </>
+        )}
       </div>
-      {isOpen && (
+      {isDropdownOpen && (
         <div className="dropdown-menu">
-          <div className="dropdown-menu__main">
-            <li>
-              <FontAwesomeIcon
-                icon={faUser}
-                className="icons NavDropdownIcon"
-              />
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <FontAwesomeIcon
-                icon={faBookmark}
-                className="icons NavDropdownIcon"
-              />
-              <Link to="/library">Library</Link>
-            </li>
-            <li>
-              <FontAwesomeIcon
-                icon={faFileText}
-                className="icons NavDropdownIcon"
-              />
-              <Link to="/stories">Stories</Link>
-            </li>
-            <li>
-              <FontAwesomeIcon
-                icon={faChartBar}
-                className="icons NavDropdownIcon"
-              />
-              <Link to="/stats">Stats</Link>
-            </li>
+          <div className="dropdown-menu__group">
+            {primaryMenuItems.map(({ icon, label, link }, idx) => (
+              <li className="dropdown-menu__group-item" key={idx}>
+                <FontAwesomeIcon
+                  icon={icon}
+                  className="icons dropdown-menu__group-item__icon"
+                />
+                <Link to={link}>{label}</Link>
+              </li>
+            ))}
           </div>
-          <div className="dropdown-menu__section2">
-            <li>
-              <Link to="/settings">settings</Link>
-            </li>
-            <li>
-              <Link to="/settings">Refine recommmendations</Link>
-            </li>
-            <li>Manage publications</li>
-            <li>Help</li>
+          <div className="dropdown-menu__group">
+            {settingsMenuItems.map(({ label, link }, idx) => (
+              <li className="dropdown-menu__group-item" key={idx}>
+                {link ? <Link to={link}>{label}</Link> : label}
+              </li>
+            ))}
           </div>
-          <div className="dropdown-menu__section3">
-            <li>
-              <Link to="/plans">Become a Binary member</Link>
-            </li>
-            <li>Create a Mastodon account</li>
-            <li>Apply for author verification</li>
-            <li>Gift a membership</li>
+          <div className="dropdown-menu__group">
+            {membershipMenuItems.map(({ label, link }, idx) => (
+              <li className="dropdown-menu__group-item" key={idx}>
+                {link ? <Link to={link}>{label}</Link> : label}
+              </li>
+            ))}
           </div>
-          <div className="dropdown-menu__section4">
-            <li>
+          <div className="dropdown-menu__group">
+            <li className="dropdown-menu__group-item">
               <Link
                 onClick={() => {
                   logoutUser();
                 }}
               >
-                {" "}
                 Sign out
                 <p>{author.email}</p>
               </Link>

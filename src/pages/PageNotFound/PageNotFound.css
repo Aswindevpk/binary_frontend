@@ -1,0 +1,27 @@
+/* src/components/PageNotFound.css */
+
+.page-not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f8f9fa;
+    color: #343a40;
+    text-align: center;
+    font-family: var(--font-family);
+  }
+  
+  .page-not-found__header {
+    font-size: 6rem;
+    font-weight: bold;
+    margin: 0;
+    color: #dc3545; /* Red color for emphasis */
+  }
+  
+  .page-not-found__info {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    color: #6c757d; /* Subtle grey for text */
+  }
+  

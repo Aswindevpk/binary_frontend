@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FilterMenu, FeaturedArticle } from "components";
+import { FilterMenu, FeaturedArticle, ActionDropDown } from "components";
 import "./AuthorDetails.css";
 import { Cover } from "assets";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { api } from "services/api";
 import Lists from "./Lists";
 import About from "./About";
@@ -14,7 +12,7 @@ const filters = [
   { name: "About", uid: "3" },
 ];
 
-const AuthorDetailsMain = ({author,id}) => {
+const AuthorDetailsMain = ({ author, id }) => {
   const [activeFilter, setActiveFilter] = useState({
     name: "Home",
     uid: "1",
@@ -41,7 +39,14 @@ const AuthorDetailsMain = ({author,id}) => {
       <img className="AuthorDetails__main-cover" src={Cover} alt="" />
       <div className="AuthorDetails__main-header">
         <h2 className="main__header">{author.username}</h2>
-        <FontAwesomeIcon icon={faEllipsis} color="gray" className="icons" />
+        <ActionDropDown>
+          <>
+            <li>Copy link to profile</li>
+            <li>Mute author</li>
+            <li>Block this author</li>
+            <li>Report this author</li>
+          </>
+        </ActionDropDown>
       </div>
       <FilterMenu
         filters={filters}
@@ -58,10 +63,12 @@ const AuthorDetailsMain = ({author,id}) => {
         )}
         {activeFilter && activeFilter.uid === "2" && (
           <div>
-            <Lists author={author}/>
+            <Lists author={author} />
           </div>
         )}
-        {activeFilter && activeFilter.uid === "3" && <About about={author.about} />}
+        {activeFilter && activeFilter.uid === "3" && (
+          <About about={author.about} />
+        )}
       </div>
     </>
   );

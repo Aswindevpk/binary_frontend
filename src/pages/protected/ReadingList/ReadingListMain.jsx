@@ -27,6 +27,7 @@ function ReadingListMain({ user }) {
       setArticles(response.data);
       setLoading(false);
     } catch (error) {
+      console.log(error)
       toast.error("error")
       console.error("There was an error fetching the articles!", error);
     }

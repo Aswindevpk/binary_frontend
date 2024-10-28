@@ -43,7 +43,10 @@ function LoginForm() {
         </button>
       </form>
       <p className="auth__para">
-        Don't have an account? <Link className="auth__cta" to="/register">Sign up</Link>
+        Don't have an account?{" "}
+        <Link className="auth__cta" to="/register">
+          Sign up
+        </Link>
       </p>
     </>
   );

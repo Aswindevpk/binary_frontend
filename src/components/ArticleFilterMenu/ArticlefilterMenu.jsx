@@ -75,7 +75,6 @@ const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
             &lt;
           </div>
         )}
-
         {/* Right Arrow */}
         {isOverflowing.right && (
           <div

@@ -74,23 +74,23 @@
 .Story{
     font-family: var(--font-family);
     border-bottom: 1px solid rgb(234, 232, 232);
-    padding-bottom: 20px;
+    padding: 20px 0px;
 }
 
 .Story-heading{
     font-size: 16px;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
 }
 
 .Story-para{
     font-size: 14px;
-    padding-bottom: 8px;
+    padding-bottom: 16px;
     margin: 0px;
 }
 
 .Story-footer{
     font-size: 14px;
     display: flex;
-    gap: 4px;
-    align-items: center;
+    gap: 8px;
+    align-items: center
 }

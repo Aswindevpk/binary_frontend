@@ -1,12 +1,10 @@
 import React from "react";
-import Story from "./Story";
 
 
 const Responses = () => {
   return (
     <>
-      <Story />
-      <Story />
+      <h1 className="para1">No response yet</h1>
     </>
   );
 };

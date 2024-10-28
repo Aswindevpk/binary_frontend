@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 // Importing helper modules
 import { useCallback, useMemo, useRef } from "react";
 import "./BlogEditor.css";
@@ -7,11 +6,10 @@ import { formApi } from "../../services/api";
 import QuillEditor from "react-quill";
 //quill editor styles
 import "react-quill/dist/quill.snow.css";
-import AuthContext from "../../context/AuthContext";
+import { toast } from "sonner";
 
 
 const BlogEditor = ({ setFormData, formData }) => {
-  let {authTokens}=useContext(AuthContext)
   // Editor ref
   const quill = useRef(null);
 
@@ -28,16 +26,14 @@ const BlogEditor = ({ setFormData, formData }) => {
       const file = input.files[0];
       const formData = new FormData();
       formData.append("image", file);
-
       try {
         const response = await formApi.post("home/upload/",formData);
         const imageUrl = response.data.imageUrl;
-
         const quillEditor = quill.current.getEditor();
         const range = quillEditor.getSelection(true);
         quillEditor.insertEmbed(range.index, "image", imageUrl, "user");
       } catch (error) {
-        console.error("Error uploading image:", error);
+        toast.error("Error while uploading image")
       }
     };
   }, []);

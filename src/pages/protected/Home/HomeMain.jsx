@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { api } from "services/api";
 import { FeaturedArticle, ArticleFilterMenu } from "components";
+import "./Home.css";
+import { ArticleSkeleton } from "components/layouts";
 
 const HomeMain = () => {
   const [activeFilter, setActiveFilter] = useState(null);
@@ -20,7 +22,6 @@ const HomeMain = () => {
       }
     };
     fetchTopics();
-    setLoading(false);
   }, []);
 
   // Fetch blogs for the active category whenever activeFilter changes
@@ -32,25 +33,33 @@ const HomeMain = () => {
         setBlogs(fetchedBlogs);
       } catch (error) {
         console.error("There was an error fetching the blogs!", error);
+      } finally {
+        setLoading(false);
       }
     };
-
-    if (activeFilter) {
-      fetchBlogs(activeFilter.name);
-    }
+    fetchBlogs(activeFilter?.name);
   }, [activeFilter]);
 
   if (loading) {
-    return <div></div>;
+    return (
+      <>
+        <ArticleSkeleton />
+        <ArticleSkeleton />
+        <ArticleSkeleton />
+        <ArticleSkeleton />
+      </>
+    );
   }
 
   return (
     <>
-      <ArticleFilterMenu
-        filters={topics}
-        activeFilter={activeFilter}
-        setActiveFilter={setActiveFilter}
-      />
+      <div className="home__article">
+        <ArticleFilterMenu
+          filters={topics}
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+        />
+      </div>
       <div className="home__main-blogs">
         {blogs.map((blog) => (
           <FeaturedArticle key={blog.uid} blog={blog} />

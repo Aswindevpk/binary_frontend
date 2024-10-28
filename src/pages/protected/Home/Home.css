@@ -1,0 +1,6 @@
+.home__article {
+    position: sticky; /* Changed quotes to correct CSS syntax */
+    top: 0px; /* Changed quotes to correct CSS syntax */
+    margin: 24px 0; /* Changed quotes to correct CSS syntax */
+    background: white; /* Changed quotes to correct CSS syntax */
+}

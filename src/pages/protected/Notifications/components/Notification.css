@@ -1,0 +1,23 @@
+.notification{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+.notification__content{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.notification__content-message{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+.notification__content-message span{
+    color: var(--color-secondary);
+}
+.notification__content-date{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-secondary);
+}

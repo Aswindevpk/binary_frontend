@@ -13,14 +13,12 @@ function EditStory() {
   //status "empty","typing","submitting"
   const [status, setStatus] = useState("loading");
 
-  //showing the popup
-  const [showPopup, setShowPopup] = useState(false);
-
-  const { formData, setFormData } = useEditStory(setStatus, id); // Destructure the hook's return values
+  const { formData, setFormData,showPopup,setShowPopup } = useEditStory(setStatus, id); // Destructure the hook's return values
 
   if (status === "loading") {
     return <div>loading..</div>;
   }
+
 
   return (
     <div className="Editor">

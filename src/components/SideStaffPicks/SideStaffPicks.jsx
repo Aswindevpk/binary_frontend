@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { api } from "services/api";
 import RecentBlog from "./RecentBlog";
+import { SideSkeleton } from "components/layouts";
+import { Link } from "react-router-dom";
 
 
 const SideStaffPicks = () => {
-  let [recentblog, setRecentBlog] = useState([]);
+  const [recentblog, setRecentBlog] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const recentBlogs = async () => {
       try {
@@ -13,10 +17,20 @@ const SideStaffPicks = () => {
         setRecentBlog(fetchedBlogs);
       } catch (error) {
         console.error("There was an error fetching the recentblogs!", error);
+      } finally {
+        setLoading(false);
       }
     };
     recentBlogs();
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <SideSkeleton />
+      </>
+    );
+  }
 
   return (
     <div className="home__recent">
@@ -26,9 +40,9 @@ const SideStaffPicks = () => {
           <RecentBlog key={blog.uid} blog={blog} />
         ))}
       </div>
-      <a className="home__side-section-cta para-cta para1" href="/author">
+      <Link to="/author" className="home__side-section-cta para-cta para1">
         See the full list
-      </a>
+      </Link>
     </div>
   );
 };

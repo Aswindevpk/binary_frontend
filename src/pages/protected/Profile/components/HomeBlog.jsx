@@ -1,9 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
-import { ProfileOverlay } from "../../../../components";
+import { ActionDropDown, ProfileOverlay } from "components";
 import { Link } from "react-router-dom";
+
 
 
 function HomeBlog({ blog }) {
@@ -19,7 +20,15 @@ function HomeBlog({ blog }) {
           <div className="para2">22h ago</div>
           <div className="profile_homeBlog-footer__icon">
             <FontAwesomeIcon icon={faBookmark} className="icons" color="gray" />
-            <FontAwesomeIcon icon={faEllipsis} className="icons" color="gray" />
+            <ActionDropDown>
+                <>
+                  <li>Follow author</li>
+                  <li>Follow publication</li>
+                  <li>Mute author</li>
+                  <li>Mute publication</li>
+                  <li style={{ color: "#c94a4a" }}>Report story..</li>
+                </>
+              </ActionDropDown>
           </div>
         </div>
       </div>

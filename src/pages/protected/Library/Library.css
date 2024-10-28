@@ -1,5 +1,3 @@
-
-
 .library__main-header {
   font-family: var(--font-family);
   font-size: 2rem;
@@ -7,11 +5,11 @@
   margin-bottom: 24px;
 }
 
-.library_history {
+.library-history {
   font-family: var(--font-family);
 }
 
-.library_history_top {
+.library-history__top {
   display: flex;
   justify-content: space-between;
   padding: 20px 50px;
@@ -22,12 +20,12 @@
   margin-bottom: 40px;
 }
 
-.library_history_top span {
+.library-history__top span {
   color: black;
   font-size: 14px;
 }
 
-.library_history_top button {
+.library-history__top button {
   padding: 8px 16px; /* Adjust padding for size */
   border: none; /* Outline border */
   background: rgb(201, 74, 74); /* No background */
@@ -36,9 +34,43 @@
   cursor: pointer; /* Pointer cursor on hover */
 }
 
-.library_history_top button:hover {
+.library-history__top button:hover {
   background: rgb(182, 54, 54);
 }
+
+.library-history-modal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  width: 500px;
+  margin: 10px 150px;
+}
+
+.library-history-modal__head{
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+
+.library-history-modal__head h1{
+  margin-bottom: 8px;
+}
+.library-history-modal__cta{
+  display: flex;
+  gap: 20px;
+}
+
+.library-history__blank{
+  text-align: center;
+  margin-top: 16px;
+}
+
+.library-history__blank h4{
+  margin-bottom: 8px;
+}
+
 
 
 /* LibrarySaveList  */

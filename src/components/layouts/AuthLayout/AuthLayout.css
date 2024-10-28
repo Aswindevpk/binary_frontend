@@ -1,11 +1,11 @@
 .authlayout {
+   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: right;
   justify-content: center;
-  max-width: 500px;
-  margin: 10% auto;
+  max-width: 550px;
   border-radius: 12px;
+  margin: 100px auto; 
 }
 
 .auth__header {
@@ -79,6 +79,12 @@
 @media screen and (max-width: 905px) {
   .authlayout {
     max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .authlayout {
+    max-width: 350px;
   }
 }
 

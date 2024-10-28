@@ -1,0 +1,28 @@
+.circleloader {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.circleloader__circle {
+  width: 40px; 
+  height: 40px;
+  border: 3px solid #4d4d4d; 
+  border-top-color: transparent; 
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(120deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -8,39 +8,37 @@ import {
   Security,
 } from "./components";
 
+const filterComponents = [
+  { name: "Account", uid: "1",component:Account },
+  { name: "Publishing", uid: "2" ,component:Publishing },
+  { name: "Notification", uid: "3" ,component:Notification  },
+  { name: "Membership and Payment", uid: "4",component:Membership },
+  { name: "Security and apps", uid: "5",component:Security },
+];
+
 
 const SettingsMain = () => {
-  const [activeFilter, setActiveFilter] = useState({
-    name: "Account",
-    uid: "2",
-  });
+  const [activeFilter, setActiveFilter] = useState(filterComponents[0]);
+
+  const renderActiveComponent = () => {
+    const ActiveComponent = activeFilter.component;
+    return ActiveComponent ? <ActiveComponent /> : null;
+  };
   
   return (
     <>
       <h2 className="header1">Settings</h2>
       <FilterMenu
-        filters={filters}
+        filters={filterComponents}
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
       />
-      {activeFilter && activeFilter.name === "Account" && <Account />}
-      {activeFilter && activeFilter.name === "Publishing" && <Publishing />}
-      {activeFilter && activeFilter.name === "Notification" && <Notification />}
-      {activeFilter && activeFilter.name === "Membership and Payment" && (
-        <Membership />
-      )}
-      {activeFilter && activeFilter.uid === "5" && <Security />}
+      {renderActiveComponent()}
     </>
   );
 };
 
-const filters = [
-  { name: "Account", uid: "1" },
-  { name: "Publishing", uid: "2" },
-  { name: "Notification", uid: "3" },
-  { name: "Membership and Payment", uid: "4" },
-  { name: "Security and apps", uid: "5" },
-];
+
 
 
 export default SettingsMain;

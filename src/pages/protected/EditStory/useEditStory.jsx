@@ -6,6 +6,9 @@ function useEditStory(setStatus, id) {
   let updatedForm = useRef(null);
   const [formData, setFormData] = useState(null);
 
+  //showing the popup
+  const [showPopup, setShowPopup] = useState(false);
+
   // fetching existing data
   useEffect(() => {
     async function fetchArticle(id) {
@@ -24,17 +27,16 @@ function useEditStory(setStatus, id) {
     fetchArticle(id);
   }, [id]);
 
-
   //update data
   useEffect(() => {
-    // Check if formData is different from initial state
-    if (JSON.stringify(formData) !== JSON.stringify(updatedForm.current)) {
+    // Check if formData is different from initial state and showpopup is not triggered
+    if (JSON.stringify(formData) !== JSON.stringify(updatedForm.current) && showPopup === false) {
       //only create article if the user pause for 2sec while typing
       setStatus("typing");
       const timeoutId = setTimeout(async () => {
         try {
           //destructuring and removing image and topic while updating
-          let { topics,image, ...values } = formData;
+          let { topics, image, ...values } = formData;
           const response = await api.patch(
             `/home/article-edit/${formData.uid}/`,
             values
@@ -45,7 +47,7 @@ function useEditStory(setStatus, id) {
             updatedForm.current = response.data;
           }
         } catch (error) {
-          console.log(error)
+          console.log(error);
           toast.error("error occured");
         }
       }, 3000);
@@ -55,7 +57,9 @@ function useEditStory(setStatus, id) {
 
   return {
     formData,
+    showPopup,
     setFormData,
+    setShowPopup
   };
 }
 

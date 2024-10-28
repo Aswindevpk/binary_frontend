@@ -1,44 +1,45 @@
 import React, { useState } from "react";
-import { FilterMenu, ProfileList } from "components";
+import { ActionDropDown, FilterMenu, ProfileList } from "components";
 import { About, Home } from "./components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEllipsis,
-} from "@fortawesome/free-solid-svg-icons";
+
+
+const filterComponents  = [
+  { name: "home", uid: "1", component:Home },
+  { name: "lists", uid: "2", component:ProfileList },
+  { name: "about", uid: "3",component:About },
+];
 
 const ProfileMain = ({ user }) => {
-  //currently active tab
-  const [activeFilter, setActiveFilter] = useState({ name: "home", uid: "1" });
+  const [activeFilter, setActiveFilter] = useState(filterComponents[0]);
+
+  const renderActiveComponent = () => {
+    const ActiveComponent = activeFilter.component;
+    return ActiveComponent ? <ActiveComponent user={user} /> : null;
+  };
+
   return (
     <>
       <div className="profile-main">
         <div className="profile-main__header">
           <h1 className="header1">{user.username}</h1>
-          <FontAwesomeIcon
-            icon={faEllipsis}
-            className="icons"
-            id="tooltip-ellipsis"
-            style={{ fontSize: "18px" }}
-            color="gray"
-          />
+          <ActionDropDown>
+            <>
+              <li>Copy link to profile</li>
+              <li>Design your profile</li>
+            </>
+          </ActionDropDown>
         </div>
         <FilterMenu
-          filters={filters}
-          activeFilter={activeFilter}
-          setActiveFilter={setActiveFilter}
+        filters={filterComponents}
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
         />
       </div>
-      {activeFilter && activeFilter.uid === "1" && <Home />}
-      {activeFilter && activeFilter.uid === "2" && <ProfileList user={user} />}
-      {activeFilter && activeFilter.uid === "3" && <About user={user} />}
+      {renderActiveComponent()}
     </>
   );
 };
 
-const filters = [
-  { name: "home", uid: "1" },
-  { name: "lists", uid: "2" },
-  { name: "about", uid: "3" },
-];
+
 
 export default ProfileMain;

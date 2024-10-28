@@ -28,8 +28,6 @@ function ReadingListInput({id}) {
     return <div>loading..</div>;
   }
 
-  console.log(note)
-
   
   const handleNoteUpdate = async () => {
     try {

@@ -2,58 +2,38 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "context/AuthContext";
 import { useParams } from "react-router-dom";
 import "./BlogDetails.css";
-import { CommentBox,Avatar } from "components";
+import {
+  CommentBox,
+  Avatar,
+  ActionDropDown,
+  Bookmark,
+  Clap,
+  Comment,
+  Mute,
+} from "components";
 import { api } from "services/api";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandsClapping,faComment,faBookmark,faStar } from '@fortawesome/free-solid-svg-icons'; 
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { calculateReadingTime } from "utils/common";
 
 const BlogDetails = () => {
-  let { user, authTokens } = useContext(AuthContext);
+  let { authTokens } = useContext(AuthContext);
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
-  const [error, setError] = useState(null);
+  const [readTime, setreadTime] = useState(0);
   const [isCommentBoxVisible, setIsCommentBoxVisible] = useState(false);
 
   const toggleCommentBoxVisibility = () => {
     setIsCommentBoxVisible(!isCommentBoxVisible);
   };
 
-  const handleBookmark = async () => {
-    try {
-      const response = await api.post(`/home/article/${blog.uid}/bookmark/`);
-      if (response.status === 201) {
-        console.log('bookmarked successfully.')
-      }
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-      }
-    }
-  };
-
-  const handleClap = async () => {
-    try {
-      const response = await api.post(`/home/article/${blog.uid}/clap/`);
-      if (response.status === 201) {
-        setBlog((prevBlog) => ({
-          ...prevBlog,
-          clap_count: prevBlog.clap_count + 1,
-        }));
-      }
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-      }
-    }
-  };
 
   useEffect(() => {
     const getBlog = async () => {
       try {
         const response = await api.get(`/home/article/${id}/`);
         const fetchedBlog = response.data;
+        setreadTime(calculateReadingTime(fetchedBlog.content))
         setBlog(fetchedBlog);
       } catch (error) {
         console.error("There was an error fetching the blogs!", error);
@@ -63,21 +43,28 @@ const BlogDetails = () => {
     getBlog();
   }, [id, authTokens]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   if (!blog) {
     return <div>No blog found</div>;
   }
 
   return (
     <div className="blog">
-      {blog.is_premium && <div className="blog-members-only"><FontAwesomeIcon icon={faStar} color="rgb(255, 192, 23)" size="xs" /><span>Member-only story</span></div>}
-      <h1 className="blog-header">{blog.title}</h1>
+      {blog.is_premium && (
+        <div className="blog-members-only">
+          <FontAwesomeIcon icon={faStar} color="rgb(255, 192, 23)" size="xs" />
+          <span>Member-only story</span>
+        </div>
+      )}
+      <h1 className="blog-header header1">
+        <strong>{blog.title}</strong>
+      </h1>
       <p className="blog-tagline">{blog.subtitle}</p>
       <div className="blog__author">
-        <Avatar username={blog.author.username} image_url={blog.author.img} size={'medium'}/>
+        <Avatar
+          username={blog.author.username}
+          image_url={blog.author.img}
+          size={"medium-large"}
+        />
         <div className="blog__author-details">
           <div className="blog__author-details__top">
             <span className="blog__author-details__top-user">
@@ -88,30 +75,29 @@ const BlogDetails = () => {
           <div className="blog__author-details__bottom">
             {/* <span className='blog__author-details__bottom'>Published inPractice in Public</span> */}
             <span className="blog__author-details__bottom-date">
-              Feb 10, 2024
+              {`${readTime} min read . Oct 16, 2024`}
             </span>
           </div>
         </div>
       </div>
       <div className="blog__actions">
         <div className="blog__actions-left">
-          <div className="blog__actions-clap">
-            <a onClick={handleClap}>
-              <FontAwesomeIcon icon={faHandsClapping} className="icons"/>
-            </a>
-            <span>{blog.clap_count}</span>
-          </div>
-          <div className="blog__actions-comment">
-            <a onClick={toggleCommentBoxVisibility} className="commentIcon">
-              <FontAwesomeIcon icon={faComment} className="icons"/>
-            </a>
-            <span>{blog.comment_count}</span>
-          </div>
+          <Clap claps={blog.clap_count} />
+          <a onClick={toggleCommentBoxVisibility} className="commentIcon">
+            <Comment comments={blog.comment_count} />
+          </a>
         </div>
         <div className="blog__actions-right">
-          <a className="blog__actions-bookmark" onClick={handleBookmark}>
-            <FontAwesomeIcon icon={faBookmark} className="icons"/>
-          </a>
+          <Bookmark is_bookmarked={blog.is_bookmarked} article_id={blog.uid} />
+          <ActionDropDown>
+            <>
+              <li>Follow author</li>
+              <li>Follow publication</li>
+              <li>Mute author</li>
+              <li>Mute publication</li>
+              <li style={{ color: "#c94a4a" }}>Report story..</li>
+            </>
+          </ActionDropDown>
         </div>
       </div>
       <div>
@@ -128,8 +114,6 @@ const BlogDetails = () => {
         isCommentBoxVisible={isCommentBoxVisible}
         article_id={blog.uid}
       />
-
-      {error && <p className="home-error">{error}</p>}
     </div>
   );
 };

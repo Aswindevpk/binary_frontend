@@ -8,7 +8,7 @@ const HomeSide = () => {
         <SideStaffPicks/>
         <SideTopics/>
         <SideFollow/>
-        <Footer/>
+        <Footer/> 
     </>
   )
 }

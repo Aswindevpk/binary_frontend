@@ -16,4 +16,9 @@ export {default as SideFollow} from './SideFollow/SideFollow';
 export {default as Modal} from './Modal/Modal';
 export {default as Avatar} from './Avatar/Avatar';
 export {default as ModalInput} from './ModalInput/ModalInput';
+export {default as ActionDropDown} from './ActionDropDown/ActionDropDown';
+export {default as Bookmark} from './Bookmark/Bookmark';
+export {default as Clap} from './Clap/Clap';
+export {default as Comment} from './Comment/Comment';
+export {default as Mute} from './Mute/Mute';
 

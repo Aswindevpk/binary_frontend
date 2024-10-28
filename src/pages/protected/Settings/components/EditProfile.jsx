@@ -32,6 +32,7 @@ function EditProfile({ user, setUser, onClose }) {
     }
     setFormData({ ...formData, img: event.target.files[0] });
   };
+  
   const inputs = [
     {
       id: 1,
@@ -44,7 +45,7 @@ function EditProfile({ user, setUser, onClose }) {
       required: true,
     },
     {
-      id: 1,
+      id: 2,
       name: "pronouns",
       type: "text",
       placeholder: "",

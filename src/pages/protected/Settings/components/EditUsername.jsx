@@ -17,7 +17,7 @@ function EditUsername({ user, setUser, onClose }) {
     name: "username",
     type: "text",
     placeholder: "@",
-    errorMessage: "Enter a valid username.",
+    // errorMessage: "Enter a valid username.",
     label: "Username",
     desc: "medium.com/" + `@${formData.username}`,
     required: true,
