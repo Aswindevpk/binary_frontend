@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark as solidBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as regularBookmark } from "@fortawesome/free-regular-svg-icons";
 import { Tooltip } from "react-tooltip";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { toast } from "sonner";
 
 

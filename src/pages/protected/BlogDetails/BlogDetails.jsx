@@ -1,20 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "context/AuthContext";
+import AuthContext from "@context/AuthContext";
 import { useParams } from "react-router-dom";
 import "./BlogDetails.css";
 import {
   CommentBox,
   Avatar,
   ActionDropDown,
+} from "@components";
+import {
   Bookmark,
   Clap,
   Comment,
   Mute,
-} from "components";
-import { api } from "services/api";
+} from "@components/ui";
+import { api } from "@services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { calculateReadingTime } from "utils/common";
+import { calculateReadingTime } from "@utils/common";
 
 const BlogDetails = () => {
   let { authTokens } = useContext(AuthContext);

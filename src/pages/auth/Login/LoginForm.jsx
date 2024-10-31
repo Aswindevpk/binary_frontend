@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useLogin from "./useLogin";
 import { Link } from "react-router-dom";
-import { FormInput } from "components";
+import { AuthButton, AuthPara, AuthInput } from "@components/ui";
 
 function LoginForm() {
   // status of the form typing,submitting,submitted
@@ -13,7 +13,7 @@ function LoginForm() {
     <>
       <form onSubmit={handleSubmit}>
         {inputs.map((input) => (
-          <FormInput
+          <AuthInput
             key={input.id}
             {...input}
             value={formData[input.name]}
@@ -25,29 +25,24 @@ function LoginForm() {
           />
         ))}
         {!isEmailVerified && (
-          <p className="auth__para">
+          <AuthPara>
             Email not verified.
             <Link to={`/verify-otp/${formData.username}`}>Verify Now ?</Link>
-          </p>
+          </AuthPara>
         )}
-
-        <Link to="/password-reset" className="auth__para auth__cta">
-          Forgot ?
-        </Link>
-        <button
-          className="auth__btn"
-          disabled={status === "submitting"}
-          type="submit"
-        >
+        <AuthPara>
+          <Link to="/password-reset">Forgot ?</Link>
+        </AuthPara>
+        <AuthButton disabled={status === "submitting"} type="submit">
           Login
-        </button>
+        </AuthButton>
       </form>
-      <p className="auth__para">
-        Don't have an account?{" "}
+      <AuthPara>
+        Don't have an account?
         <Link className="auth__cta" to="/register">
           Sign up
         </Link>
-      </p>
+      </AuthPara>
     </>
   );
 }

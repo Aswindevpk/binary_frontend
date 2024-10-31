@@ -1,10 +1,10 @@
 import React from "react";
 import "./ProfileList.css";
-import { Post } from "assets";
+import { Post } from "@assets";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { ActionDropDown, Avatar } from "components";
+import { ActionDropDown, Avatar } from "@components";
 
 function ProfileList({ user }) {
   return (

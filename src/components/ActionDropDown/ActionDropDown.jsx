@@ -1,4 +1,4 @@
-import "./ActionDropDown.css";
+import "./ActionDropDown.css"; // Keep this if you have any remaining custom styles
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
@@ -7,12 +7,10 @@ function ActionDropDown({ children }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  //usecllback for performance
   const toggleDropdownVisibility = useCallback(() => {
     setIsDropdownOpen((prev) => !prev);
-  });
+  }, []);
 
-  //useCallback for performance
   const closeDropdownOnClickOutside = useCallback((event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
@@ -27,19 +25,19 @@ function ActionDropDown({ children }) {
   }, [closeDropdownOnClickOutside]);
 
   return (
-    <div className="action-dropdown" ref={dropdownRef}>
-      <>
-        <FontAwesomeIcon
-          onClick={(e)=>{
-            e.stopPropagation();
-            toggleDropdownVisibility();
-            }}
-          icon={faEllipsis}
-          className="icons action-dropdown__toggler"
-        />
-      </>
+    <div className="relative flex justify-center" ref={dropdownRef}>
+      <FontAwesomeIcon
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleDropdownVisibility();
+        }}
+        icon={faEllipsis}
+        className="text-secondary text-lg cursor-pointer hover:text-primary"
+      />
       {isDropdownOpen && (
-        <div className="action-dropdown__menu">{children}</div>
+        <div className="action-dropdown__menu absolute top-[28px] bg-white shadow-md rounded z-20 p-2">
+          {children}
+        </div>
       )}
     </div>
   );

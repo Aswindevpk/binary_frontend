@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 

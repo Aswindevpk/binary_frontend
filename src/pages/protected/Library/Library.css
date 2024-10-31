@@ -25,14 +25,7 @@
   font-size: 14px;
 }
 
-.library-history__top button {
-  padding: 8px 16px; /* Adjust padding for size */
-  border: none; /* Outline border */
-  background: rgb(201, 74, 74); /* No background */
-  color: white; /* Text color */
-  border-radius: 20px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-}
+
 
 .library-history__top button:hover {
   background: rgb(182, 54, 54);

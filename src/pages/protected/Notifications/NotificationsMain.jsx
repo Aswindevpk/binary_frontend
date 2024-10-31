@@ -1,4 +1,4 @@
-import { FilterMenu } from "components/index";
+import { FilterMenu } from "@components/index";
 import React, { useState } from "react";
 import All from "./components/All";
 import Responses from "./components/Responses";

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { FilterMenu, FeaturedArticle, ActionDropDown } from "components";
+import { FilterMenu, FeaturedArticle, ActionDropDown } from "@components";
 import "./AuthorDetails.css";
-import { Cover } from "assets";
-import { api } from "services/api";
+import { Cover } from "@assets";
+import { api } from "@services/api";
 import Lists from "./Lists";
 import About from "./About";
 

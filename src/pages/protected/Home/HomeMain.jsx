@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { api } from "services/api";
-import { FeaturedArticle, ArticleFilterMenu } from "components";
+import { api } from "@services/api";
+import { FeaturedArticle, ArticleFilterMenu } from "@components";
 import "./Home.css";
-import { ArticleSkeleton } from "components/layouts";
+import { ArticleSkeleton } from "@components/layouts";
 
 const HomeMain = () => {
   const [activeFilter, setActiveFilter] = useState(null);

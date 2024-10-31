@@ -1,65 +1,48 @@
 import React, { useContext } from "react";
-import "./Navbar.css";
-import AuthContext from "context/AuthContext";
-import { ProfileDropdown } from "components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
+import AuthContext from "@context/AuthContext";
+import SearchBar from './SearchBar';
+import NavLink from './NavLink';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { Link } from "react-router-dom";
+import ProfileDropdown from '../../ProfileDropdown/ProfileDropdown'; 
 
-
-function Navbar () {
-  let {isAuthenticated} = useContext(AuthContext);
+function Navbar() {
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-container-left">
-          <Link to="/" className="navbar-logo">
-            Binary
-          </Link>
-          <div className="search-bar-container">
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="icons" id="search-icon" />
-            <input type="text" className="search-input" placeholder="Search" />
-          </div>
+    <nav className="bg-bg-color border-b border-color-border p-2 relative w-full z-20">
+      <div className="flex justify-between items-center mx-auto">
+        <div className="flex items-center gap-4">
+          <Link to="/" className="text-2xl font-bold text-color-primary font-family">Binary</Link>
+          <SearchBar />
         </div>
-        <div className="navbar-links">
-          {isAuthenticated ? (
-            <>
-              <Link to="/create-story" className="navbar-item">
-                <FontAwesomeIcon icon={faPenToSquare} className="icons navbar-icon" />
-                <span className="navbar-item-name">Write</span>
-              </Link>
-              <Link className="navbar-item" id="navbar-search">
-                <FontAwesomeIcon icon={faMagnifyingGlass} className="icons navbar-icon" />
-              </Link>
-              <Link to="/notifications" className="navbar-item">
-                <FontAwesomeIcon icon={faBell} className="icons navbar-icon" />
-              </Link>
-              <div>
-                <ProfileDropdown />
-              </div>
-            </>
-          ) : (
-            <>
-              <Link to="/" className="navbar-item">
-                Articles
-              </Link>
-              <Link to="/plans" id="navbar-plans" className="navbar-item">
-                Plans
-              </Link>
-              <Link to="/login" id ="navbar-sign-in" className="navbar-item">
-                Sign In
-              </Link>
-              <Link className="black_button" to="/register">
-                Get Started
-              </Link>
-            </>
-          )}
+        <div className="flex items-center gap-10">
+          {isAuthenticated ? <AuthLinks /> : <GuestLinks />}
         </div>
       </div>
     </nav>
   );
-};
+}
+
+const GuestLinks = () => (
+  <>
+    <NavLink to="/" className="" id="navbar-articles">Articles</NavLink>
+    <NavLink to="/plans" className="" id="navbar-plans">Plans</NavLink>
+    <NavLink to="/login" className="" id="navbar-sign-in">Sign In</NavLink>
+    <NavLink to="/register" className="bg-black text-white py-2 px-4 rounded-full">Get Started</NavLink>
+  </>
+);
+
+const AuthLinks = () => (
+  <>
+    <NavLink to="/create-story" icon={<FontAwesomeIcon icon={faPenToSquare} className="text-lg" />}>
+      Write
+    </NavLink>
+    <NavLink to="/notifications" icon={<FontAwesomeIcon icon={faBell} className="text-lg" />}>
+    </NavLink>
+    <ProfileDropdown />
+  </>
+);
 
 export default Navbar;

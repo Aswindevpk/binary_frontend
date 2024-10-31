@@ -1,11 +1,14 @@
-import { AuthLayout } from "components/layouts";
+import { AuthLayout } from "@components/layouts";
 import LoginForm from "./LoginForm";
+import { AuthHeader } from "@components/ui";
+
+
 
 const Login = () => {
   return (
     <AuthLayout>
       <div>
-        <h2 className="auth__header">Login to Binary</h2>
+        <AuthHeader>Login to Binary</AuthHeader>
         <LoginForm />
       </div>
     </AuthLayout>

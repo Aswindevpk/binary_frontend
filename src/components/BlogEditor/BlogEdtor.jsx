@@ -1,7 +1,7 @@
 // Importing helper modules
 import { useCallback, useMemo, useRef } from "react";
 import "./BlogEditor.css";
-import { formApi } from "../../services/api";
+import { formApi } from "@services/api";
 // Importing core components
 import QuillEditor from "react-quill";
 //quill editor styles

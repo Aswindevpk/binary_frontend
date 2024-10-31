@@ -1,14 +1,4 @@
 .Articlefilter-menu {
-  display: flex;
-  border-bottom: 1px solid rgb(242, 242, 242);
-  gap: 35px;
-  background-color: var(--color-bg);
-  align-items: center;
-  overflow-x: auto;
-  width: 100%;
-  /* Sticky positioning to stay below navbar */
-  position: sticky;
-  top: 0px; /* Adjust 'top' value to match the height of your navbar */
   /* Hide scrollbars */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -18,44 +8,6 @@
   display: none; /* Chrome, Safari, and Edge */
 }
 
-
-#filter-menu-add {
-  padding: 2px;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-}
-
-#filter-menu-add:hover {
-  background-color: rgb(235, 235, 235);
-}
-
-.Articlefilter-menu div {
-  display: flex;
-  flex-shrink: 0;
-  font-family: var(--font-family);
-  padding: 15px 0px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--color-secondary);
-  border: none;
-  cursor: pointer;
-}
-
-.Articlefilter-menu div:hover {
-  color: var(--color-primary);
-}
-
-.Articlefilter-menu div.active {
-  border-bottom: 1px solid var(--color-primary);
-  color: var(--color-primary);
-}
-
-.filter__scroll-container{
-  position: relative;
-  display: flex;
-  align-items: center;
-} 
 
 .arrow{
   font-size: 24px;
@@ -75,13 +27,3 @@
   z-index: -1; /* Behind the arrow */
 }
 
-.left-arrow{
-  position: absolute;
-  z-index: 1;
-}
-
-.right-arrow{
-  position: absolute;
-  right: 0px;
-  z-index: 20;
-}

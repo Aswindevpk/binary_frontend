@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import usePassReset from "./usePassReset";
-import { FormInput } from "components";
+import { AuthInput,AuthButton } from "@components/ui";
 
 function PassResetForm({ uid, token }) {
   // status of the form typing,submitting,submitted
@@ -17,7 +17,7 @@ function PassResetForm({ uid, token }) {
           </span>
         ))}
       {inputs.map((input) => (
-        <FormInput
+        <AuthInput
           key={input.id}
           {...input}
           value={formData[input.name]}
@@ -28,9 +28,9 @@ function PassResetForm({ uid, token }) {
           error_message={errors[input.name]}
         />
       ))}
-      <button className="auth__btn" type="submit">
+      <AuthButton className="auth__btn" type="submit">
         Reset Password
-      </button>
+      </AuthButton>
     </form>
   );
 }

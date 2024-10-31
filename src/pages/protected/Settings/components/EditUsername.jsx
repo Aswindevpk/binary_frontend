@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ModalInput from "components/ModalInput/ModalInput";
+import ModalInput from "@components/ModalInput/ModalInput";
 import useProfileUpdate from "./useProfileUpdate";
 
 function EditUsername({ user, setUser, onClose }) {

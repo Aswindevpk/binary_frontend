@@ -1,15 +1,13 @@
-import AppRouter from 'routes/AppRouter';
-import './App.css';
+// import './App.css';
 import './index.css';
 import { Toaster} from "sonner";
-
-
+import AppRouter from './routes/AppRouter';
 
 const App = () => {
   return (
     <>
       <AppRouter/>
-      <Toaster richColors position="top-center" />
+      <Toaster richColors position="top-center" /> 
     </>
   );
 };

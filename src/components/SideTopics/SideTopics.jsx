@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { api } from "../../services/api";
-import { SideSkeleton } from "components/layouts";
+import { api } from "@services/api";
+import { SideSkeleton } from "@components/layouts";
 
 const SideTopics = () => {
   let [topics, setTopics] = useState([]);

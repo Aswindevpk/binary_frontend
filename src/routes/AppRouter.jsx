@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 //route warpper
-import PrivateRoute from "../utils/PrivateRoute";
-import PrivateRouteLoggedIn from "../utils/PrivateRouteLoggedIn";
+import PrivateRoute from "@utils/PrivateRoute";
+import PrivateRouteLoggedIn from "@utils/PrivateRouteLoggedIn";
 
 //contains authentication related
-import { AuthProvider } from "../context/AuthContext";
-import { Navbar } from "components/layouts";
+import { AuthProvider } from "@context/AuthContext";
+import { Navbar } from "@components/layouts";
 
 import {
   Register,
@@ -16,7 +16,7 @@ import {
   PasswordResetConfirm,
   PasswordResetRequest,
   Test
-} from "pages/auth";
+} from "@pages/auth";
 
 import {
   Home,
@@ -38,8 +38,8 @@ import {
   Followers,
   Following,
   Notifications,
-} from "pages/protected";
-import PageNotFound from "pages/PageNotFound/PageNotFound";
+} from "@pages/protected";
+import PageNotFound from "@pages/PageNotFound/PageNotFound";
 
 
 function AppRouter() {
@@ -80,8 +80,8 @@ function AppRouter() {
             <Route path="/following/" element={<Following />} />
             <Route path="/notifications" element={<Notifications />} /> 
           </Route>
-          {/* Catch-all route for 404 Page */}
-          <Route path="*" element={<PageNotFound />} />
+           {/* Catch-all route for 404 Page */}
+          <Route path="*" element={<PageNotFound />} /> 
         </Routes>
       </AuthProvider>
     </Router>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import useRegister from "./useRegister";
 import { Link } from "react-router-dom";
-import { FormInput } from "components";
+import { AuthPara, AuthInput, AuthButton } from "@components/ui";
+
 
 function RegisterForm() {
   // status of the form typing,submitting,submitted
@@ -13,7 +14,7 @@ function RegisterForm() {
     <>
       <form onSubmit={handleSubmit}>
         {inputs.map((input) => (
-          <FormInput
+          <AuthInput
             key={input.id}
             {...input}
             value={formData[input.name]}
@@ -24,21 +25,21 @@ function RegisterForm() {
             error_message={errors[input.name]}
           />
         ))}
-        <p className="auth__para">
+        <AuthPara>
           By creating an account you agree with our <a className="auth__cta">Terms of Service</a>,
           <br></br> <a className="auth__cta">Privacy Policy</a>, and our default{" "}
           <a className="auth__cta">Notification Settings.</a>{" "}
-        </p>
-        <button
+        </AuthPara>
+        <AuthButton
           disabled={status === "submitting"}
           className="auth__btn"
           type="submit"
         >
           Create account
-        </button>
-        <p className="auth__para">
+        </AuthButton>
+        <AuthPara>
           Already have an Account ? <Link className="auth__cta" to="/login">Log In</Link>
-        </p>
+        </AuthPara>
       </form>
     </>
   );

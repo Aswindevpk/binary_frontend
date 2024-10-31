@@ -1,9 +1,9 @@
 import React from 'react'
 import "./Lists.css";
-import { Post} from 'assets';
+import { Post} from '@assets';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis,faBookmark } from "@fortawesome/free-solid-svg-icons";
-import { Avatar } from 'components';
+import { Avatar } from '@components';
 
 const Lists = ({author}) => {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { Footer } from "components/layouts";
+import { Footer } from "@components/layouts";
 import ListItem from "./ListItem";
-import { Avatar } from "components";
+import { Avatar } from "@components";
 
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./ListItem.css";
-import { Cover } from "assets";
+import { Cover } from "@assets";
 
 const ListItem = () => {
   return (

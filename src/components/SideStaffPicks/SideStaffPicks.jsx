@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { api } from "services/api";
+import { api } from "@services/api";
 import RecentBlog from "./RecentBlog";
-import { SideSkeleton } from "components/layouts";
+import { SideSkeleton } from "@components/layouts";
 import { Link } from "react-router-dom";
 
 

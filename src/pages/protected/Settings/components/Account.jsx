@@ -4,8 +4,8 @@ import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import EditEmail from "./EditEmail";
 import EditUsername from "./EditUsername";
 import EditProfile from "./EditProfile";
-import { api } from "services/api";
-import { Modal } from "components/index";
+import { api } from "@services/api";
+import { Modal } from "@components/index";
 
 
 const Account = () => {

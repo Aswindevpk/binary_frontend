@@ -1,4 +1,4 @@
-import ModalInput from "components/ModalInput/ModalInput";
+import ModalInput from "@components/ModalInput/ModalInput";
 import useProfileUpdate from "./useProfileUpdate";
 import React, { useState } from "react";
 

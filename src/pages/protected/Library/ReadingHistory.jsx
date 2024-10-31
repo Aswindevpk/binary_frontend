@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FeaturedArticle, Modal } from "components";
+import { FeaturedArticle, Modal } from "@components";
 import { useReadingHistory } from "./useReadingHistory";
+import { Button } from "@components/ui";
 
 export default function ReadingHistory() {
-  const [togglePopup, setTogglePopup] = useState(false);  //for clear confirm popup toggling
+  const [togglePopup, setTogglePopup] = useState(false); //for clear confirm popup toggling
   const { articles, loading, clearHistory } = useReadingHistory();
 
   if (loading) {
@@ -16,14 +17,16 @@ export default function ReadingHistory() {
         <>
           <div className="library-history__top">
             <span>You can clear your reading history for a fresh start.</span>
-            <button
-              disabled={loading}
+            <Button
+              size="md"
+              color="red"
               onClick={() => {
                 setTogglePopup(!togglePopup);
               }}
+              disabled={loading}
             >
               Clear History
-            </button>
+            </Button>
           </div>
 
           {articles.map((blog) => (
@@ -44,21 +47,28 @@ export default function ReadingHistory() {
                 </p>
               </div>
               <div className="library-history-modal__cta">
-                <button className="outline_button"
+                <Button
+                  size="md"
+                  color="black"
+                  variant="outlined"
+                  className="outline_button"
                   onClick={() => {
-                    setTogglePopup(!togglePopup);  //closing the modal
+                    setTogglePopup(!togglePopup); //closing the modal
                   }}
                 >
                   Cancel
-                </button>
-                <button className="red_button"
+                </Button>
+                <Button
+                  size="md"
+                  color="red"
+                  variant="filled"
                   onClick={() => {
-                    setTogglePopup(!togglePopup);  //closing the modal
-                    clearHistory();  //clear the history
+                    setTogglePopup(!togglePopup); //closing the modal
+                    clearHistory(); //clear the history
                   }}
                 >
                   Confirm and Clear
-                </button>
+                </Button>
               </div>
             </div>
           </Modal>

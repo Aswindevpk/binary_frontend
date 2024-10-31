@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./AuthorDetails.css";
-import { MainLayout } from "components/layouts";
+import { MainLayout } from "@components/layouts";
 import AuthorDetailsMain from "./AuthorDetailsMain";
 import AuthorDetailsSide from "./AuthorDetailsSide";
 import { useParams } from "react-router-dom";
-import { api } from "services/api";
+import { api } from "@services/api";
 
 
 function AuthorDetails() {

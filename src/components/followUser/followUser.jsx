@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./followUser.css";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { Link } from "react-router-dom";
-import { Avatar } from "components";
+import { Avatar } from "@components";
 
 
 function FollowUser({ author }){

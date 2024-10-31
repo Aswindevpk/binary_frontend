@@ -1,7 +1,7 @@
-import { api } from "services/api";
+import { api } from "@services/api";
 import { useState,useContext } from "react";
 import { toast } from "sonner";
-import AuthContext from "context/AuthContext";
+import AuthContext from "@context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 

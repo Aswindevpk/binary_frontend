@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FormInput } from "components";
 import useVerifyOtp from "./useVerifyOtp";
+import { AuthInput, AuthButton } from "@components/ui";
 
 function VerifyOtpForm(username) {
   // status of the form typing,submitting,submitted
@@ -35,9 +35,9 @@ function VerifyOtpForm(username) {
           <a onClick={handleResendOtp}>Resend OTP</a>
         )}
       </div>  */}
-      <button className="auth__btn" type="submit">
+      <AuthButton type="submit">
         Verify OTP
-      </button>
+      </AuthButton>
     </form>
   );
 }

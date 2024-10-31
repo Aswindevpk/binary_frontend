@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { FilterMenu, ProfileList } from "components";
+import React, { useState} from "react";
+import { FilterMenu, ProfileList } from "@components";
 import ReadingHistory from "./ReadingHistory";
 import SaveLists from "./SaveLists";
-import { api } from "services/api";
-import { toast } from "sonner";
 import useFetchUser from "./useFetchUser";
+import { Header1 } from "@components/ui";
+
 
 const filterComponents = [
   { name: "Your Lists", uid: "1", component: ProfileList },
@@ -28,7 +28,7 @@ export default function LibraryMain() {
 
   return (
     <>
-      <h2 className="main__header">Library</h2>
+      <Header1>Library</Header1>
       <FilterMenu
         filters={filterComponents}
         activeFilter={activeFilter}

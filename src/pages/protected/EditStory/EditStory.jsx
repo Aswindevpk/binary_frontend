@@ -1,7 +1,7 @@
-import AuthContext from "context/AuthContext";
+import AuthContext from "@context/AuthContext";
 import React, { useContext, useState } from "react";
 import "../CreateStory/CreateStory.css";
-import { BlogEditor, BlogPreview } from "components";
+import { BlogEditor, BlogPreview } from "@components";
 import useEditStory from "./useEditStory";
 import { useParams } from "react-router-dom";
 

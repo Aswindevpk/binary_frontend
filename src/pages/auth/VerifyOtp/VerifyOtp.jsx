@@ -1,7 +1,8 @@
 import React from "react";
-import { AuthLayout } from "components/layouts";
+import { AuthLayout } from "@components/layouts";
 import VerifyOtpForm from "./VerifyOtpForm";
 import { useParams } from "react-router-dom";
+import { AuthHeader } from "@components/ui";
 
 function VerifyOtp() {
   //get username from params
@@ -9,8 +10,8 @@ function VerifyOtp() {
 
   return (
     <AuthLayout>
-      <h2 className="auth__header" style={{textAlign:'center'}}>Verify Account</h2>
-      <p className="auth__sub-header">
+      <AuthHeader>Verify Account</AuthHeader>
+      <p className="text-center mb-6 text-[1rem] font-[var(--font-family)] text-[var(--color-secondary)]">
         One Time Password OTP has been sent to Your Registred Email
       </p>
       <VerifyOtpForm username={username} />

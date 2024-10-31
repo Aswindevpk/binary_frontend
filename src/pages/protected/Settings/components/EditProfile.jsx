@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import useEditProfile from "./useEditProfile";
-import { ModalInput } from "components";
+import { ModalInput } from "@components";
 
 
 function EditProfile({ user, setUser, onClose }) {

@@ -1,4 +1,4 @@
-import { FilterMenu } from "components/index";
+import { FilterMenu } from "@components/index";
 import React, { useState } from "react";
 import People from "./components/People";
 

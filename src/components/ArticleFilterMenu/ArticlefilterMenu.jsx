@@ -3,87 +3,81 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useRef, useState } from "react";
 
+const FilterItem = ({ filter, isActive, onClick }) => (
+  <div
+    className={`flex-shrink-0 py-4 text-sm font-medium ${isActive ? 'border-b border-primary text-primary' : 'text-secondary'} cursor-pointer hover:text-primary`}
+    onClick={onClick}
+  >
+    {filter.name}
+  </div>
+);
+
 const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
   const containerRef = useRef(null);
-  const [isOverflowing, setIsOverflowing] = useState({
-    left: false,
-    right: false,
-  });
+  const [isOverflowing, setIsOverflowing] = useState({ left: false, right: false });
 
-  // Check if content overflows the container and set arrow visibility
   const checkOverflow = () => {
     const container = containerRef.current;
     if (container) {
       setIsOverflowing({
         left: container.scrollLeft > 0,
-        right:
-          container.scrollLeft + container.clientWidth < container.scrollWidth,
+        right: container.scrollLeft + container.clientWidth < container.scrollWidth,
       });
     }
   };
 
-  // Scroll the content
   const scrollContent = (direction) => {
     const container = containerRef.current;
-    const scrollAmount = 100; // Amount to scroll
     container.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
+      left: direction === "left" ? -100 : 100,
       behavior: "smooth",
     });
   };
 
-  // Run overflow check on mount and on scroll
   useEffect(() => {
-    checkOverflow(); // Initial check
+    checkOverflow();
     const container = containerRef.current;
-    if (container) {
-      container.addEventListener("scroll", checkOverflow);
-    }
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", checkOverflow);
-      }
-    };
+    container.addEventListener("scroll", checkOverflow);
+    return () => container.removeEventListener("scroll", checkOverflow);
   }, []);
 
   return (
-    <div className="filter__scroll-container">
-      <div className="Articlefilter-menu" ref={containerRef}>
+    <div className="relative flex items-center">
+      <div
+        className="flex border-b border-gray-300 gap-[35px] bg-bg sticky top-0 overflow-x-auto scrollbar-hide w-full Articlefilter-menu"
+        ref={containerRef}
+      >
         <FontAwesomeIcon
           icon={faPlus}
-          className="icons"
-          id="filter-menu-add"
+          className="p-1 rounded-full w-4 h-4 hover:bg-gray-200 my-auto"
           color="gray"
+          id="filter-menu-add"
         />
         {filters.map((filter) => (
-          <div
+          <FilterItem
             key={filter.uid}
-            className={filter === activeFilter ? "active" : ""}
+            filter={filter}
+            isActive={filter === activeFilter}
             onClick={() => setActiveFilter(filter)}
-          >
-            {filter.name}
-          </div>
+          />
         ))}
-
       </div>
-        {/* Left Arrow */}
-        {isOverflowing.left && (
-          <div
-            className="arrow left-arrow"
-            onClick={() => scrollContent("left")}
-          >
-            &lt;
-          </div>
-        )}
-        {/* Right Arrow */}
-        {isOverflowing.right && (
-          <div
-            className="arrow right-arrow"
-            onClick={() => scrollContent("right")}
-          >
-            &gt;
-          </div>
-        )}
+      {isOverflowing.left && (
+        <div
+          className="arrow absolute z-10 text-xl cursor-pointer"
+          onClick={() => scrollContent("left")}
+        >
+          &lt;
+        </div>
+      )}
+      {isOverflowing.right && (
+        <div
+          className="arrow absolute right-0 z-20 text-xl cursor-pointer"
+          onClick={() => scrollContent("right")}
+        >
+          &gt;
+        </div>
+      )}
     </div>
   );
 };

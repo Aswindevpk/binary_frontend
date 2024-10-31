@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Story from "./Story";
-import { api } from "services/api";
+import { api } from "@services/api";
 
 
 const Draft = () => {

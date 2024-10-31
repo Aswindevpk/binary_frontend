@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { api } from "../../../services/api";
-import { FeaturedArticle } from "../../../components";
+import { api } from "@services/api";
+import { FeaturedArticle } from "@components";
 import "./ReadingList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEllipsis, faComment, faHandsClapping } from "@fortawesome/free-solid-svg-icons";
 import ReadingListInput from "./ReadingListInput";
-import { Avatar } from "components";
+import { Avatar } from "@components";
 import { toast } from "sonner";
 
 function ReadingListMain({ user }) {

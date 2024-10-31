@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
 import "./FeaturedArticle.css";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ProfileOverlay from "./ProfileOverlay";
-import { ActionDropDown, Bookmark, Clap, Comment, Mute } from "..";
+import { ActionDropDown } from "@components";
+import {Bookmark, Clap, Comment, Mute} from "@components/ui";
 
 const FeaturedArticle = ({ blog }) => {
   const formattedDate = format(new Date(blog.created_at), "MMM d"); // Format date as 'Feb 9'

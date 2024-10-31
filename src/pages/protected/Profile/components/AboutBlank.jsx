@@ -1,5 +1,6 @@
 import React from "react";
 import './AboutBlank.css';
+import {Button} from "@components/ui";
 
 
 const AboutBlank = ({ setEdit }) => {
@@ -13,7 +14,7 @@ const AboutBlank = ({ setEdit }) => {
           experience, accomplishments, interests, dreams, and more. You can even
           add images and use rich text to personalize your bio.
         </span>
-        <button className="outline_button" onClick={() => setEdit(true)}>Get Started</button>
+        <Button color="black" variant="filled" onClick={() => setEdit(true)}>Get Started</Button>
       </div>
     );
 };

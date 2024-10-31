@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer } from "components/layouts";
+import { Footer } from "@components/layouts";
 import { Link } from 'react-router-dom';
 
 const SettingsSide = () => {

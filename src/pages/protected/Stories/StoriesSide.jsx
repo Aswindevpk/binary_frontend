@@ -1,6 +1,6 @@
 import React from "react";
-import { SideFollow, SideStaffPicks, SideTopics } from "../../../components";
-import Footer from "../../../components/layouts/Footer/Footer";
+import { SideFollow, SideStaffPicks, SideTopics } from "@components";
+import Footer from "@components/layouts/Footer/Footer";
 
 const StoriesSide = () => {
   return (

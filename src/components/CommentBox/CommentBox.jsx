@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./CommentBox.css";
-import { Close, Avatar } from "assets";
-import AuthContext from "context/AuthContext";
+import { Close, Avatar } from "@assets";
+import AuthContext from "@context/AuthContext";
 import useComments from "./useComments"; // Import the custom hook
 
 const CommentBox = ({ toggleVisibility, isCommentBoxVisible, article_id }) => {

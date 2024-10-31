@@ -1,4 +1,4 @@
-import { FilterMenu } from "components";
+import { FilterMenu } from "@components";
 import React, { useState } from "react";
 import {
   Account,

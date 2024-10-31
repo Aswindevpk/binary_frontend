@@ -1,7 +1,7 @@
-import AuthContext from "context/AuthContext";
+import AuthContext from "@context/AuthContext";
 import React, { useContext, useEffect, useState } from "react";
 import "./About.css";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { Link } from "react-router-dom";
 
 function FollowStat() {

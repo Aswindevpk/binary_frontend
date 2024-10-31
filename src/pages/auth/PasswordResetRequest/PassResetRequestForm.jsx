@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { FormInput } from "components";
 import usePassResetRequest from "./usePassResetRequest";
+import { AuthButton, AuthInput } from "@components/ui";
+
 
 
 function PassResetRequestForm() {
@@ -11,7 +12,7 @@ function PassResetRequestForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormInput
+      <AuthInput
         key={input.id}
         {...input}
         value={formData[input.name]}
@@ -21,9 +22,9 @@ function PassResetRequestForm() {
         errors={errors}
         error_message={errors[input.name]}
       />
-      <button className="auth__btn" type="submit">
+      <AuthButton className="auth__btn" type="submit">
         Sent Link
-      </button>
+      </AuthButton>
     </form>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ReadingListInput.css";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { toast } from "sonner";
 
 

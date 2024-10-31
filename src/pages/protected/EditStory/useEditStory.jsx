@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { toast } from "sonner";
 
 function useEditStory(setStatus, id) {

@@ -1,4 +1,4 @@
-import { MainLayout } from "components/layouts";
+import { MainLayout } from "@components/layouts";
 import "./Settings.css";
 import SettingsMain from "./SettingsMain";
 import SettingsSide from "./SettingsSide";

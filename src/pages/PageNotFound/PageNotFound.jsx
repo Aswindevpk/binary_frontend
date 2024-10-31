@@ -1,13 +1,12 @@
 import React from 'react';
-import './PageNotFound.css'
 
 function PageNotFound() {
   return (
-    <div className='page-not-found'>
-      <h1 className='page-not-found__header'>404</h1>
-      <p className='page-not-found__info'>Page Not Found</p>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <h1 className="text-6xl font-bold text-gray-800">404</h1>
+      <p className="mt-4 text-xl text-gray-600">Page Not Found</p>
     </div>
-  )
+  );
 }
 
-export default PageNotFound
+export default PageNotFound;

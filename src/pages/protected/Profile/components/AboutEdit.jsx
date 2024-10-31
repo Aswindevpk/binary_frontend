@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { api } from "services/api";
+import { api } from "@services/api";
 import './AboutEdit.css';
+import {Button} from "@components/ui";
 
 
 const AboutEdit = ({ setEdit, setUser, user }) => {
@@ -34,12 +35,12 @@ const AboutEdit = ({ setEdit, setUser, user }) => {
         cols="2"
       ></textarea>
       <div className="profile_about_edit-cta">
-        <button className="outline_button" onClick={() => setEdit(false)}>
+        <Button color="black" variant="outlined" className="outline_button" onClick={() => setEdit(false)}>
           Cancel
-        </button>
-        <button className="black_button" onClick={updateAbout}>
+        </Button>
+        <Button color="black" variant="filled" className="black_button" onClick={updateAbout}>
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

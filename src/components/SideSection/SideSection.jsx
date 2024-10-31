@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import FollowUser from "components/followUser/followUser";
-import  Footer  from "components/layouts/Footer/Footer";
-import { Avatar } from "assets";
-import { api } from "services/api";
+import FollowUser from "@components/followUser/followUser";
+import  Footer  from "@components/layouts/Footer/Footer";
+import { Avatar } from "@assets";
+import { api } from "@services/api";
 import "./RecentBlog.css";
 import "./SideSection.css";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { MainLayout } from "components/layouts";
+import { MainLayout } from "@components/layouts";
 import HomeMain from "./HomeMain";
 import HomeSide from "./HomeSide";
 

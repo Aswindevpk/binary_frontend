@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Footer } from "components/layouts";
+import { Footer } from "@components/layouts";
 import "./Profile.css";
 import { Link } from "react-router-dom";
-import { Avatar } from "components";
-import { api } from "services/api";
+import { Avatar } from "@components";
+import { api } from "@services/api";
 import { toast } from "sonner";
 
 

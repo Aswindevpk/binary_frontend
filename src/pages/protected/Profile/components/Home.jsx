@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import HomeBlog from "./HomeBlog";
-import { api } from "services/api";
-import AuthContext from "context/AuthContext";
+import { api } from "@services/api";
+import AuthContext from "@context/AuthContext";
 import "./Home.css";
-import CircleLoader from "components/layouts/Skeleton/CircleLoader";
+import CircleLoader from "@components/layouts/Skeleton/CircleLoader";
 
 
 function Home() {

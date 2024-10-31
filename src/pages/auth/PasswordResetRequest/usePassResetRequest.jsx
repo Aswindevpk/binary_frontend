@@ -1,7 +1,6 @@
-import { api } from "services/api";
+import { api } from "@services/api";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 
 function usePassResetRequest(setStatus) {
   // form data

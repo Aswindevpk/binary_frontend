@@ -1,7 +1,7 @@
-import { ActionDropDown } from "components/index";
+import { ActionDropDown } from "@components/index";
 import React from "react";
 import { Link } from "react-router-dom";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { toast } from "sonner";
 
 

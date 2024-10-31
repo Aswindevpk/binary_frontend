@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { api } from "services/api";
+import { api } from "@services/api";
 import { toast } from "sonner";
 
 // Custom hook to handle fetching and clearing of reading history

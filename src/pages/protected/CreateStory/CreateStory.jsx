@@ -1,8 +1,9 @@
-import AuthContext from "context/AuthContext";
+import AuthContext from "@context/AuthContext";
 import React, { useContext,useState } from "react";
 import "./CreateStory.css";
-import { BlogEditor } from "components";
+import { BlogEditor } from "@components";
 import useCreateStory from "./useCreateStory";
+import { Button } from "@components/ui";
 
 function CreateStory() {
   let { user } = useContext(AuthContext);
@@ -17,9 +18,9 @@ function CreateStory() {
         <p className="Editor_header-save">
           {status === "submitting" ? "Saving..." : `Draft in ${user.username}`}
         </p>
-        <button className="green_button" disabled={status === "empty"}>
+        <Button size="sm" color="green" variant="filled" disabled={status === "empty"}>
           Publish
-        </button>
+        </Button>
       </div>
       <div className="Editor_content">
         <input

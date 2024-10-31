@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { api } from "services/api";
-import { MainLayout } from "components/layouts";
+import { api } from "@services/api";
+import { MainLayout } from "@components/layouts";
 import HomeSide from "../Home/HomeSide";
 import NotificationsMain from "./NotificationsMain";
 

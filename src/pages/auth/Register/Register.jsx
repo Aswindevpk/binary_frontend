@@ -1,10 +1,11 @@
-import { AuthLayout } from "components/layouts";
+import { AuthLayout } from "@components/layouts";
 import RegisterForm from "./RegisterForm";
+import { AuthHeader } from "@components/ui";
 
 const Register = () => {
   return (
     <AuthLayout>
-      <h2 className="auth__header">Register to Binary</h2>
+      <AuthHeader>Register to Binary</AuthHeader>
       <RegisterForm />
     </AuthLayout>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { api } from "services/api";
-import { MainLayout } from "components/layouts";
+import { api } from "@services/api";
+import { MainLayout } from "@components/layouts";
 import ProfileMain from "./ProfileMain";
 import ProfileSide from "./ProfileSide";
 

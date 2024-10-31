@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
-import { ActionDropDown, ProfileOverlay } from "components";
+import { ActionDropDown, ProfileOverlay } from "@components";
 import { Link } from "react-router-dom";
 
 

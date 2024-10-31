@@ -1,4 +1,4 @@
-import { Avatar } from "components/index";
+import { Avatar } from "@components/index";
 import React from "react";
 import "./Notification.css";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./UserDetail.css";
-import { Avatar } from "components/index";
+import { Avatar } from "@components/index";
 
 function UserDetail() {
   return (

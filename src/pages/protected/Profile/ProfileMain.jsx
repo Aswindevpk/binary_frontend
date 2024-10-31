@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { ActionDropDown, FilterMenu, ProfileList } from "components";
+import { ActionDropDown, FilterMenu, ProfileList } from "@components";
 import { About, Home } from "./components";
+import { Header1 } from "@components/ui";
 
 
 const filterComponents  = [
@@ -21,7 +22,7 @@ const ProfileMain = ({ user }) => {
     <>
       <div className="profile-main">
         <div className="profile-main__header">
-          <h1 className="header1">{user.username}</h1>
+          <Header1>{user.username}</Header1>
           <ActionDropDown>
             <>
               <li>Copy link to profile</li>

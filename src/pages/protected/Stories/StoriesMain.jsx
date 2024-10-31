@@ -1,7 +1,7 @@
 import React ,{useState} from "react";
-import { FilterMenu } from "../../../components";
+import { FilterMenu } from "@components";
 import { Draft, Published, Responses } from "./components";
-import { Link } from 'react-router-dom';
+import {Header1,LinkButton} from "@components/ui";
 
 const filterComponents = [
   { name: "Drafts", uid: "1",component:Draft },
@@ -19,14 +19,14 @@ const StoriesMain = () => {
   return (
     <>
       <div className="stories__main-header">
-        <h1 className="header1">Your Stories</h1>
+        <Header1>Your Stories</Header1>
         <div className="stories__main-header__cta">
-          <Link className="green_button" to="/create-story">
+          <LinkButton color="green" variant="filled" to="/create-story">
             Write a Story
-          </Link>
-          <Link className="outline_button" to="/">
+          </LinkButton>
+          <LinkButton color="green" variant="outlined" to="/">
             Import a Story
-          </Link>
+          </LinkButton>
         </div>
       </div>
         <FilterMenu

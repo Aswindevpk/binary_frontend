@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { api } from "../../services/api";
+import { api } from "@services/api";
 import FollowUser from "../followUser/followUser";
-import { SideSkeleton } from "components/layouts";
+import { SideSkeleton } from "@components/layouts";
 
 const SideFollow = () => {
   const [authors, setAuthors] = useState([]);

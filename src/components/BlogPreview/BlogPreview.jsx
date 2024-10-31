@@ -1,8 +1,6 @@
-import "./BlogPreview.css";
-import { Close } from "../../assets";
+import { Close } from "@assets";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { Toaster } from "sonner";
 import useBlogPreview from "./useBlogPreview";
 
 const BlogPreview = ({ onClose, formData, setFormData, id }) => {
@@ -18,61 +16,51 @@ const BlogPreview = ({ onClose, formData, setFormData, id }) => {
   } = useBlogPreview(formData, setFormData, id);
 
   return (
-    <div className="popup-overlay">
-      <Toaster richColors position="top-center" />
-      <div className="popup-close">
-        <img
-          className="popus-close__img"
-          src={Close}
-          alt=""
-          onClick={onClose}
-        />
+    <div className="fixed inset-0 flex justify-center items-center bg-white z-50 animate-fade-in">
+      <div className="absolute top-10 right-10 cursor-pointer" onClick={onClose}>
+        <img className="w-5 h-5" src={Close} alt="Close" />
       </div>
-      <div className="BlogPreview">
-        <div className="BlogPreview-content">
-          <h2 className="BlogPreview-content__header">Story Preview</h2>
-          <div className="BlogPreview-content__img">
+      <div className="flex w-full p-8 rounded-lg shadow-lg justify-around">
+        <div className="flex flex-col w-1/2 mb-5">
+          <h2 className="text-lg font-bold mb-4">Story Preview</h2>
+          <div className="w-7/10 h-72 bg-gray-200 flex items-center justify-center mb-4">
             <img
               src={imageSrc}
               alt="Include a high-quality image in your story to make it more inviting to readers."
+              className="max-w-full max-h-full object-cover"
             />
           </div>
           <input
-            className="BlogPreview-content__imginput"
+            className="block w-full mb-4 text-gray-600"
             type="file"
             name="image"
             onChange={handleImageChange}
           />
           <input
-            className="BlogPreview-content__heading"
+            className="w-11/12 mb-2 border-none font-bold text-lg"
             type="text"
             value={formData.title}
-            onChange={(e) => {
-              setFormData({ ...formData, title: e.target.value });
-            }}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             placeholder="Your Story Heading"
           />
           <input
-            className="BlogPreview-content__subtitle"
+            className="w-11/12 mb-4 border-none text-sm"
             type="text"
             value={formData.subtitle}
-            onChange={(e) =>
-              setFormData({ ...formData, subtitle: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
             placeholder="Write a preview subtitle.."
           />
-          <p className="BlogPreview-content__note">
+          <p className="w-11/12 text-xs text-gray-600">
             Note: Changes here will affect how your story appears in public
             places like Medium’s homepage and in subscribers’ inboxes — not the
             contents of the story itself.
           </p>
         </div>
 
-        <div className="BlogPreview-others">
-          <h5 className="BlogPreview-others__header">Publishing to :Aswin</h5>
-          <p className="BlogPreview-others__para">
-            Add or change topics (up to 5) so readers know what your story is
-            about
+        <div className="flex flex-col font-sans">
+          <h5 className="text-lg font-bold mb-2">Publishing to: Aswin</h5>
+          <p className="text-sm text-gray-700 mb-2">
+            Add or change topics (up to 5) so readers know what your story is about
           </p>
           <Select
             closeMenuOnSelect={false}
@@ -82,10 +70,15 @@ const BlogPreview = ({ onClose, formData, setFormData, id }) => {
             isMulti
             options={topics}
           />
-          <p className="BlogPreview-others__para">
+          <p className="text-sm text-gray-700 mb-4">
             Learn more about what happens to your post when you publish.
           </p>
-          <button onClick={onSubmit}>Publish Now</button>
+          <button
+            onClick={onSubmit}
+            className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500"
+          >
+            Publish Now
+          </button>
         </div>
       </div>
     </div>
