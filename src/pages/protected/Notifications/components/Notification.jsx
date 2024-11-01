@@ -4,13 +4,13 @@ import "./Notification.css";
 
 function Notification() {
   return (
-    <div className="notification">
+    <div className="flex gap-2 items-center">
       <Avatar username="aswin" size="medium" />
-      <div className="notification__content">
-        <p className="notification__content-message">
+      <div className="flex flex-col gap-0">
+        <p className="text-sm text-primary font-semibold">
           Aswin <span>started following you</span>
         </p>
-        <span className="notification__content-date">Jul 24, 2024</span>
+        <span className="text-xs text-secondary">Jul 24, 2024</span>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
   return (
     <div className="relative flex items-center">
       <div
-        className="flex border-b border-gray-300 gap-[35px] bg-bg sticky top-0 overflow-x-auto scrollbar-hide w-full Articlefilter-menu"
+        className="flex border-b border-neutral gap-[35px] bg-bg sticky top-0 overflow-x-auto scrollbar-hide w-full Articlefilter-menu"
         ref={containerRef}
       >
         <FontAwesomeIcon
@@ -64,7 +64,7 @@ const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
       </div>
       {isOverflowing.left && (
         <div
-          className="arrow absolute z-10 text-xl cursor-pointer"
+          className="Articlefilter-menu__arrow absolute z-10 text-xl cursor-pointer"
           onClick={() => scrollContent("left")}
         >
           &lt;
@@ -72,7 +72,7 @@ const ArticleFilterMenu = ({ filters, activeFilter, setActiveFilter }) => {
       )}
       {isOverflowing.right && (
         <div
-          className="arrow absolute right-0 z-20 text-xl cursor-pointer"
+          className="Articlefilter-menu__arrow absolute right-0 z-20 text-xl cursor-pointer"
           onClick={() => scrollContent("right")}
         >
           &gt;

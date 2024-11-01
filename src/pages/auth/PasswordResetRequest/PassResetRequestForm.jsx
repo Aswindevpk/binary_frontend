@@ -22,7 +22,7 @@ function PassResetRequestForm() {
         errors={errors}
         error_message={errors[input.name]}
       />
-      <AuthButton className="auth__btn" type="submit">
+      <AuthButton type="submit">
         Sent Link
       </AuthButton>
     </form>

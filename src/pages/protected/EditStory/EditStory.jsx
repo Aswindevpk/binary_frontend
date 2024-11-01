@@ -1,54 +1,51 @@
 import AuthContext from "@context/AuthContext";
 import React, { useContext, useState } from "react";
-import "../CreateStory/CreateStory.css";
 import { BlogEditor, BlogPreview } from "@components";
 import useEditStory from "./useEditStory";
 import { useParams } from "react-router-dom";
-
+import { Button } from "@components/ui";
 
 function EditStory() {
-  let { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
-
-  //status "empty","typing","submitting"
   const [status, setStatus] = useState("loading");
-
-  const { formData, setFormData,showPopup,setShowPopup } = useEditStory(setStatus, id); // Destructure the hook's return values
+  const { formData, setFormData, showPopup, setShowPopup } = useEditStory(
+    setStatus,
+    id
+  );
 
   if (status === "loading") {
-    return <div>loading..</div>;
+    return <div>Loading...</div>;
   }
 
-
   return (
-    <div className="Editor">
-      <div className="Editor_header">
-        <p className="Editor_header-save">
+    <div className="w-full mx-auto p-5 sm:w-10/12">
+      <div className="flex justify-between items-center mb-5">
+        <p className="text-gray-500 text-base">
           {status === "submitting" ? "Saving..." : `Draft in ${user.username}`}
         </p>
-        <button
-          className="green_button"
+        <Button
+          size="sm"
+          variant="filled"
+          color="green"
           disabled={status !== "typing"}
-          onClick={() => {
-            setShowPopup(true);
-          }}
+          onClick={() => setShowPopup(true)}
+          className="text-white bg-green-600 hover:bg-green-400"
         >
           Publish
-        </button>
+        </Button>
         {showPopup && (
           <BlogPreview
-            onClose={() => {
-              setShowPopup(false);
-            }}
+            onClose={() => setShowPopup(false)}
             formData={formData}
             setFormData={setFormData}
             id={id}
           />
         )}
       </div>
-      <div className="Editor_content">
+      <div className="flex flex-col">
         <input
-          className="Editor_content-title"
+          className="text-2xl p-2 mb-5 border-none w-full focus:outline-none"
           type="text"
           placeholder="Title"
           value={formData.title}
@@ -56,7 +53,7 @@ function EditStory() {
             setFormData({ ...formData, title: e.target.value });
             setStatus("typing");
           }}
-        ></input>
+        />
         <BlogEditor setFormData={setFormData} formData={formData} />
       </div>
     </div>

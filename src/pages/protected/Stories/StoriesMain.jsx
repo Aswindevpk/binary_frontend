@@ -18,9 +18,9 @@ const StoriesMain = () => {
   };
   return (
     <>
-      <div className="stories__main-header">
-        <Header1>Your Stories</Header1>
-        <div className="stories__main-header__cta">
+      <div className="flex items-baseline justify-between flex-wrap gap-6">
+        <Header1 className="pt-10">Your Stories</Header1>
+        <div className="flex items-center gap-2">
           <LinkButton color="green" variant="filled" to="/create-story">
             Write a Story
           </LinkButton>

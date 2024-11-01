@@ -72,10 +72,10 @@ const ProfileDropdown = () => {
   ];
 
   return (
-    <div className="relative inline-block font-sans" ref={dropdownRef}>
+    <div className="relative inline-block font-sans z-50" ref={dropdownRef}>
       <div onClick={toggleDropdownVisibility}>
         {loading ? (
-          <div className="navbar-avatar__skelton-loader"></div>
+          <div>loading...</div>
         ) : (
           <Avatar username={author.username} image_url={author.img} size={"medium"} />
         )}

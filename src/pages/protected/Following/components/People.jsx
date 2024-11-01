@@ -1,6 +1,5 @@
 import React from "react";
 import UserDetail from "../UserDetail";
-import '../Following.css'
 
 
 function People() {

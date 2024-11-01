@@ -33,14 +33,14 @@ const SideStaffPicks = () => {
   }
 
   return (
-    <div className="home__recent">
-      <h2 className="home__side-section-header header3">Staff picks</h2>
-      <div className="home__recent-list">
+    <div className="mb-6">
+      <h2 className="mb-4 font-extrabold">Staff picks</h2>
+      <div className="flex flex-col gap-2">
         {recentblog.map((blog) => (
           <RecentBlog key={blog.uid} blog={blog} />
         ))}
       </div>
-      <Link to="/author" className="home__side-section-cta para-cta para1">
+      <Link to="/author" className="text-sm text-success">
         See the full list
       </Link>
     </div>

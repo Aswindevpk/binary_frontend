@@ -9,12 +9,12 @@
 }
 
 
-.arrow{
+.Articlefilter-menu__arrow{
   font-size: 24px;
   cursor: pointer;
 }
 
-.arrow::before {
+.Articlefilter-menu__arrow::before {
   content: '';
   position: absolute;
   top: 50%;

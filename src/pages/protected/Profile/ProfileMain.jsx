@@ -20,9 +20,9 @@ const ProfileMain = ({ user }) => {
 
   return (
     <>
-      <div className="profile-main">
-        <div className="profile-main__header">
-          <Header1>{user.username}</Header1>
+      <div className="">
+        <div className="flex items-baseline justify-between">
+          <Header1 className="mt-10">{user.username}</Header1>
           <ActionDropDown>
             <>
               <li>Copy link to profile</li>

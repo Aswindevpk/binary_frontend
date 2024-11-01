@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AuthPara = ({ children }) => {
+const AuthPara = ({ children , className = '' }) => {
   return (
-    <p className="pt-2 text-center mt-2 text-[0.8rem] font-[var(--font-family)] text-[var(--color-secondary)]">
+    <p className={`text-xs text-secondary ${className}`}>
       {children}
     </p>
   );

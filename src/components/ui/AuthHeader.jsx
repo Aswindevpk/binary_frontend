@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AuthHeader = ({ children }) => {
+const AuthHeader = ({ children ,className=""}) => {
   return (
-    <h2 className="font-[var(--font-family)] mb-8 text-[1.7rem] font-extrabold text-[var(--primary-color)]">
+    <h2 className={`mb-8 text-3xl font-extrabold text-primary ${className}`}>
       {children}
     </h2>
   );

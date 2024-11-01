@@ -1,48 +1,4 @@
-.ProfileList {
-  border: 1px solid rgb(240, 240, 249);
-  font-family: var(--font-family);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: rgb(249, 249, 249);
-}
 
-.ProfileList-main {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-  padding: 20px;
-}
-
-.ProfileList-main h1 {
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.ProfileList-main__sub {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: gray;
-  gap: 10px;
-  align-items: center;
-}
-
-.ProfileList-main__author {
-  display: flex;
-  gap: 10px;
-}
-
-.ProfileList-main__author img {
-  width: 20px;
-  height: 20px;
-}
-
-.ProfileList-main__author span {
-  font-size: 14px;
-  font-weight: 500;
-}
 
 .ProfileList-sub {
   display: flex;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link} from "react-router-dom";
 import { api } from "@services/api";
-import './FeaturedArticle.css'
 import { Avatar } from "..";
 
 function ProfileOverlay({ author }) {

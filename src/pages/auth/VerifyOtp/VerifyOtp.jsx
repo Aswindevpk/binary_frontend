@@ -10,8 +10,8 @@ function VerifyOtp() {
 
   return (
     <AuthLayout>
-      <AuthHeader>Verify Account</AuthHeader>
-      <p className="text-center mb-6 text-[1rem] font-[var(--font-family)] text-[var(--color-secondary)]">
+      <AuthHeader className="text-center">Verify Account</AuthHeader>
+      <p className="text-center mb-6 text-sm text-secondary">
         One Time Password OTP has been sent to Your Registred Email
       </p>
       <VerifyOtpForm username={username} />

@@ -2,11 +2,11 @@ import { FilterMenu } from "@components/index";
 import React, { useState } from "react";
 import All from "./components/All";
 import Responses from "./components/Responses";
-
+import { Header1 } from "@components/ui";
 
 const filterComponents = [
-    { name: "All", uid: "1", component: All },
-    { name: "Responses", uid: "2", component: Responses },
+  { name: "All", uid: "1", component: All },
+  { name: "Responses", uid: "2", component: Responses },
 ];
 
 function NotificationsMain() {
@@ -19,7 +19,7 @@ function NotificationsMain() {
 
   return (
     <>
-      <h2 className="main__header">Notifications</h2>
+      <Header1 className="pt-10"> Notifications</Header1>
       <FilterMenu
         filters={filterComponents}
         activeFilter={activeFilter}

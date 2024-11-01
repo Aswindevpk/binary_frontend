@@ -9,7 +9,7 @@ const DropdownMenu = ({ primaryMenuItems, settingsMenuItems, membershipMenuItems
       <MenuGroup items={settingsMenuItems} />
       <MenuGroup items={membershipMenuItems} />
       <div className="text-sm font-medium text-secondary py-3 px-5 flex items-center border-b border-gray-300">
-        <li className="list-none py-2 px-1">
+        <li className="list-none py-2 px-1 hover:text-primary">
           <Link onClick={logoutUser}>
             Sign out
             <p>{author.email}</p>
@@ -24,7 +24,7 @@ const MenuGroup = ({ items }) => {
   return (
     <div className="text-sm font-medium text-secondary py-3 px-5 flex flex-col border-b border-gray-300">
       {items.map(({ icon, label, link }, idx) => (
-        <li className="list-none py-2 px-1 flex" key={idx}>
+        <li className="list-none py-2 px-1 flex hover:text-primary" key={idx}>
           {icon && <FontAwesomeIcon icon={icon} className="icons text-xl min-w-[20px] mr-4 flex justify-start" />}
           {link ? <Link to={link}>{label}</Link> : label}
         </li>

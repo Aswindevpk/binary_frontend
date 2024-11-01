@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "@services/api";
 import FollowUser from "../followUser/followUser";
 import { SideSkeleton } from "@components/layouts";
+import { Link } from "react-router-dom";
 
 const SideFollow = () => {
   const [authors, setAuthors] = useState([]);
@@ -32,16 +33,16 @@ const SideFollow = () => {
   }
 
   return (
-    <div className="home__followList">
-      <h3 className="home__side-section-header header3">Who to Follow</h3>
-      <div className="home__followList-list">
+    <div className="mb-6">
+      <h3 className="mb-4 font-extrabold">Who to Follow</h3>
+      <div className="flex flex-col gap-1">
         {authors.map((author) => (
           <FollowUser key={author.id} author={author} />
         ))}
       </div>
-      <a className="home__side-section-cta para-cta para1" href="">
+      <Link className="text-sm text-success" href="">
         See more suggestions
-      </a>
+      </Link>
     </div>
   );
 };

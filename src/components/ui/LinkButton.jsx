@@ -25,7 +25,7 @@ const LinkButton = ({ size = 'md', color = 'green', variant = 'filled', children
   };
 
   // Combine size and color classes
-  const buttonClasses = `${sizeClasses[size]} ${colorClasses[color][variant]} rounded transition-all duration-200`;
+  const buttonClasses = `${sizeClasses[size]} ${colorClasses[color][variant]} rounded-full transition-all duration-200`;
 
   return (
     <Link to={to} className={buttonClasses} disabled={disabled}>

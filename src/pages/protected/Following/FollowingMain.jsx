@@ -1,6 +1,7 @@
 import { FilterMenu } from "@components/index";
 import React, { useState } from "react";
 import People from "./components/People";
+import { Header1 } from "@components/ui";
 
 const filterComponents = [
   { name: "People", uid: "1", component:People },
@@ -17,12 +18,12 @@ function FollowingMain() {
 
   return (
     <>
-      <div className="breadcrumb">
-        <span style={{ color: "var(--color-secondary)" }}>Appuspk</span>
-        <span style={{ color: "var(--color-secondary)" }}>&gt;</span>
-        <span>Following</span>
+      <div className="flex gap-1 pt-10 text-sm text-secondary">
+        <span >Appuspk</span>
+        <span >&gt;</span>
+        <span >Following</span>
       </div>
-      <h2 className="header1">Following</h2>
+      <Header1 className="pt-1">Following</Header1>
       <FilterMenu
         filters={filterComponents}
         activeFilter={activeFilter}

@@ -2,17 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "@context/AuthContext";
 import { useParams } from "react-router-dom";
 import "./BlogDetails.css";
-import {
-  CommentBox,
-  Avatar,
-  ActionDropDown,
-} from "@components";
-import {
-  Bookmark,
-  Clap,
-  Comment,
-  Mute,
-} from "@components/ui";
+import { CommentBox, Avatar, ActionDropDown } from "@components";
+import { Bookmark, Clap, Comment } from "@components/ui";
 import { api } from "@services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -29,13 +20,12 @@ const BlogDetails = () => {
     setIsCommentBoxVisible(!isCommentBoxVisible);
   };
 
-
   useEffect(() => {
     const getBlog = async () => {
       try {
         const response = await api.get(`/home/article/${id}/`);
         const fetchedBlog = response.data;
-        setreadTime(calculateReadingTime(fetchedBlog.content))
+        setreadTime(calculateReadingTime(fetchedBlog.content));
         setBlog(fetchedBlog);
       } catch (error) {
         console.error("There was an error fetching the blogs!", error);
@@ -50,67 +40,70 @@ const BlogDetails = () => {
   }
 
   return (
-    <div className="blog">
+    <div className="pt-8 max-w-[900px] mx-4 sm:mx-auto">
       {blog.is_premium && (
-        <div className="blog-members-only">
+        <div className="flex items-center pb-2 gap-1">
           <FontAwesomeIcon icon={faStar} color="rgb(255, 192, 23)" size="xs" />
-          <span>Member-only story</span>
+          <span className="text-sm text-secondary">Member-only story</span>
         </div>
       )}
-      <h1 className="blog-header header1">
+
+      <h1 className="text-3xl font-bold mb-2 text-primary">
         <strong>{blog.title}</strong>
       </h1>
-      <p className="blog-tagline">{blog.subtitle}</p>
-      <div className="blog__author">
+      <p className="text-lg leading-7 text-secondary  font-normal mb-6">
+        {blog.subtitle}
+      </p>
+
+      <div className="flex items-center mb-8 gap-3">
         <Avatar
           username={blog.author.username}
           image_url={blog.author.img}
-          size={"medium-large"}
+          size="medium-large"
         />
-        <div className="blog__author-details">
-          <div className="blog__author-details__top">
-            <span className="blog__author-details__top-user">
+        <div className="flex flex-col">
+          <div className="flex items-center">
+            <span className="text-lg font-bold mr-2 ">
               {blog.author.username}
             </span>
-            <a className="blog__author-details__top-cta">Follow</a>
+            <a className="text-sm text-blue-600 font-semibold cursor-pointer no-underline">
+              Follow
+            </a>
           </div>
-          <div className="blog__author-details__bottom">
-            {/* <span className='blog__author-details__bottom'>Published inPractice in Public</span> */}
-            <span className="blog__author-details__bottom-date">
-              {`${readTime} min read . Oct 16, 2024`}
-            </span>
-          </div>
+          <div className="mt-1 text-xs text-gray-500">{`${readTime} min read . Oct 16, 2024`}</div>
         </div>
       </div>
-      <div className="blog__actions">
-        <div className="blog__actions-left">
+
+      <div className="flex flex-row border-t border-b border-neutral justify-between p-2.5">
+        <div className="flex flex-row gap-4 items-center">
           <Clap claps={blog.clap_count} />
-          <a onClick={toggleCommentBoxVisibility} className="commentIcon">
+          <a
+            onClick={toggleCommentBoxVisibility}
+            className="flex items-center cursor-pointer"
+          >
             <Comment comments={blog.comment_count} />
           </a>
         </div>
-        <div className="blog__actions-right">
+        <div className="flex items-center gap-4">
           <Bookmark is_bookmarked={blog.is_bookmarked} article_id={blog.uid} />
           <ActionDropDown>
-            <>
-              <li>Follow author</li>
-              <li>Follow publication</li>
-              <li>Mute author</li>
-              <li>Mute publication</li>
-              <li style={{ color: "#c94a4a" }}>Report story..</li>
-            </>
+            <li>Follow author</li>
+            <li>Follow publication</li>
+            <li>Mute author</li>
+            <li>Mute publication</li>
+            <li className="text-red-500">Report story..</li>
           </ActionDropDown>
         </div>
       </div>
-      <div>
-        <div className="blog__image">
-          <img src={blog.image} alt="" />
-        </div>
-        <div
-          className="blog__content"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
-        ></div>
+
+      <div className="my-5 mx-auto  rounded-md overflow-hidden">
+        <img src={blog.image} alt="" className="w-full h-full object-cover" />
       </div>
+
+      <div className="mx-5 my-5 font-serif text-lg leading-[2rem]">
+        <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+      </div>
+
       <CommentBox
         toggleVisibility={toggleCommentBoxVisibility}
         isCommentBoxVisible={isCommentBoxVisible}

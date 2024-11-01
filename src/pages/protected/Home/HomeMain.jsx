@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { api } from "@services/api";
 import { FeaturedArticle, ArticleFilterMenu } from "@components";
-import "./Home.css";
 import { ArticleSkeleton } from "@components/layouts";
 
 const HomeMain = () => {
@@ -53,14 +52,14 @@ const HomeMain = () => {
 
   return (
     <>
-      <div className="home__article">
+      <div className="sticky top-0 bg-white z-10 pt-4">
         <ArticleFilterMenu
           filters={topics}
           activeFilter={activeFilter}
           setActiveFilter={setActiveFilter}
         />
       </div>
-      <div className="home__main-blogs">
+      <div>
         {blogs.map((blog) => (
           <FeaturedArticle key={blog.uid} blog={blog} />
         ))}

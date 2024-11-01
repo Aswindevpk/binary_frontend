@@ -21,16 +21,14 @@ function Clap({ claps }) {
   // };
 
   return (
-    <div className="blog__actions-clap">
+    <div className="outline-none">
       <FontAwesomeIcon
         icon={faHandsClapping}
-        className="icons"
+        className="icons text-secondary"
         id="tooltip-clap"
-        style={{ fontSize: "14px" }}
-        color="gray"
       />
-      <Tooltip anchorSelect="#tooltip-clap" content={`${claps} claps`} />
-      <span>{claps}</span>
+      {/* <Tooltip anchorSelect="#tooltip-clap" content={`${claps} claps`} /> */}
+      <span className="text-xs ml-1">{claps}</span>
     </div>
   );
 }

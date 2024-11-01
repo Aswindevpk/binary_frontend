@@ -11,19 +11,17 @@ function Comment({ comments }) {
     setIsComment(!isComment); // Toggle bookmark state
   };
   return (
-    <div className="blog__actions-comment">
+    <div className="outline-none focus:outline-none">
       <FontAwesomeIcon
         icon={isComment ? solidComment : solidComment}
-        className="icons"
+        className="icons outline-none focus:outline-none text-secondary"
         id="tooltip-comment"
-        style={{ fontSize: "14px" }}
-        color="gray"
       />
-      <Tooltip
+      {/* <Tooltip
         anchorSelect="#tooltip-comment"
         content={`${comments} comments`}
-      />
-      <span>{comments}</span>
+      /> */}
+      <span className="text-xs ml-1">{comments}</span>
     </div>
   );
 }

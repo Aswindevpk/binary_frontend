@@ -3,9 +3,9 @@ import React from "react";
 
 function AuthLayout({ children }) {
   return (
-    <div className="w-full max-w-[550px] flex flex-col justify-center rounded-[12px] mx-auto mt-[100px]">
-      {children}
-    </div>
+        <div className="mx-5 my-20 sm:w-8/12 sm:mx-auto lg:w-5/12">
+        {children}
+      </div>
   );
 }
 

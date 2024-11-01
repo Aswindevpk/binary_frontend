@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import useVerifyOtp from "./useVerifyOtp";
 import { AuthInput, AuthButton } from "@components/ui";
 
@@ -8,8 +8,6 @@ function VerifyOtpForm(username) {
   const { formData, setFormData, errors, handleSubmit, handleResendOtp } =
     useVerifyOtp(setStatus); // Destructure the hook's return values
 
-  console.log(errors);
-
   return (
     <form onSubmit={(e) => handleSubmit(e, username)}>
       {errors.error &&
@@ -18,7 +16,7 @@ function VerifyOtpForm(username) {
             {error}
           </span>
         ))}
-      <FormInput
+      <AuthInput
         key={input.id}
         {...input}
         value={formData[input.name]}
@@ -28,19 +26,51 @@ function VerifyOtpForm(username) {
         errors={errors}
         error_message={errors[input.name]}
       />
-      {/* <div className="verifyOtp__timer">
-        {timer > 0 ? (
-          <p>Time remaining: {formatTime(timer)}</p>
-        ) : (
-          <a onClick={handleResendOtp}>Resend OTP</a>
-        )}
-      </div>  */}
+      <OtpTimer onResend={handleResendOtp}/>
       <AuthButton type="submit">
         Verify OTP
       </AuthButton>
     </form>
   );
 }
+
+
+
+const OtpTimer = ({ initialTime = 30, onResend }) => {
+  const [timeLeft, setTimeLeft] = useState(initialTime);
+  const [isActive, setIsActive] = useState(true);
+
+  // Start the countdown when OTP is sent
+  useEffect(() => {
+    let timer;
+    if (isActive && timeLeft > 0) {
+      timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    } else if (timeLeft === 0) {
+      setIsActive(false); // Disable resend until user clicks
+    }
+    return () => clearTimeout(timer);
+  }, [isActive, timeLeft]);
+
+  // Resend OTP and reset timer
+  const handleResend = () => {
+    setTimeLeft(initialTime);
+    setIsActive(true);
+    if (onResend) onResend(); // Callback to trigger OTP resend
+  };
+
+  return (
+    <div className="mb-3">
+      {isActive ? (
+        <span className="text-xs text-secondary">Resend OTP in {timeLeft}s</span>
+      ) : (
+        <button onClick={handleResend} className="text-primary text-xs hover:underline">
+          Resend OTP
+        </button>
+      )}
+    </div>
+  );
+};
+
 
 let input = {
   id: 1,

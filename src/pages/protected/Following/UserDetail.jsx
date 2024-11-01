@@ -1,16 +1,26 @@
 import React from "react";
-import "./UserDetail.css";
 import { Avatar } from "@components/index";
+import { Button } from "@components/ui";
 
 function UserDetail() {
   return (
     <div className="user-detail">
       <Avatar username="aswin" size="medium-large" />
-      <div className="user-detail__content">
-        <span className="user-detail__username">Aswin</span>
-        <span className="user-detail__about">full-stackish developer, late bloomer coder and power google user and owner of Parsity.io</span>
+      <div className="flex flex-col">
+        <span className="text-md font-bold text-primary">Aswin</span>
+        <span
+          className="text-sm text-secondary overflow-hidden"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2, // Adjust the number of lines to clamp
+            WebkitBoxOrient: "vertical",
+          }}
+        >
+          full-stackish developer, late bloomer coder and power google user and
+          owner of Parsity.io
+        </span>
       </div>
-      <button className="green_button">Following</button>
+      <Button color="black">Following</Button>
     </div>
   );
 }

@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 
 const MainLayout = ({ Main, Side }) => {
   return (
-    <div className="flex flex-row mx-20 justify-evenly font-[var(--font-family)]">
-      <section className="flex flex-col flex-1 max-w-[728px] mr-5">
+    <div className="grid grid-cols-1 mx-5 lg:grid-cols-[1fr_368px] md:mx-20 gap-2">
+      <section className="max-w-[728px] md:mx-auto md:min-w-[728px]">
         {Main && <Main />}
       </section>
       {Side && (
-        <section className="hidden lg:flex flex-col sticky top-0 max-w-[368px] border-l border-gray-300 p-10 min-h-full">
-          {Side()}
-        </section>
+        <div>
+          <section className="hidden lg:flex flex-col justify-between max-w-xs sticky top-0 border-l border-neutral p-10 min-h-screen">
+            {Side()}
+          </section>
+        </div>
       )}
     </div>
   );

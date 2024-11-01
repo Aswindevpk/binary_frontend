@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Header1 = ({ children }) => {
+const Header1 = ({ children,className="" }) => {
   return (
-    <h2 className="font-[var(--font-family)] text-[42px]  font-extrabold text-[var(--primary-color)]">
+    <h2 className={`text-4xl  font-extrabold ${className}`}>
       {children}
     </h2>
   );

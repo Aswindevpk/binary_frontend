@@ -32,15 +32,13 @@ function Bookmark({is_bookmarked,article_id}) {
 
 
   return (
-    <div onClick={()=>handleBookmark(article_id)}>
+    <div className="outline-none" onClick={()=>handleBookmark(article_id)}>
       <FontAwesomeIcon
         icon={isBookmarked ? solidBookmark : regularBookmark}
-        className="icons"
+        className="icons text-secondary"
         id="tooltip-bookmark"
-        style={{ fontSize: "16px", cursor: "pointer" }}
-        color="gray"
       />
-      <Tooltip anchorSelect="#tooltip-bookmark" content="Save" />
+      {/* <Tooltip anchorSelect="#tooltip-bookmark" content="Save" /> */}
     </div>
   );
 }

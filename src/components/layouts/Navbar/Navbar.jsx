@@ -6,16 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { Link } from "react-router-dom";
 import ProfileDropdown from '../../ProfileDropdown/ProfileDropdown'; 
+import { LinkButton } from "@components/ui";
 
 function Navbar() {
   const { isAuthenticated } = useContext(AuthContext);
 
   return (
-    <nav className="bg-bg-color border-b border-color-border p-2 relative w-full z-20">
+    <nav className="bg-bg-color border-b border-neutral px-5 py-3 relative w-full z-1">
       <div className="flex justify-between items-center mx-auto">
-        <div className="flex items-center gap-4">
-          <Link to="/" className="text-2xl font-bold text-color-primary font-family">Binary</Link>
-          <SearchBar />
+        <div className="flex items-center gap-5">
+          <Link to="/" className="text-3xl font-bold text-color-primary font-family">Binary</Link>
+          <SearchBar  />
         </div>
         <div className="flex items-center gap-10">
           {isAuthenticated ? <AuthLinks /> : <GuestLinks />}
@@ -27,10 +28,10 @@ function Navbar() {
 
 const GuestLinks = () => (
   <>
-    <NavLink to="/" className="" id="navbar-articles">Articles</NavLink>
-    <NavLink to="/plans" className="" id="navbar-plans">Plans</NavLink>
-    <NavLink to="/login" className="" id="navbar-sign-in">Sign In</NavLink>
-    <NavLink to="/register" className="bg-black text-white py-2 px-4 rounded-full">Get Started</NavLink>
+    <NavLink className="hidden md:flex" to="/" id="navbar-articles">Articles</NavLink>
+    <NavLink className="hidden md:flex"  to="/plans" id="navbar-plans">Plans</NavLink>
+    <NavLink className="hidden md:flex" to="/login" id="navbar-sign-in">Sign In</NavLink>
+    <LinkButton to="/register" color="black" variant="filled">Get Started</LinkButton>
   </>
 );
 

@@ -1,15 +1,23 @@
 import React from "react";
-import ProfileOverlay from "../FeaturedArticle/ProfileOverlay";
 import { Link } from "react-router-dom";
+import { Avatar } from "@components";
 
 const RecentBlog = ({ blog }) => {
   return (
     <>
-      <div className="home__recent-content__author">
-        <ProfileOverlay author={blog.author} />
-      </div>
-      <Link to={`/blog/${blog.uid}/`} className="home__recent-content">
-        <h3 className="home__recent-content__header">{blog.title}</h3>
+      <Link
+        className="flex gap-2 align-middle"
+        to={`/author/${blog.author.id}`}
+      >
+        <Avatar
+          username={blog.author?.username}
+          image_url={blog.author?.img}
+          size={"small"}
+        />
+        <span className="text-sm">{blog.author.username}</span>
+      </Link>
+      <Link to={`/blog/${blog.uid}/`} className="">
+        <h3 className="font-extrabold">{blog.title}</h3>
       </Link>
     </>
   );

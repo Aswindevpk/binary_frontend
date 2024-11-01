@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "@services/api";
 import { SideSkeleton } from "@components/layouts";
+import { Link } from "react-router-dom";
 
 const SideTopics = () => {
   let [topics, setTopics] = useState([]);
@@ -30,21 +31,18 @@ const SideTopics = () => {
   }
 
   return (
-    <div className="home__topics">
-      <h3 className="home__side-section-header header3">Recommended Topics</h3>
-      <div className="home__topics-list">
+    <div className="mb-6">
+      <h3 className="mb-4 font-extrabold">Recommended Topics</h3>
+      <div className="flex flex-wrap gap-2 mb-3">
         {topics.map((topic) => (
           <a key={topic.uid} className="home__topics-topic" href="/tag">
             <span>{topic.name}</span>
           </a>
         ))}
       </div>
-      <a
-        className="home__side-section-cta para-cta para1"
-        href="/explore-topics"
-      >
+      <Link className="text-sm text-success hover:text-primary" to="/explore-topics">
         See more topics
-      </a>
+      </Link>
     </div>
   );
 };

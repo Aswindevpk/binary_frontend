@@ -10,23 +10,23 @@ function ProfileList({ user }) {
   return (
     <Link
       to="/reading-list"
-      className="ProfileList"
+      className="border border-neutral rounded font-[var(--font-family)] flex flex-row justify-between bg-neutral"
     >
-      <div className="ProfileList-main">
+      <div className="p-6">
         <span
-          className="ProfileList-main__author"
+          className="flex gap-2"
         >
           <Avatar
             username={user.username}
             image_url={user.img}
             size={"small"}
           />
-          <span>{user.username}</span>
+          <span className="text-sm">{user.username}</span>
         </span>
-        <h1>Reading List</h1>
-        <div className="ProfileList-main__sub">
-          <div className="ProfileList-main__sub">
-            <span>4 stories</span>
+        <h1 className="text-xl mt-1 mb-3 font-extrabold">Reading List</h1>
+        <div className="flex justify-between">
+          <div className="flex items-center gap-1">
+            <span className="text-xs">4 stories</span>
             <FontAwesomeIcon
               icon={faLock}
               className="icons"

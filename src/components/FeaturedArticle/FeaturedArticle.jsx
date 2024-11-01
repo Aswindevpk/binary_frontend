@@ -1,35 +1,51 @@
-import "./FeaturedArticle.css";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ProfileOverlay from "./ProfileOverlay";
-import { ActionDropDown } from "@components";
-import {Bookmark, Clap, Comment, Mute} from "@components/ui";
+import { ActionDropDown, Avatar } from "@components";
+import { Bookmark, Clap, Comment, Mute } from "@components/ui";
 
 const FeaturedArticle = ({ blog }) => {
-  const formattedDate = format(new Date(blog.created_at), "MMM d"); // Format date as 'Feb 9'
+  const formattedDate = format(new Date(blog.created_at), "MMM d");
 
   return (
-    <div className="FeaturedArticle">
-      <div className="FeaturedArticle__content">
-        <div className="FeaturedArticle__content-author">
-          <ProfileOverlay author={blog.author} />
-        </div>
+    <div className="flex flex-row pb-6 my-6 border-b border-gray-200 font-[var(--font-family)] justify-between items-center gap-5">
+      <div className="flex flex-col w-3/5">
         <Link
-          to={`/blog/${blog.uid}/`}
-          className="FeaturedArticle_content-main"
+          className="flex gap-2 items-center mb-1"
+          to={`/author/${blog.author.id}`}
         >
-          <h2 className="FeaturedArticle__content-title">{blog.title}</h2>
-          <p
-            className="FeaturedArticle__content-short"
-            dangerouslySetInnerHTML={{
-              __html: blog.summary,
+          <Avatar
+            username={blog.author?.username}
+            image_url={blog.author?.img}
+            size={"small"}
+          />
+          <span className="text-sm">{blog.author.username}</span>
+        </Link>
+        <Link to={`/blog/${blog.uid}/`} className="flex flex-col">
+          <h2
+            className="flex text-2xl font-extrabold leading-7 text-primary cursor-pointer overflow-hidden break-words"
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 3, // Adjust the number of lines to clamp
+              WebkitBoxOrient: "vertical",
             }}
+          >
+            {blog.title}
+          </h2>
+          <p
+            className="pt-2 text-base font-normal text-secondary cursor-pointer overflow-hidden"
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 2, // Adjust the number of lines to clamp
+              WebkitBoxOrient: "vertical",
+            }}
+            dangerouslySetInnerHTML={{ __html: blog.summary }}
           ></p>
         </Link>
-        <div className="FeaturedArticle__content-footer">
-          <div className="FeaturedArticle__actions-left">
+        <div className="flex justify-between pt-5">
+          <div className="flex items-center gap-1.5 sm:gap-3 text-xs text-secondary cursor-pointer">
             {blog.is_premium && (
               <FontAwesomeIcon
                 icon={faStar}
@@ -37,27 +53,34 @@ const FeaturedArticle = ({ blog }) => {
                 color="rgb(255, 192, 23)"
               />
             )}
-            <span>{formattedDate}</span>
+            <span className="ml-1">{formattedDate}</span>
             <Clap claps={blog.clap_count} />
             <Comment comments={blog.comment_count} />
           </div>
-          <div className="FeaturedArticle__actions-right">
+          <div className="flex items-center gap-3 sm:gap-8 cursor-pointer">
             <Mute />
-            <Bookmark is_bookmarked={blog.is_bookmarked} article_id={blog.uid} />
+            <Bookmark
+              is_bookmarked={blog.is_bookmarked}
+              article_id={blog.uid}
+            />
             <ActionDropDown>
               <>
                 <li>Follow author</li>
                 <li>Follow publication</li>
                 <li>Mute author</li>
                 <li>Mute publication</li>
-                <li style={{ color: "#c94a4a" }}>Report story..</li>
+                <li className="text-red-600">Report story..</li>
               </>
             </ActionDropDown>
           </div>
         </div>
       </div>
-      <div className="FeaturedArticle__image">
-        <img src={blog.image} alt="article" />
+      <div className="w-28 h-22 overflow-hidden sm:w-44">
+        <img
+          src={blog.image}
+          alt="article"
+          className="w-full h-full object-cover"
+        />
       </div>
     </div>
   );

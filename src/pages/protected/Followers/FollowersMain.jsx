@@ -1,17 +1,17 @@
 import React from "react";
 import UserDetail from "../Following/UserDetail";
-import './Followers.css'
+import { Header1 } from "@components/ui";
 
 function FollowersMain() {
   return (
     <>
-      <div className="breadcrumb">
-        <span style={{ color: "var(--color-secondary)" }}>Appuspk</span>
-        <span style={{ color: "var(--color-secondary)" }}>&gt;</span>
-        <span>Following</span>
+      <div className="flex gap-1 pt-10 text-sm text-secondary">
+        <span >Appuspk</span>
+        <span >&gt;</span>
+        <span >Followers</span>
       </div>
-      <h2 className="header1">Followers</h2>
-      <div className="follow-user-list">
+      <Header1 className="pt-1">Followers</Header1>
+      <div className="flex flex-col gap-4 mt-6">
         <UserDetail />
         <UserDetail />
         <UserDetail />

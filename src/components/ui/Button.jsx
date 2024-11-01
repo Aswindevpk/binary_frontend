@@ -24,7 +24,7 @@ const Button = ({ size = 'md', color = 'green', variant = 'filled', children, on
   };
 
   // Combine size and color classes
-  const buttonClasses = `${sizeClasses[size]} ${colorClasses[color][variant]} rounded-full transition-all duration-200`;
+  const buttonClasses = `${sizeClasses[size]} ${colorClasses[color][variant]} rounded-full transition-all duration-200 whitespace-nowrap`;
 
   return (
     <button className={buttonClasses} onClick={onClick} disabled={disabled}>

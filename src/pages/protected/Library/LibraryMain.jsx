@@ -28,7 +28,7 @@ export default function LibraryMain() {
 
   return (
     <>
-      <Header1>Library</Header1>
+      <Header1 className="mt-10" >Library</Header1>
       <FilterMenu
         filters={filterComponents}
         activeFilter={activeFilter}

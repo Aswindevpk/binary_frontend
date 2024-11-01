@@ -21,7 +21,12 @@ module.exports = {
   			sans: ['Manrope', 'font-sans']
   		},
 
-  	}
+  	},
+	  variants: {
+		extend: {
+		  outline: ['focus'],
+		},
+	  },
   },
   plugins: [],
 }

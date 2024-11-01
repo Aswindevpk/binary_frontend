@@ -7,6 +7,7 @@ import {
   Membership,
   Security,
 } from "./components";
+import {Header1} from "@components/ui";
 
 const filterComponents = [
   { name: "Account", uid: "1",component:Account },
@@ -27,7 +28,7 @@ const SettingsMain = () => {
   
   return (
     <>
-      <h2 className="header1">Settings</h2>
+      <Header1 className="pt-10">Settings</Header1>
       <FilterMenu
         filters={filterComponents}
         activeFilter={activeFilter}

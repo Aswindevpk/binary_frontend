@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className="flex flex-wrap gap-2 mb-6 font-[var(--font-family)]">
+    <div className="flex flex-wrap gap-1.5">
       <FooterLink>Help</FooterLink>
       <FooterLink>Status</FooterLink>
       <FooterLink>About</FooterLink>
@@ -19,7 +19,7 @@ function Footer() {
 
 const FooterLink = ({ children }) => {
   return (
-    <span className="text-[11px] leading-[16px] font-light text-gray-600">
+    <span className="text-xs text-secondary">
       {children}
     </span>
   );
