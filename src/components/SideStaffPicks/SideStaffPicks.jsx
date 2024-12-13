@@ -34,7 +34,7 @@ const SideStaffPicks = () => {
 
   return (
     <div className="mb-6">
-      <h2 className="mb-4 font-extrabold">Staff picks</h2>
+      <h2 className="mb-4 font-extrabold">Recent picks</h2>
       <div className="flex flex-col gap-2">
         {recentblog.map((blog) => (
           <RecentBlog key={blog.uid} blog={blog} />

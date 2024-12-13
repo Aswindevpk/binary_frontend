@@ -10,3 +10,4 @@ export {default as Header1} from './Header1';
 export {default as Button} from './Button';
 export {default as LinkButton} from './LinkButton';
 export {default as AuthCta} from './AuthCta';
+export {default as Share} from './Share';

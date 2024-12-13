@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import ModalInput from "@components/ModalInput/ModalInput";
+import { ModalInput } from "@components";
 import useProfileUpdate from "./useProfileUpdate";
+import {Button} from "@components/ui";
 
 function EditUsername({ user, setUser, onClose }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,7 +11,7 @@ function EditUsername({ user, setUser, onClose }) {
     setStatus,
     setUser,
     user
-  ); 
+  );
 
   const inputs = {
     id: 1,
@@ -24,9 +25,11 @@ function EditUsername({ user, setUser, onClose }) {
   };
 
   return (
-    <div className="modal-main__container">
-      <div className="modal-section">
-        <h2 className="modal-main__header">Username and subdomain</h2>
+    <div className="sm:w-[540px]">
+      <div className="">
+        <h2 className="text-center mb-3 font-bold text-lg">
+          Username and subdomain
+        </h2>
         <ModalInput
           key={inputs.id}
           {...inputs}
@@ -38,15 +41,15 @@ function EditUsername({ user, setUser, onClose }) {
           max_len="30"
         />
       </div>
-      <div className="modal-section">
-        <div className="modal-input__desc">
-          <div className="test" style={{ width: "80%" }}>
-            <span className="modal-label">Enable Medium subdomain URL</span>
-            <span className="modal-main__para">
+      <div className="">
+        <div className="flex justify-between items-start">
+          <div className="w-[80%]">
+            <p className="font-semibold text-sm">Enable Medium subdomain URL</p>
+            <p className="text-xs my-2 text-secondary">
               Redirect medium.com/@username to username.medium.com. Note: a new
               profile page on a subdomain may take longer to rank in Google
               search.
-            </span>
+            </p>
           </div>
           <input
             checked={isChecked}
@@ -57,35 +60,33 @@ function EditUsername({ user, setUser, onClose }) {
           />
         </div>
       </div>
-      <div className="modal-section">
-        <p className="modal-main__para2">
-          <a href="">Learn more</a>
-          about subdomain URLs.
-        </p>
+      <div className="flex gap-1 text-sm font-medium text-secondary mb-6">
+        <a href="" className=" underline">
+          Learn more
+        </a>
+        <span className="text-sm">about subdomain URLs.</span>
       </div>
       {isChecked && (
-        <div className="modal-section" id="subdomain-input">
-          <label className="modal-label">Subdomain</label>
+        <div className="flex flex-col mb-6" id="subdomain-input">
+          <label className="text-sm mb-2">Subdomain</label>
           <input
-            style={{ color: "var(--color-secondary)" }}
-            className="modal-input"
+            className="text-secondary text-sm bg-neutral p-2 rounded-md"
             type="text"
             value={`@${formData.username}.medium.com`}
             disabled
           />
         </div>
       )}
-      <div className="modal-cta">
-        <button className="outline_green_button" onClick={onClose}>
+      <div className="flex justify-end gap-2">
+        <Button variant="outlined"  onClick={onClose}>
           Cancel
-        </button>
-        <button
-          className="green_button"
+        </Button>
+        <Button
           disabled={status === "submitting"}
           onClick={handleSubmit}
         >
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

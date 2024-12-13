@@ -1,6 +1,7 @@
-import ModalInput from "@components/ModalInput/ModalInput";
+import { ModalInput } from "@components";
 import useProfileUpdate from "./useProfileUpdate";
 import React, { useState } from "react";
+import {Button} from "@components/ui";
 
 function EditEmail({ user, setUser, onClose }) {
   let [status, setStatus] = useState("typing");
@@ -12,8 +13,8 @@ function EditEmail({ user, setUser, onClose }) {
   ); // Destructure the hook's return values
 
   return (
-    <div className="modal-main__container">
-      <h2 className="modal-main__header">Email address</h2>
+    <div className="sm:w-[540px]">
+      <h2 className="text-center mb-3 font-bold text-lg">Email address</h2>
 
       <ModalInput
         key={inputs.id}
@@ -26,13 +27,13 @@ function EditEmail({ user, setUser, onClose }) {
         max_len="30"
       />
 
-      <div className="modal-cta">
-        <button className="outline_green_button" onClick={onClose}>
+      <div className="flex justify-end gap-2">
+        <Button variant="outlined" onClick={onClose}>
           Cancel
-        </button>
-        <button className="green_button" onClick={handleSubmit}>
+        </Button>
+        <Button onClick={handleSubmit}>
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

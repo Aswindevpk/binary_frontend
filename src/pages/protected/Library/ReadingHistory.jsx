@@ -38,10 +38,10 @@ export default function ReadingHistory() {
               setTogglePopup(!togglePopup); // Close modal when button is clicked or backdrop is clicked
             }}
           >
-            <div className="flex flex-col items-center gap-4 p-6">
+            <div className="flex flex-col items-center gap-4 p-6 ">
               <div className="flex flex-col gap-3">
                 <h1 className="text-center">Clear reading history</h1>
-                <p className="text-sm text-secondary max-w-[500px] text-center">
+                <p className="text-sm text-secondary max-w-[500px] m-3 text-center">
                   The stories that are cleared will no longer influence the
                   recommendations that you receive in your feed or email digest
                 </p>

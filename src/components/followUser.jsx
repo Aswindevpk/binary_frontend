@@ -37,36 +37,43 @@ function FollowUser({ author }) {
 
   return (
     <div className="flex justify-between mb-2">
-      <Link className="flex gap-2" to={`author/${author.id}`}>
+      <Link
+        className="flex gap-2 place-items-center"
+        to={`author/${author.id}`}
+      >
         <Avatar
           username={author.username}
           image_url={author.img}
           size={"medium"}
         />
         <div>
-          <p className="text-md font-extrabold">{author.username}</p>
-          <span className="text-sm">{author.about ? author.about : " "}</span>
+          <p className="text-md font-extrabold m-0">{author.username}</p>
+          <div className="text-sm text-secondary m-0">
+            {author.about ? author.about : " "}
+          </div>
         </div>
       </Link>
-      {isFollowing ? (
-        <Button
-          size="sm"
-          color="black"
-          variant="outlined"
-          onClick={handleUnFollow}
-        >
-          Following
-        </Button>
-      ) : (
-        <Button
-          size="sm"
-          color="black"
-          variant="filled"
-          onClick={handleFollow}
-        >
-          Follow
-        </Button>
-      )}
+      <div className="flex items-center">
+        {isFollowing ? (
+          <Button
+            size="sm"
+            color="black"
+            variant="outlined"
+            onClick={handleUnFollow}
+          >
+            Following
+          </Button>
+        ) : (
+          <Button
+            size="sm"
+            color="black"
+            variant="filled"
+            onClick={handleFollow}
+          >
+            Follow
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

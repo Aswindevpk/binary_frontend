@@ -49,7 +49,7 @@ function useLogin(setStatus) {
         setEmailVerified(false);
         setStatus("typing");
       }
-      if (err.response.status === 400) {
+      else if (err.response.status === 400) {
         let error_messages = err.response.data;
         if (error_messages) {
           setStatus("typing");

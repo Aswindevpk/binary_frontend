@@ -21,12 +21,12 @@ const Story = ({ article, setLoading }) => {
   }
 
   return (
-    <div className="Story">
+    <div className="flex flex-col border-b border-neutral py-4">
       <Link to={`/edit-story/${article.uid}`}>
-        <h2 className="Story-heading">{article.title}</h2>
-        <p className="Story-para">{article.subtitle}</p>
+        <h2 className="text-md font-semibold">{article.title}</h2>
+        <p className="text-sm text-secondary">{article.subtitle}</p>
       </Link>
-      <div className="Story-footer">
+      <div className="mt-2 text-xs flex gap-2 text-secondary">
         <span>Last edited 5 days ago</span>
         <span>.</span>
         <span>1 min read (2 words) so far</span>

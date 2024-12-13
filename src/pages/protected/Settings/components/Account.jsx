@@ -98,7 +98,7 @@ const Account = () => {
           </div>
           <FontAwesomeIcon icon={faUpRightFromSquare} className="icons" />
         </div>
-        <div className="settings_account_item">
+        {/* <div className="settings_account_item">
           <div className="settings_heading_group">
             <span className="settings_heading">Custom domain</span>
             <span className="settings_desc">
@@ -125,9 +125,9 @@ const Account = () => {
             </span>
           </div>
           <FontAwesomeIcon icon={faUpRightFromSquare} className="icons" />
-        </div>
+        </div> */}
       </div>
-      <div className="settings_section_border_bottom">
+      {/* <div className="settings_section_border_bottom">
         <div className="settings_account_item">
           <div className="settings_heading_group">
             <span className="settings_heading">
@@ -141,16 +141,16 @@ const Account = () => {
             <span className="settings_heading">Blocked Users</span>
           </div>
         </div>
-      </div>
+      </div> */}
       <div>
-        <div className="settings_account_item">
+        {/* <div className="settings_account_item">
           <div className="settings_heading_group">
             <span className="settings_heading_danger">Deactivate Account</span>
             <span className="settings_desc">
               Deactivating will suspend your account until you sign back in.
             </span>
           </div>
-        </div>
+        </div> */}
         <div className="settings_account_item">
           <div className="settings_heading_group">
             <span className="settings_heading_danger">Delete account</span>

@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { FilterMenu, FeaturedArticle, ActionDropDown } from "@components";
-import "./AuthorDetails.css";
+import {
+  FilterMenu,
+  FeaturedArticle,
+  ActionDropDown,
+  ProfileList,
+} from "@components";
 import { Cover } from "@assets";
 import { api } from "@services/api";
-import Lists from "./Lists";
+import List from "./List";
 import About from "./About";
+import { Header1 ,Share} from "@components/ui";
+
 
 const filters = [
   { name: "Home", uid: "1" },
-  { name: "Lists", uid: "2" },
   { name: "About", uid: "3" },
 ];
 
@@ -36,24 +41,26 @@ const AuthorDetailsMain = ({ author, id }) => {
 
   return (
     <>
-      <img className="AuthorDetails__main-cover" src={Cover} alt="" />
-      <div className="AuthorDetails__main-header">
-        <h2 className="main__header">{author.username}</h2>
-        <ActionDropDown>
-          <>
-            <li>Copy link to profile</li>
-            <li>Mute author</li>
-            <li>Block this author</li>
-            <li>Report this author</li>
-          </>
-        </ActionDropDown>
+      <img className="hidden" src={Cover} alt="" />
+      <div className="flex justify-between items-center mt-10">
+        <Header1>{author.username}</Header1>
+        <div className="flex gap-8 items-center">
+          <Share/>
+          <ActionDropDown>
+            <>
+              <li>Mute author</li>
+              <li>Block this author</li>
+              <li>Report this author</li>
+            </>
+          </ActionDropDown>
+        </div>
       </div>
       <FilterMenu
         filters={filters}
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
       />
-      <div className="AuthorDetails__main-content">
+      <div>
         {activeFilter && activeFilter.uid === "1" && (
           <div>
             {blogs.map((blog) => (
@@ -63,7 +70,7 @@ const AuthorDetailsMain = ({ author, id }) => {
         )}
         {activeFilter && activeFilter.uid === "2" && (
           <div>
-            <Lists author={author} />
+            <List user={author} />
           </div>
         )}
         {activeFilter && activeFilter.uid === "3" && (

@@ -14,14 +14,14 @@
 }
 
 .FilterMenu__arrow::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   width: 60px;
   height: 100%;
   background-color: rgba(255, 255, 255, 1); /* White color with opacity */
-  filter: blur(55px); /* Blur effect */
+  filter: blur(5px);  /* Blur effect */
   transform: translate(-50%, -50%);
   z-index: -1; /* Behind the arrow */
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { toast } from "sonner";
 
-const API_URL = 'http://192.168.1.3:8000/api/'; 
+const API_URL = 'http://192.168.1.8:8000/api/'; 
 
 const api = axios.create({
   baseURL: API_URL,
@@ -27,6 +28,19 @@ const attachTokenToRequest = (config) => {
 // Request interceptor to attach the access token to headers
 api.interceptors.request.use(attachTokenToRequest, (error) => Promise.reject(error));
 formApi.interceptors.request.use(attachTokenToRequest, (error) => Promise.reject(error));
+
+//Response interceptor for handling errors
+const handleErrorResponse = (error) =>{
+  if(error.code === 'ERR_NETWORK'){
+    //network error
+    console.log("Network error: Unable to connect to the server.")
+    toast.error("Something went wrong in the API end.")
+  }
+  return Promise.reject(error)
+}
+
+api.interceptors.response.use(response => response, handleErrorResponse)
+formApi.interceptors.response.use(response => response, handleErrorResponse)
 
 export { api, formApi };
 

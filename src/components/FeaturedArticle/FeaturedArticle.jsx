@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import ProfileOverlay from "./ProfileOverlay";
 import { ActionDropDown, Avatar } from "@components";
 import { Bookmark, Clap, Comment, Mute } from "@components/ui";
 
 const FeaturedArticle = ({ blog }) => {
   const formattedDate = format(new Date(blog.created_at), "MMM d");
 
+
   return (
-    <div className="flex flex-row pb-6 my-6 border-b border-gray-200 font-[var(--font-family)] justify-between items-center gap-5">
-      <div className="flex flex-col w-3/5">
+    <div className="flex flex-row pb-6 my-6 border-b border-neutral justify-between items-center gap-5">
+      <div className="flex flex-col w-4/6">
         <Link
           className="flex gap-2 items-center mb-1"
           to={`/author/${blog.author.id}`}
@@ -21,7 +21,7 @@ const FeaturedArticle = ({ blog }) => {
             image_url={blog.author?.img}
             size={"small"}
           />
-          <span className="text-sm">{blog.author.username}</span>
+          <span className="text-sm hover:underline">{blog.author.username}</span>
         </Link>
         <Link to={`/blog/${blog.uid}/`} className="flex flex-col">
           <h2
@@ -75,7 +75,7 @@ const FeaturedArticle = ({ blog }) => {
           </div>
         </div>
       </div>
-      <div className="w-28 h-22 overflow-hidden sm:w-44">
+      <div className="w-28 h-20 overflow-hidden sm:w-3/12 sm:h-25 ">
         <img
           src={blog.image}
           alt="article"

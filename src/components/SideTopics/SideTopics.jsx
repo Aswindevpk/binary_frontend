@@ -33,9 +33,9 @@ const SideTopics = () => {
   return (
     <div className="mb-6">
       <h3 className="mb-4 font-extrabold">Recommended Topics</h3>
-      <div className="flex flex-wrap gap-2 mb-3">
+      <div className="flex flex-wrap gap-2.5 mb-3">
         {topics.map((topic) => (
-          <a key={topic.uid} className="home__topics-topic" href="/tag">
+          <a key={topic.uid} className="rounded-full bg-neutral text-primary font-semibold px-4 py-2" href="/tag">
             <span>{topic.name}</span>
           </a>
         ))}

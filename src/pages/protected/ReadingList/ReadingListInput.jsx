@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./ReadingListInput.css";
 import { api } from "@services/api";
 import { toast } from "sonner";
 
-
-function ReadingListInput({id}) {
+function ReadingListInput({ id }) {
   const [note, setNote] = useState(null);
   const [isActive, setIsActive] = useState(false);
   let [loading, setLoading] = useState(true);
@@ -15,7 +13,7 @@ function ReadingListInput({id}) {
       setNote(response.data.note);
       setLoading(false);
     } catch (error) {
-      toast.error("error")
+      toast.error("error");
     }
   };
 
@@ -23,33 +21,30 @@ function ReadingListInput({id}) {
     fetchNote();
   }, []);
 
-
   if (loading) {
     return <div>loading..</div>;
   }
 
-  
   const handleNoteUpdate = async () => {
     try {
-      setLoading(true)
-      const response = await api.patch(`/home/bookmark/${id}/`,{note:note});
+      setLoading(true);
+      const response = await api.patch(`/home/bookmark/${id}/`, { note: note });
       //set new data
       setNote(response.data.note);
       setLoading(false);
     } catch (error) {
-      toast.error("error")
+      toast.error("error");
     }
   };
 
-
   return (
     <form
-      className={`reading-list-input ${
-        note && "reading-list-input--active"
+      className={`flex justify-between items-center border-l-4 rounded-sm ${
+        note ? "border-secondary" : "border-border"
       }`}
     >
       <input
-        className="reading-list-input__note modal-input"
+        className="ml-4 max-w-lg focus:outline-none focus:border-secondary  p-2 rounded-md text-sm bg-neutral italic"
         type="text"
         placeholder="Add a note..."
         value={note}
@@ -60,22 +55,20 @@ function ReadingListInput({id}) {
         }}
       />
       {isActive && (
-        <div className="reading-list-input__actions">
+        <div className="flex gap-4">
           <input
             type="button"
-            className="reading-list-input__cancel-button"
-            onClick={()=>{
-                setIsActive(false)
-            }}
-            value="cancel"
+            className="text-secondary cursor-pointer text-sm"
+            onClick={() => setIsActive(false)}
+            value="Cancel"
           />
           <input
-            className="reading-list-input__submit-button"
             type="submit"
+            className="text-green-500 cursor-pointer text-sm"
             value="Done"
-            onClick={()=>{
+            onClick={() => {
               handleNoteUpdate();
-              setIsActive(false)
+              setIsActive(false);
             }}
           />
         </div>

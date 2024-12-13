@@ -1,6 +1,5 @@
 import AuthContext from "@context/AuthContext";
 import React, { useContext, useEffect, useState } from "react";
-import "./About.css";
 import { api } from "@services/api";
 import { Link } from "react-router-dom";
 
@@ -25,10 +24,10 @@ function FollowStat() {
 
   return (
     follow && (
-      <div className="profile_about-bottom">
-        <Link to="/followers/">{follow.followers_count} Followers</Link>
-        <span>.</span>
-        <Link to="/following/">{follow.following_count} Following</Link>
+      <div className="text-sm flex gap-2">
+        <Link className="text-success font-semibold" to="/followers/">{follow.followers_count} Followers</Link>
+        <div className="flex items-center">•</div>
+        <Link className="text-success font-semibold" to="/following/">{follow.following_count} Following</Link>
       </div>
     )
   );

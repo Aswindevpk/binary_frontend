@@ -11,8 +11,8 @@ import {Header1} from "@components/ui";
 
 const filterComponents = [
   { name: "Account", uid: "1",component:Account },
-  { name: "Publishing", uid: "2" ,component:Publishing },
-  { name: "Notification", uid: "3" ,component:Notification  },
+  // { name: "Publishing", uid: "2" ,component:Publishing },
+  // { name: "Notification", uid: "3" ,component:Notification  },
   { name: "Membership and Payment", uid: "4",component:Membership },
   { name: "Security and apps", uid: "5",component:Security },
 ];

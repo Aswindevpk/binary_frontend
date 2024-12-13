@@ -3,9 +3,7 @@ import { api } from "@services/api";
 import AboutEdit from "./AboutEdit";
 import AboutView from "./AboutView";
 import AboutBlank from "./AboutBlank";
-// import { ClipLoader } from 'react-spinners';
-import './About.css';
-import FollowStat from "./FollowStat";
+import { FollowStat } from '@components'
 
 const About = () => {
   const [edit, setEdit] = useState(false);

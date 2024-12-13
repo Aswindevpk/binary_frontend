@@ -1,18 +1,15 @@
 import React from "react";
-import "./ProfileList.css";
 import { Post } from "@assets";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { ActionDropDown, Avatar } from "@components";
 
-function ProfileList({ user }) {
+function List({ user }) {
   return (
     <Link
       to="/reading-list"
-      className="border border-neutral rounded font-[var(--font-family)] flex flex-row justify-between bg-neutral"
+      className=" rounded flex flex-row justify-between bg-neutral"
     >
-      <div className="p-6">
+      <div className="p-6 w-3/5">
         <span
           className="flex gap-2"
         >
@@ -27,12 +24,6 @@ function ProfileList({ user }) {
         <div className="flex justify-between">
           <div className="flex items-center gap-1">
             <span className="text-xs">4 stories</span>
-            <FontAwesomeIcon
-              icon={faLock}
-              className="icons"
-              color="gray"
-              style={{ fontSize: "10px" }}
-            />
           </div>
           <ActionDropDown>
             <>
@@ -41,13 +32,13 @@ function ProfileList({ user }) {
           </ActionDropDown>
         </div>
       </div>
-      <div className="ProfileList-sub">
-        <img className="ProfileList-sub__img1" src={Post} alt="" />
-        <img className="ProfileList-sub__img2" src={Post} alt="" />
-        <img className="ProfileList-sub__img3" src={Post} alt="" />
+      <div className="relative w-[294px] rounded">
+        <img className="absolute border-r-2 border-white z-20 h-full w-3/5 right-18 sm:right-24" src={Post} alt="" />
+        <img className="absolute border-r-2  border-white z-10 h-full w-3/5 right-6 sm:right-8" src={Post} alt="" />
+        <img className="absolute  h-full w-3/5 right-0 rounded" src={Post} alt="" />
       </div>
     </Link>
   );
 }
 
-export default ProfileList;
+export default List;

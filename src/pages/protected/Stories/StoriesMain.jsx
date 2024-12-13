@@ -6,7 +6,7 @@ import {Header1,LinkButton} from "@components/ui";
 const filterComponents = [
   { name: "Drafts", uid: "1",component:Draft },
   { name: "Published", uid: "2",component:Published  },
-  { name: "Response", uid: "3" ,component:Responses },
+  // { name: "Response", uid: "3" ,component:Responses },
 ];
 
 const StoriesMain = () => {
@@ -24,9 +24,9 @@ const StoriesMain = () => {
           <LinkButton color="green" variant="filled" to="/create-story">
             Write a Story
           </LinkButton>
-          <LinkButton color="green" variant="outlined" to="/">
+          {/* <LinkButton color="green" variant="outlined" to="/">
             Import a Story
-          </LinkButton>
+          </LinkButton> */}
         </div>
       </div>
         <FilterMenu

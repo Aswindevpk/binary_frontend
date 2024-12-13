@@ -1,13 +1,12 @@
 import React from "react";
-import "./Skeleton.css";
 
 function SideSkeleton() {
   return (
-    <div style={{marginBottom:'40px'}}className="skeleton__main">
-      <div className="skeleton__username"></div>
-      <div className="skeleton__content">
-        <div className="skeleton__para1"></div>
-        <div className="skeleton__para2"></div>
+    <div className="mb-10 flex flex-col gap-6 flex-1 animate-pulse">
+      <div className="w-20 h-2.5 bg-gray-200 rounded"></div>
+      <div className="flex flex-col gap-3">
+        <div className="h-4 w-7/12 bg-gray-200 rounded"></div>
+        <div className="h-4 w-11/12 bg-gray-200 rounded"></div>
       </div>
     </div>
   );

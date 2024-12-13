@@ -8,8 +8,8 @@ import { Header1 } from "@components/ui";
 
 const filterComponents = [
   { name: "Your Lists", uid: "1", component: ProfileList },
-  { name: "Saved Lists", uid: "2", component: SaveLists },
-  { name: "Highlights", uid: "3", component: null }, // Assuming no component for Highlights
+  // { name: "Saved Lists", uid: "2", component: SaveLists },
+  // { name: "Highlights", uid: "3", component: null }, // Assuming no component for Highlights
   { name: "Reading History", uid: "4", component: ReadingHistory },
 ];
 

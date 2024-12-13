@@ -1,5 +1,5 @@
 import React from "react";
-import "./Stories.css";
+// import "./Stories.css";
 import { MainLayout } from "@components/layouts";
 import StoriesMain from "./StoriesMain";
 import StoriesSide from "./StoriesSide";

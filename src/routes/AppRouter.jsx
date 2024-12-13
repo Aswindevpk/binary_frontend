@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Suspense,lazy}from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 //route warpper
@@ -10,13 +10,15 @@ import { AuthProvider } from "@context/AuthContext";
 import { Navbar } from "@components/layouts";
 
 import {
-  Register,
   Login,
   VerifyOtp,
   PasswordResetConfirm,
   PasswordResetRequest,
   Test
 } from "@pages/auth";
+
+const Register = lazy(()=>import("@pages/auth/Register/Register"))
+
 
 import {
   Home,
@@ -39,6 +41,7 @@ import {
   Following,
   Notifications,
 } from "@pages/protected";
+
 import PageNotFound from "@pages/PageNotFound/PageNotFound";
 
 

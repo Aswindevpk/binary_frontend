@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "@context/AuthContext";
 import { useParams } from "react-router-dom";
-import "./BlogDetails.css";
 import { CommentBox, Avatar, ActionDropDown } from "@components";
-import { Bookmark, Clap, Comment } from "@components/ui";
+import { Bookmark, Clap, Comment ,Share} from "@components/ui";
 import { api } from "@services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { calculateReadingTime } from "@utils/common";
+import { calculateReadingTime, formatDate } from "@utils/common";
+import AuthorFollow from "./AuthorFollow";
 
 const BlogDetails = () => {
   let { authTokens } = useContext(AuthContext);
@@ -34,6 +34,13 @@ const BlogDetails = () => {
 
     getBlog();
   }, [id, authTokens]);
+
+  function clapIncrement(){
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      clap_count: prevBlog.clap_count + 1,
+    }));
+  }
 
   if (!blog) {
     return <div>No blog found</div>;
@@ -66,17 +73,15 @@ const BlogDetails = () => {
             <span className="text-lg font-bold mr-2 ">
               {blog.author.username}
             </span>
-            <a className="text-sm text-blue-600 font-semibold cursor-pointer no-underline">
-              Follow
-            </a>
+            <AuthorFollow author_id={blog.author.id}/>
           </div>
-          <div className="mt-1 text-xs text-gray-500">{`${readTime} min read . Oct 16, 2024`}</div>
+          <div className="mt-1 text-xs text-gray-500">{`${readTime} min read . ${formatDate(blog.created_at)}`}</div>
         </div>
       </div>
 
       <div className="flex flex-row border-t border-b border-neutral justify-between p-2.5">
         <div className="flex flex-row gap-4 items-center">
-          <Clap claps={blog.clap_count} />
+          <Clap claps={blog.clap_count} blog_id={blog.uid} clapIncrement={clapIncrement} />
           <a
             onClick={toggleCommentBoxVisibility}
             className="flex items-center cursor-pointer"
@@ -84,8 +89,9 @@ const BlogDetails = () => {
             <Comment comments={blog.comment_count} />
           </a>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
           <Bookmark is_bookmarked={blog.is_bookmarked} article_id={blog.uid} />
+          <Share/>
           <ActionDropDown>
             <li>Follow author</li>
             <li>Follow publication</li>
@@ -100,7 +106,7 @@ const BlogDetails = () => {
         <img src={blog.image} alt="" className="w-full h-full object-cover" />
       </div>
 
-      <div className="mx-5 my-5 font-serif text-lg leading-[2rem]">
+      <div className="mx-5 my-5 font-serif text-2xl leading-10 ">
         <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
       </div>
 

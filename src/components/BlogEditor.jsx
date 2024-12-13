@@ -1,6 +1,6 @@
 // Importing helper modules
 import { useCallback, useMemo, useRef } from "react";
-import "./BlogEditor.css";
+// import "./BlogEditor.css";
 import { formApi } from "@services/api";
 // Importing core components
 import QuillEditor from "react-quill";
@@ -91,9 +91,9 @@ const BlogEditor = ({ setFormData, formData }) => {
   };
 
   return (
-    <div>
+    <div className="h-[80vh] mb-10">
       <QuillEditor
-        className="Editor_content-body"
+        className="border-none h-full pb-20"
         ref={quill}
         theme="snow"
         value={formData.content}

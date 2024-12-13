@@ -1,19 +1,19 @@
 export {default as ArticleFilterMenu} from './ArticleFilterMenu/ArticlefilterMenu';
-export {default as BlogEditor} from './BlogEditor/BlogEdtor';
+export {default as BlogEditor} from './BlogEditor';
 export {default as CommentBox} from './CommentBox/CommentBox';
 export {default as FeaturedArticle} from './FeaturedArticle/FeaturedArticle';
 export {default as ProfileOverlay} from './FeaturedArticle/ProfileOverlay';
-export {default as FollowUser} from './followUser/followUser';
+export {default as FollowUser} from './followUser';
 export {default as ProfileDropdown} from './ProfileDropdown/ProfileDropdown';
 export {default as BlogPreview} from './BlogPreview/BlogPreview';
 export {default as FilterMenu} from './FilterMenu/FilterMenu';
-export {default as SideSection} from './SideSection/SideSection';
-export {default as ProfileList} from './ProfileList/ProfileList';
+export {default as ProfileList} from './ProfileList';
 export {default as SideTopics} from './SideTopics/SideTopics';
 export {default as SideStaffPicks} from './SideStaffPicks/SideStaffPicks';
 export {default as SideFollow} from './SideFollow/SideFollow';
-export {default as Modal} from './Modal/Modal';
+export {default as Modal} from './Modal';
 export {default as Avatar} from './Avatar';
-export {default as ModalInput} from './ModalInput/ModalInput';
-export {default as ActionDropDown} from './ActionDropDown/ActionDropDown';
+export {default as ModalInput} from './ModalInput';
+export {default as ActionDropDown} from './ActionDropDown';
+export {default as FollowStat} from './FollowStat';
 

@@ -3,7 +3,7 @@ import Notification from './Notification'
 
 function Responses() {
   return (
-    <div className="notificaions-all">
+    <div className='flex flex-col gap-4'>
       <Notification/>
       <Notification/>
       <Notification/>

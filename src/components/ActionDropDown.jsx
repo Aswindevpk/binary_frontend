@@ -1,4 +1,3 @@
-import "./ActionDropDown.css"; // Keep this if you have any remaining custom styles
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
@@ -25,18 +24,20 @@ function ActionDropDown({ children }) {
   }, [closeDropdownOnClickOutside]);
 
   return (
-    <div className="relative flex justify-center" ref={dropdownRef}>
+    <div className="relative flex sm:justify-center" ref={dropdownRef}>
       <FontAwesomeIcon
         onClick={(e) => {
           e.stopPropagation();
           toggleDropdownVisibility();
         }}
         icon={faEllipsis}
-        className="text-secondary text-lg cursor-pointer hover:text-primary"
+        className="text-secondary text-lg cursor-pointer hover:text-primary "
       />
       {isDropdownOpen && (
-        <div className="action-dropdown__menu absolute top-[28px] bg-white shadow-md rounded z-20 p-2">
-          {children}
+        <div className="absolute top-5 right-0 items-center bg-white shadow-md text-sm rounded z-20 p-3 whitespace-nowrap list-none">
+          <ul className="space-y-2">
+            {children}
+          </ul>
         </div>
       )}
     </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./AuthorDetails.css";
 import { MainLayout } from "@components/layouts";
 import AuthorDetailsMain from "./AuthorDetailsMain";
 import AuthorDetailsSide from "./AuthorDetailsSide";

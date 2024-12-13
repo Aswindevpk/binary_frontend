@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     let [authTokens, setAuthTokens] = useState(() => checkTokenValidity() ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const navigate = useNavigate();
 
+
     
     function setTokens(token){
         setAuthTokens(token)

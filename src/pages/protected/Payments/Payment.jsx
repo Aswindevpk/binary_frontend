@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react';
-import AuthContext from '../../../context/AuthContext';
-import { useLocation, useNavigate } from 'react-router-dom';
-import './Payment.css'
-import { api } from "../../../services/api";
-
-
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { api } from "@services/api";
 
 const Payment = () => {
+  const [user,setUser] = useState(null)
   const location = useLocation();
   const navigate = useNavigate();
   const { price } = location.state || { amount: 0 };
-
-  let {authTokens } = useContext(AuthContext);
   const [amount, setAmount] = useState(parseInt(price));
 
+  const fetchUser = async () => {
+    try {
+      const response = await api.get("/accounts/profile/");
+      const fetchedUser = response.data;
+      setUser(fetchedUser);
+    } catch (error) {
+      console.error("There was an error fetching the tags!", error);
+    }
+  };
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
     return () => {
@@ -26,7 +34,9 @@ const Payment = () => {
   }, []);
 
   const handlePayment = async () => {
-    const { data: orderData } = await api.post('/accounts/create_order/', {'amount':amount});
+    const { data: orderData } = await api.post("/accounts/create_order/", {
+      amount: amount,
+    });
 
     const options = {
       key: orderData.key,
@@ -42,14 +52,16 @@ const Payment = () => {
           razorpay_signature: response.razorpay_signature,
         };
 
-        try{
-          const result = await api.post('/accounts/verify_payment/', paymentData);
-          if (result.status===200){
-            navigate('/payment-success')
+        try {
+          const result = await api.post(
+            "/accounts/verify_payment/",
+            paymentData
+          );
+          if (result.status === 200) {
+            navigate("/payment-success");
           }
-        }
-        catch (error){
-          navigate('/payment-failed')
+        } catch (error) {
+          navigate("/payment-failed");
         }
       },
       prefill: {
@@ -69,11 +81,26 @@ const Payment = () => {
     rzp1.open();
   };
 
+  
+  if (!user) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <div className='payment'>
-      <h2 className='payment__heading'>Payment Page</h2>
-      <h5 className='payment__info'>{amount}/-</h5>
-      <button className='payment__info-btn' onClick={handlePayment}>Pay Now</button>
+    <div className="flex flex-col items-center pt-20 font-sans w-[50%] m-auto">
+      <h2 className="text-2xl text-center font-sans text-primary pb-2 font-medium mb-4">
+        Payment
+      </h2>
+      <div className="p-4 bg-neutral text-center w-full  mb-4">
+        <p className="text-sm">You are signed up with {user.email}</p>
+      </div>
+      <h5 className="text-sm text-center">{amount}/-</h5>
+      <button
+        className="mt-4 bg-primary text-white py-2 px-4 rounded-md transition duration-300 hover:bg-primary-dark w-[200px]"
+        onClick={handlePayment}
+      >
+        Pay Now
+      </button>
     </div>
   );
 };

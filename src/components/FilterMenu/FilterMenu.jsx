@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import './FilterMenu.css'
-
+import "./FilterMenu.css";
 
 function FilterMenu({ filters, activeFilter, setActiveFilter }) {
   const containerRef = useRef(null);
@@ -36,14 +35,14 @@ function FilterMenu({ filters, activeFilter, setActiveFilter }) {
   }, []);
 
   return (
-    <div>
+    <div className="relative">
       <div
         ref={containerRef}
         className="FilterMenu flex text-sm border-b border-neutral overflow-x-auto  scrollbar-hide w-full gap-5 items-center my-6"
       >
         {filters.map((filter) => (
           <div
-            className={`flex-shrink-0 py-4 text-secondary cursor-pointer 
+            className={`flex-shrink-0 py-4 text-secondary cursor-pointer font-semibold
             ${
               filter === activeFilter
                 ? "border-b border-secondary text-primary"
@@ -55,23 +54,25 @@ function FilterMenu({ filters, activeFilter, setActiveFilter }) {
             {filter.name}
           </div>
         ))}
+      <div className="flex items-center">
+        {isOverflowing.left && (
+          <div
+            className="FilterMenu__arrow absolute z-10 text-xl left-0 h-full flex items-center justify-center"
+            onClick={() => scrollContent("left")}
+          >
+            &lt;
+          </div>
+        )}
+        {isOverflowing.right && (
+          <div
+            className="FilterMenu__arrow absolute right-0 z-10 text-xl h-full flex items-center justify-center"
+            onClick={() => scrollContent("right")}
+          >
+            &gt;
+          </div>
+        )}
       </div>
-      {isOverflowing.left && (
-        <div
-          className="FilterMenu__arrow absolute z-10 text-xl cursor-pointer"
-          onClick={() => scrollContent("left")}
-        >
-          &lt;
-        </div>
-      )}
-      {isOverflowing.right && (
-        <div
-          className="FilterMenu__arrow absolute right-0 z-20 text-xl cursor-pointer"
-          onClick={() => scrollContent("right")}
-        >
-          &gt;
-        </div>
-      )}
+      </div>
     </div>
   );
 }

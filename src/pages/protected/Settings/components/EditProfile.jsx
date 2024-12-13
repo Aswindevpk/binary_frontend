@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import useEditProfile from "./useEditProfile";
 import { ModalInput } from "@components";
-
+import { Button } from "@components/ui";
+import { Link } from "react-router-dom";
 
 function EditProfile({ user, setUser, onClose }) {
   let [status, setStatus] = useState("typing");
@@ -32,7 +33,7 @@ function EditProfile({ user, setUser, onClose }) {
     }
     setFormData({ ...formData, img: event.target.files[0] });
   };
-  
+
   const inputs = [
     {
       id: 1,
@@ -57,12 +58,14 @@ function EditProfile({ user, setUser, onClose }) {
   ];
 
   return (
-    <div className="modal-main__container">
-      <h2 className="modal-main__header">Profile information</h2>
+    <div className="sm:w-[540px]">
+      <h2 className="text-center mb-3 font-bold text-lg">
+        Profile information
+      </h2>
       <div>
-        <div className="modal-section">
-          <span className="modal-label">Photo</span>
-          <div className="modal-input__desc">
+        <section className="mb-4">
+          <p className="text-sm mb-3 font-medium text-secondary">Photo</p>
+          <div className="flex gap-6 justify-between">
             <img
               src={imageSrc}
               alt=""
@@ -70,15 +73,10 @@ function EditProfile({ user, setUser, onClose }) {
               height="80px"
               id="profile_img"
             />
-            <div>
-              <div>
+            <div className="flex flex-col justify-between">
+              <div className="flex gap-8">
                 <a
-                  style={{
-                    color: "green",
-                    fontSize: "13px",
-                    paddingRight: "5%",
-                    cursor: "pointer",
-                  }}
+                  className="text-sm text-success"
                   onClick={() => {
                     fileInputRef.current.click();
                   }}
@@ -86,7 +84,7 @@ function EditProfile({ user, setUser, onClose }) {
                   Update
                 </a>
                 <a
-                  style={{ color: "red", fontSize: "13px", cursor: "pointer" }}
+                  className="text-red-700 text-sm"
                   onClick={() => {
                     setImageSrc(null); // Clear the image source
                     fileInputRef.current.value = null; // Reset the file input
@@ -102,37 +100,38 @@ function EditProfile({ user, setUser, onClose }) {
                 onChange={handleFileChange}
                 type="file"
               />
-              <span className="modal-main__para" style={{ width: "70%" }}>
+              <p className="text-sm  text-secondary">
                 Recommended: Square JPG, PNG, or GIF, at least 1,000 pixels per
                 side.
-              </span>
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
+        <section>
+          {inputs.map((input) => (
+            //render both name and pronouns field
+            <ModalInput
+              key={input.id}
+              {...input}
+              value={formData[input.name]}
+              onChange={(e) => {
+                setFormData({ ...formData, [e.target.name]: e.target.value });
+              }}
+              status={status}
+              max_len="10"
+            />
+          ))}
+        </section>
 
-        {inputs.map((input)=>(
-          //render both name and pronouns field
-          <ModalInput
-            key={input.id}
-            {...input}
-            value={formData[input.name]}
-            onChange={(e) => {
-              setFormData({ ...formData, [e.target.name]: e.target.value });
-            }}
-            status={status}
-            max_len="10"
-          />
-        ))}
-
-        <div className="modal-section">
-          <label className="modal-label" htmlFor="short_bio">
+        <section className="mb-3">
+          <label className="text-sm mb-3" htmlFor="short_bio">
             Short bio
           </label>
           <textarea
             maxLength={160}
             rows={4}
-            className="modal-input"
+            className="resize-none bg-neutral w-full p-2"
             type="text"
             id="short_bio"
             name="about"
@@ -140,41 +139,35 @@ function EditProfile({ user, setUser, onClose }) {
               setFormData({ ...formData, [e.target.name]: e.target.value });
             }}
             value={formData.about}
-            style={{ resize: "none" }}
           />
-          <div className="modal-input__desc">
-            <span className="modal-main__para"></span>
-            <span>
-              <span className="modal-input__current-count">
-                {formData.about.length}
-              </span>
-              <span className="modal-input__count-limit">/160</span>
-            </span>
-          </div>
-        </div>
+          <p className="text-right text-xs mt-1">
+            {formData.about.length}
+            <span className="text-secondary">/160</span>
+          </p>
+        </section>
 
-        <a className="modal-section modal-input__desc" href="/profile">
-          <div style={{ width: "80%" }}>
-            <span className="modal-label">About Page</span>
-            <p className="modal-main__para">
-              Personalize with images and more to paint more of a vivid portrait
-              of yourself than your ‘Short bio.’
-            </p>
-          </div>
-          <FontAwesomeIcon
-            icon={faUpRightFromSquare}
-            className="icons"
-            color="gray"
-          />
-        </a>
+        <section className="mb-6">
+          <Link className="flex justify-between" to="/profile">
+            <div className="w-[80%]">
+              <span className="text-sm">About Page</span>
+              <p className="text-xs text-secondary">
+                Personalize with images and more to paint more of a vivid
+                portrait of yourself than your ‘Short bio.’
+              </p>
+            </div>
+            <FontAwesomeIcon
+              icon={faUpRightFromSquare}
+              className="icons"
+              color="gray"
+            />
+          </Link>
+        </section>
       </div>
-      <div className="modal-cta">
-        <button className="outline_green_button" onClick={onClose}>
+      <div className="flex justify-end gap-2">
+        <Button variant="outlined" onClick={onClose}>
           Cancel
-        </button>
-        <button className="green_button" onClick={handleSubmit}>
-          Save
-        </button>
+        </Button>
+        <Button onClick={handleSubmit}>Save</Button>
       </div>
     </div>
   );

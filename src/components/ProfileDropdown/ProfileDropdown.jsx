@@ -3,7 +3,6 @@ import AuthContext from "../../context/AuthContext";
 import { Avatar } from "@components";
 import { api } from "@services/api";
 import { toast } from "sonner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBookmark, faFileText, faChartBar } from "@fortawesome/free-regular-svg-icons";
 import DropdownMenu from './DropdownMenu'; // Import the new DropdownMenu component
 
@@ -25,12 +24,7 @@ const ProfileDropdown = () => {
         setLoading(false);
       }
     };
-
-    const timer = setTimeout(() => {
-      fetchAuthor();
-    }, 2000);
-
-    return () => clearTimeout(timer);
+    fetchAuthor()
   }, [user.user_id]);
 
   const toggleDropdownVisibility = useCallback(() => {
@@ -54,14 +48,15 @@ const ProfileDropdown = () => {
     { icon: faUser, label: "Profile", link: "/profile" },
     { icon: faBookmark, label: "Library", link: "/library" },
     { icon: faFileText, label: "Stories", link: "/stories" },
-    { icon: faChartBar, label: "Stats", link: "/stats" },
+    // { icon: faChartBar, label: "Stats", link: "/stats" },
   ];
 
   const settingsMenuItems = [
     { label: "Settings", link: "/settings" },
-    { label: "Refine recommendations", link: "/settings" },
-    { label: "Manage publications", link: "/settings" },
-    { label: "Help", link: "/settings" },
+    { label: "Become a Binary member", link: "/plans" },
+    // { label: "Refine recommendations", link: "/settings" },
+    // { label: "Manage publications", link: "/settings" },
+    // { label: "Help", link: "/settings" },
   ];
 
   const membershipMenuItems = [
